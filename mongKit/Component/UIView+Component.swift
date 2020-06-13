@@ -11,4 +11,8 @@ import UIKit
 /**
  This extension provides support for view building for all UIKit view types.
  */
-extension UIView: Component { }
+extension UIView: Component {
+  public func addSubview(_ view: () -> UIView) {
+    addSubview(view())
+  }
+}

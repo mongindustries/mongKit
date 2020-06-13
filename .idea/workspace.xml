@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="169b55a2-6f55-4d97-b8b4-1564aa00994f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/mongkit.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/xcode.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mongKit.xcodeproj/xcuserdata/rantingmong.xcuserdatad/xcschemes/mongKitSample.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mongKit/Controller/Controller+Coordinator.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mongKit/Controller/Controller.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mongKit/Coordinator/Coordinator.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mongKit/View/View.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongKit.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongKit.xcodeproj/xcuserdata/rantingmong.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit.xcodeproj/xcuserdata/rantingmong.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongKit/Builder/ConstructorComponentBuilder.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit/Builder/ConstructorComponentBuilder.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongKit/Configuration/StyleConfiguration.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit/Configuration/StyleConfiguration.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongKit/Style/UIStackView+Style.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit/Style/UIStackView+Style.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongKitSample/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKitSample/ViewController.swift" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_56746B29-1897-4560-A509-549FA5E217AD" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1d4ucuDRHZP0DIZYpwaKzJR04Cl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="OBJC.PRESERVED_TARGET_SELECTION" value="mongKit" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager" selected="Application.mongKitSample">
+    <configuration name="mongKit" type="AppleRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mongKit" TARGET_NAME="mongKit" CONFIG_NAME="Debug" SCHEME_NAME="mongKit" IS_LOCATION_SIMULATION_ALLOWED="true" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <embedded_app_extension_list />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mongKitSample" type="AppleRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="mongKit" TARGET_NAME="mongKitSample" CONFIG_NAME="Debug" SCHEME_NAME="mongKitSample" IS_LOCATION_SIMULATION_ALLOWED="true" LOCATION_SCENARIO_ID="com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier" LOCATION_SCENARIO_TYPE="1" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" RUN_TARGET_PROJECT_NAME="mongKit" RUN_TARGET_NAME="mongKitSample" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <embedded_app_extension_list />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.mongKit" />
+      <item itemvalue="Application.mongKitSample" />
+    </list>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1864" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591697985343">
+      <screen x="1440" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1864" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1591697985343" />
+    <state x="2110" y="251" key="#mongKit" timestamp="1591697973178">
+      <screen x="1440" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2110" y="251" key="#mongKit/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1591697973178" />
+    <state width="1189" height="193" key="GridCell.Tab.0.bottom" timestamp="1591726546612">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1591726546612" />
+    <state width="1605" height="384" key="GridCell.Tab.0.bottom/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1591698004659" />
+    <state width="1189" height="193" key="GridCell.Tab.0.bottom/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320293" />
+    <state width="1189" height="193" key="GridCell.Tab.0.center" timestamp="1591726546612">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1591726546612" />
+    <state width="1605" height="384" key="GridCell.Tab.0.center/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1591698004656" />
+    <state width="1189" height="193" key="GridCell.Tab.0.center/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320292" />
+    <state width="1189" height="193" key="GridCell.Tab.0.left" timestamp="1591726546611">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1591726546611" />
+    <state width="1605" height="384" key="GridCell.Tab.0.left/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1591698004652" />
+    <state width="1189" height="193" key="GridCell.Tab.0.left/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320292" />
+    <state width="1189" height="193" key="GridCell.Tab.0.right" timestamp="1591726546612">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1591726546612" />
+    <state width="1605" height="384" key="GridCell.Tab.0.right/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1591698004658" />
+    <state width="1189" height="193" key="GridCell.Tab.0.right/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320293" />
+    <state width="1189" height="193" key="GridCell.Tab.1.bottom" timestamp="1591726546613">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.1.bottom/0.23.1440.812@0.23.1440.812" timestamp="1591726546613" />
+    <state width="1189" height="193" key="GridCell.Tab.1.bottom/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320294" />
+    <state width="1189" height="193" key="GridCell.Tab.1.center" timestamp="1591726546612">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.1.center/0.23.1440.812@0.23.1440.812" timestamp="1591726546612" />
+    <state width="1189" height="193" key="GridCell.Tab.1.center/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320293" />
+    <state width="1189" height="193" key="GridCell.Tab.1.left" timestamp="1591726546612">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.1.left/0.23.1440.812@0.23.1440.812" timestamp="1591726546612" />
+    <state width="1189" height="193" key="GridCell.Tab.1.left/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320293" />
+    <state width="1189" height="193" key="GridCell.Tab.1.right" timestamp="1591726546612">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="1189" height="193" key="GridCell.Tab.1.right/0.23.1440.812@0.23.1440.812" timestamp="1591726546612" />
+    <state width="1189" height="193" key="GridCell.Tab.1.right/1440.23.1920.1057/0.23.1440.812@1440.23.1920.1057" timestamp="1591698320294" />
+  </component>
+</project>

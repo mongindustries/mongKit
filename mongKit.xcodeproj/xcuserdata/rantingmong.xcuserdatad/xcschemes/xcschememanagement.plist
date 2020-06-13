@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>mongKit.xcscheme_^#shared#^_</key>
+		<key>mongKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>mongKitSample.xcscheme_^#shared#^_</key>
+		<key>mongKitSample.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>

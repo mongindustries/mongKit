@@ -17,6 +17,12 @@ public struct Ref<Target: UIView>: StyleConfiguration {
     self.value = action
   }
 
+  public init(to target: UnsafeMutablePointer<Target>) {
+    self.value = { view in
+      target.pointee = view
+    }
+  }
+
   public func apply(_ target: Target) {
     value(target)
   }

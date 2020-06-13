@@ -19,7 +19,7 @@ public protocol StyleConfiguration: Configuration {
 
 extension StyleConfiguration {
   public var any: AnyStyleConfiguration {
-    return .init(self)
+    .init(self)
   }
 }
 

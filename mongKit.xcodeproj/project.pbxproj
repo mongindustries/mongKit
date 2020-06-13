@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191D842D14C79084243455A6 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D8363DD86558EB30FCD2C /* Controller.swift */; };
+		191D859C294067995129B277 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D879E0E1DCBE69263AE4A /* View.swift */; };
+		191D887105E83DC1C3C6A092 /* Controller+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D89B67515F41DFBD41628 /* Controller+Coordinator.swift */; };
+		191D8AD8413DF9809F3C051D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D8DCC11A73753BC1CE489 /* Coordinator.swift */; };
 		608A4D40248BF33300D439AE /* mongKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D3F248BF33300D439AE /* mongKit.swift */; };
 		608A4D4A248BFDF600D439AE /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D49248BFDF600D439AE /* Component.swift */; };
 		608A4D4C248BFE4600D439AE /* EmptyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D4B248BFE4600D439AE /* EmptyComponent.swift */; };
@@ -32,6 +36,14 @@
 		60EECB84248EB7D600F029FA /* ConstructorComponentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB83248EB7D600F029FA /* ConstructorComponentBuilder.swift */; };
 		60EECB86248F414000F029FA /* UIStackView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB85248F414000F029FA /* UIStackView+Style.swift */; };
 		60EECB88248F480600F029FA /* FrameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB87248F480600F029FA /* FrameLayout.swift */; };
+		60F94B262494EA0F00E34301 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B252494EA0F00E34301 /* Constraint.swift */; };
+		60F94B282494EA6200E34301 /* ConstraintModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B272494EA6200E34301 /* ConstraintModifier.swift */; };
+		60F94B2A2494F0DF00E34301 /* Leading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B292494F0DF00E34301 /* Leading.swift */; };
+		60F94B2C2494F0ED00E34301 /* ConstraintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B2B2494F0ED00E34301 /* ConstraintHelper.swift */; };
+		60F94B2E2494F15C00E34301 /* Trailing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B2D2494F15C00E34301 /* Trailing.swift */; };
+		60F94B302494F1D600E34301 /* Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B2F2494F1D600E34301 /* Raw.swift */; };
+		60F94B322494F3D100E34301 /* Top.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B312494F3D100E34301 /* Top.swift */; };
+		60F94B342494F49300E34301 /* Bottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B332494F49300E34301 /* Bottom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +69,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		191D8363DD86558EB30FCD2C /* Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		191D879E0E1DCBE69263AE4A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		191D89B67515F41DFBD41628 /* Controller+Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Controller+Coordinator.swift"; sourceTree = "<group>"; };
+		191D8DCC11A73753BC1CE489 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		608A4D3C248BF33300D439AE /* libmongKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmongKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		608A4D3F248BF33300D439AE /* mongKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mongKit.swift; sourceTree = "<group>"; };
 		608A4D49248BFDF600D439AE /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -84,6 +100,14 @@
 		60EECB83248EB7D600F029FA /* ConstructorComponentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorComponentBuilder.swift; sourceTree = "<group>"; };
 		60EECB85248F414000F029FA /* UIStackView+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Style.swift"; sourceTree = "<group>"; };
 		60EECB87248F480600F029FA /* FrameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameLayout.swift; sourceTree = "<group>"; };
+		60F94B252494EA0F00E34301 /* Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		60F94B272494EA6200E34301 /* ConstraintModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintModifier.swift; sourceTree = "<group>"; };
+		60F94B292494F0DF00E34301 /* Leading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leading.swift; sourceTree = "<group>"; };
+		60F94B2B2494F0ED00E34301 /* ConstraintHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintHelper.swift; sourceTree = "<group>"; };
+		60F94B2D2494F15C00E34301 /* Trailing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trailing.swift; sourceTree = "<group>"; };
+		60F94B2F2494F1D600E34301 /* Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raw.swift; sourceTree = "<group>"; };
+		60F94B312494F3D100E34301 /* Top.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top.swift; sourceTree = "<group>"; };
+		60F94B332494F49300E34301 /* Bottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottom.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +129,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		191D8246DFF3CCC433C58AD9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				191D8363DD86558EB30FCD2C /* Controller.swift */,
+				191D89B67515F41DFBD41628 /* Controller+Coordinator.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		191D8E9EAA5098CF8E6F572B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				191D879E0E1DCBE69263AE4A /* View.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		608A4D33248BF33300D439AE = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +174,11 @@
 				608A4D53248C001C00D439AE /* Builder */,
 				608A4D48248BFDED00D439AE /* Component */,
 				608A4D54248C005800D439AE /* Configuration */,
+				191D8246DFF3CCC433C58AD9 /* Controller */,
+				60D056BD248F940300EA7BD8 /* Coordinator */,
 				608A4D62248CB5F700D439AE /* Layout */,
 				608A4D5B248C03A600D439AE /* Style */,
+				191D8E9EAA5098CF8E6F572B /* View */,
 			);
 			path = mongKit;
 			sourceTree = "<group>";
@@ -155,9 +199,9 @@
 		608A4D53248C001C00D439AE /* Builder */ = {
 			isa = PBXGroup;
 			children = (
+				60EECB83248EB7D600F029FA /* ConstructorComponentBuilder.swift */,
 				608A4D65248CB9FA00D439AE /* LayoutBuilder.swift */,
 				608A4D59248C01E700D439AE /* StyleBuilder.swift */,
-				60EECB83248EB7D600F029FA /* ConstructorComponentBuilder.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -185,10 +229,19 @@
 		608A4D62248CB5F700D439AE /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				60F94B242494EA0500E34301 /* Auto Layout Constraint */,
 				608A4D63248CB60500D439AE /* AutoLayout.swift */,
 				60EECB87248F480600F029FA /* FrameLayout.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		60D056BD248F940300EA7BD8 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				191D8DCC11A73753BC1CE489 /* Coordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		60EECB6A248E716200F029FA /* mongKitSample */ = {
@@ -210,6 +263,21 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		60F94B242494EA0500E34301 /* Auto Layout Constraint */ = {
+			isa = PBXGroup;
+			children = (
+				60F94B332494F49300E34301 /* Bottom.swift */,
+				60F94B252494EA0F00E34301 /* Constraint.swift */,
+				60F94B2B2494F0ED00E34301 /* ConstraintHelper.swift */,
+				60F94B272494EA6200E34301 /* ConstraintModifier.swift */,
+				60F94B292494F0DF00E34301 /* Leading.swift */,
+				60F94B2F2494F1D600E34301 /* Raw.swift */,
+				60F94B312494F3D100E34301 /* Top.swift */,
+				60F94B2D2494F15C00E34301 /* Trailing.swift */,
+			);
+			path = "Auto Layout Constraint";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,24 +373,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60F94B2C2494F0ED00E34301 /* ConstraintHelper.swift in Sources */,
+				60F94B2E2494F15C00E34301 /* Trailing.swift in Sources */,
+				60F94B342494F49300E34301 /* Bottom.swift in Sources */,
 				608A4D58248C00B800D439AE /* StyleConfiguration.swift in Sources */,
+				60F94B262494EA0F00E34301 /* Constraint.swift in Sources */,
 				608A4D66248CB9FA00D439AE /* LayoutBuilder.swift in Sources */,
 				608A4D61248CB59F00D439AE /* LayoutConfiguration.swift in Sources */,
 				60EECB88248F480600F029FA /* FrameLayout.swift in Sources */,
 				608A4D4E248BFE5800D439AE /* ArrayComponent.swift in Sources */,
 				60EECB84248EB7D600F029FA /* ConstructorComponentBuilder.swift in Sources */,
+				60F94B282494EA6200E34301 /* ConstraintModifier.swift in Sources */,
 				608A4D64248CB60500D439AE /* AutoLayout.swift in Sources */,
 				608A4D52248BFE8500D439AE /* UIView+Component.swift in Sources */,
 				608A4D50248BFE6B00D439AE /* ChoiceComponent.swift in Sources */,
 				60EECB86248F414000F029FA /* UIStackView+Style.swift in Sources */,
+				60F94B302494F1D600E34301 /* Raw.swift in Sources */,
 				60EECB82248E7E6C00F029FA /* UILabel+Style.swift in Sources */,
 				608A4D4C248BFE4600D439AE /* EmptyComponent.swift in Sources */,
+				60F94B2A2494F0DF00E34301 /* Leading.swift in Sources */,
 				608A4D4A248BFDF600D439AE /* Component.swift in Sources */,
 				608A4D56248C006600D439AE /* Configuration.swift in Sources */,
 				608A4D40248BF33300D439AE /* mongKit.swift in Sources */,
 				608A4D5D248C03AD00D439AE /* UIView+Style.swift in Sources */,
 				608A4D5F248CB25900D439AE /* ConstructorComponent.swift in Sources */,
 				608A4D5A248C01E700D439AE /* StyleBuilder.swift in Sources */,
+				191D8AD8413DF9809F3C051D /* Coordinator.swift in Sources */,
+				191D842D14C79084243455A6 /* Controller.swift in Sources */,
+				191D859C294067995129B277 /* View.swift in Sources */,
+				191D887105E83DC1C3C6A092 /* Controller+Coordinator.swift in Sources */,
+				60F94B322494F3D100E34301 /* Top.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

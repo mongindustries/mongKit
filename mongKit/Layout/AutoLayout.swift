@@ -8,46 +8,37 @@
 
 import UIKit
 
-public protocol Constraint {
-  var constraint: () -> NSLayoutConstraint { get }
-}
-
-public struct Raw: Constraint {
-
-  public let constraint: () -> NSLayoutConstraint
-
-  public init(_ raw: @escaping () -> NSLayoutConstraint) {
-    constraint = raw
-  }
-}
-
-
 @_functionBuilder
-public struct AutoLayoutBuilder {
-  public static func buildBlock(_ children: Constraint) -> AutoLayoutConfiguration {
-    return .init(constraints: [ children.constraint ])
+public struct AutoLayoutBuilder: Constraint {
+
+  public static func buildBlock(_ children: Constraint...) -> AutoLayoutBuilder {
+    .init(constraints: children.map { $0.constraint })
   }
-  public static func buildBlock(_ children: Constraint...) -> AutoLayoutConfiguration {
-    return .init(constraints: children.map{ $0.constraint })
+
+
+  public let constraint: (UIView) -> NSLayoutConstraint
+
+  init(constraints: [(UIView) -> NSLayoutConstraint]) {
+    constraint = { view in
+
+      view.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate(constraints.map { $0(view) })
+
+      return .init() // special case
+    }
   }
 }
 
-public struct AutoLayoutConfiguration {
-  let constraints: [() -> NSLayoutConstraint]
-}
 
 public class AutoLayout: Layout {
 
-  let constraints: [() -> NSLayoutConstraint]
+  let constraints: AutoLayoutBuilder
 
-  public init(@AutoLayoutBuilder _ builder: () -> AutoLayoutConfiguration) {
-    constraints = builder().constraints
+  public init(@AutoLayoutBuilder _ builder: () -> Constraint) {
+    constraints = builder() as! AutoLayoutBuilder
   }
 
   public override func apply(_ target: UIView) {
-
-    target.translatesAutoresizingMaskIntoConstraints = false
-
-    NSLayoutConstraint.activate(constraints.map({ $0() }))
+    _ = constraints.constraint(target)
   }
 }

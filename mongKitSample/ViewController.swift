@@ -11,11 +11,11 @@ import mongKit
 
 class ViewController: UIViewController {
 
-  var container: UIView!
+  weak var container: UIView!
 
-  var line1: UILabel!
+  weak var line1: UILabel!
 
-  var line2: UILabel!
+  weak var line2: UILabel!
 
 
   override func viewDidLoad() {
@@ -23,27 +23,33 @@ class ViewController: UIViewController {
 
     mongKit.initialize()
 
-    view.addSubview(UIStackView {
-      Style(for: UIView.self) {
-        VerticalStack(spacing: 10)
-        LayoutMarginStack(value: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
-        Ref { self.container = $0 } }
-      AutoLayout {
-        Raw { self.container.leadingAnchor  .constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor  ) }
-        Raw { self.container.trailingAnchor .constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor ) }
-        Raw { self.container.topAnchor      .constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor      ) } }
+    let salg = view.safeAreaLayoutGuide
 
-      UILabel {
-        Style(for: UILabel.self) {
-          Ref { (r: UILabel) in self.line1 = r }
-          Text(value: "Hello world!") }
-        Layout() }
+    view.addSubview {
+      UIStackView {
+        Style(for: UIView.self) {
+          VerticalStack(spacing: 10)
+          LayoutMarginStack(value: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
+          Ref { (v: UIView) in self.container = v } }
+        AutoLayout {
+          Leading(equalTo: salg)
+          Trailing(equalTo: salg)
+          Top(equalTo: salg) }
 
-      UILabel {
-        Style(for: UILabel.self) {
-          Ref { (r: UILabel) in self.line2 = r }
-          Text(value: "Nice to meet you!") }
-        Layout() }
-    })
+        UILabel {
+          Style(for: UILabel.self) {
+            Ref { (v: UILabel) in self.line1 = v }
+            Text(value: "Hello world!") }
+          Layout() }
+
+        UILabel {
+          Style(for: UILabel.self) {
+            Ref { (v: UILabel) in self.line2 = v }
+            Text(value: "Nice to meet you!") }
+          Layout() }
+
+        UIView {
+          Style(for: UIView.self) {
+            SpacerStack(axis: [ .vertical ]) } } } }
   }
 }
