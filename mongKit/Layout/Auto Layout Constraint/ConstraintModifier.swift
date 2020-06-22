@@ -9,20 +9,27 @@
 import UIKit
 
 public protocol ConstraintModifier {
+  func apply(_ target: NSLayoutConstraint)
 }
 
 public struct CompositeConstraintModifier: ConstraintModifier {
-}
 
-public struct EmptyConstraintModifier: ConstraintModifier {
-}
+  let constraints: [ConstraintModifier]
 
+  init(_ constraints: [ConstraintModifier]) {
+    self.constraints = constraints
+  }
+
+  public func apply(_ target: NSLayoutConstraint) {
+    constraints.forEach{ $0.apply(target) }
+  }
+}
 
 @_functionBuilder
 public struct ConstraintModifierBuilder {
 
   public static func buildBlock(_ builder: ConstraintModifier...) -> ConstraintModifier {
-    CompositeConstraintModifier()
+    CompositeConstraintModifier(builder)
   }
 }
 
@@ -39,6 +46,9 @@ public struct Inset: ConstraintModifier {
 
   public init(top: CGFloat, sides: CGFloat, bottom: CGFloat) {
   }
+
+  public func apply(_ target: NSLayoutConstraint) {
+  }
 }
 
 public enum ConstraintPriority: CGFloat, ConstraintModifier {
@@ -47,4 +57,8 @@ public enum ConstraintPriority: CGFloat, ConstraintModifier {
   case medium = 750
   case high = 999
   case required = 1000
+
+  public func apply(_ target: NSLayoutConstraint) {
+    target.priority = .init(Float(rawValue))
+  }
 }

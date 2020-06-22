@@ -20,4 +20,6 @@ public protocol Coordinator: AnyCoordinator {
   associatedtype Container: UIViewController
 
   var container: Container { get }
+
+  func setup() -> Container
 }

@@ -10,13 +10,13 @@ import UIKit
 
 public struct Raw: Constraint {
 
-  public let constraint: (UIView) -> NSLayoutConstraint
+  public let constraint: (UIView) -> [NSLayoutConstraint]
 
   public init(_ raw: @escaping () -> NSLayoutConstraint) {
-    constraint = { _ in raw() }
+    constraint = { _ in [ raw() ] }
   }
 
   public init(_ raw: @escaping (UIView) -> NSLayoutConstraint) {
-    constraint = raw
+    constraint = { [raw($0)] }
   }
 }

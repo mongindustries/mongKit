@@ -11,6 +11,11 @@
 		191D859C294067995129B277 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D879E0E1DCBE69263AE4A /* View.swift */; };
 		191D887105E83DC1C3C6A092 /* Controller+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D89B67515F41DFBD41628 /* Controller+Coordinator.swift */; };
 		191D8AD8413DF9809F3C051D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D8DCC11A73753BC1CE489 /* Coordinator.swift */; };
+		6066B310249BC4190035A740 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6066B30F249BC4190035A740 /* Language.swift */; };
+		6066B313249BC5C80035A740 /* Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6066B312249BC5C80035A740 /* Center.swift */; };
+		6066B315249BC9CE0035A740 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6066B314249BC9CE0035A740 /* Edge.swift */; };
+		6066B317249BC9D40035A740 /* Horizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6066B316249BC9D40035A740 /* Horizontal.swift */; };
+		6066B319249BC9D80035A740 /* Vertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6066B318249BC9D80035A740 /* Vertical.swift */; };
 		608A4D40248BF33300D439AE /* mongKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D3F248BF33300D439AE /* mongKit.swift */; };
 		608A4D4A248BFDF600D439AE /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D49248BFDF600D439AE /* Component.swift */; };
 		608A4D4C248BFE4600D439AE /* EmptyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D4B248BFE4600D439AE /* EmptyComponent.swift */; };
@@ -25,6 +30,7 @@
 		608A4D61248CB59F00D439AE /* LayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D60248CB59F00D439AE /* LayoutConfiguration.swift */; };
 		608A4D64248CB60500D439AE /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D63248CB60500D439AE /* AutoLayout.swift */; };
 		608A4D66248CB9FA00D439AE /* LayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D65248CB9FA00D439AE /* LayoutBuilder.swift */; };
+		60CA7A21249C843400154B56 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60CA7A20249C843400154B56 /* Weak.swift */; };
 		60EECB6C248E716200F029FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6B248E716200F029FA /* AppDelegate.swift */; };
 		60EECB6E248E716200F029FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6D248E716200F029FA /* SceneDelegate.swift */; };
 		60EECB70248E716200F029FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6F248E716200F029FA /* ViewController.swift */; };
@@ -73,6 +79,11 @@
 		191D879E0E1DCBE69263AE4A /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		191D89B67515F41DFBD41628 /* Controller+Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Controller+Coordinator.swift"; sourceTree = "<group>"; };
 		191D8DCC11A73753BC1CE489 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		6066B30F249BC4190035A740 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		6066B312249BC5C80035A740 /* Center.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Center.swift; sourceTree = "<group>"; };
+		6066B314249BC9CE0035A740 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		6066B316249BC9D40035A740 /* Horizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horizontal.swift; sourceTree = "<group>"; };
+		6066B318249BC9D80035A740 /* Vertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertical.swift; sourceTree = "<group>"; };
 		608A4D3C248BF33300D439AE /* libmongKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmongKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		608A4D3F248BF33300D439AE /* mongKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mongKit.swift; sourceTree = "<group>"; };
 		608A4D49248BFDF600D439AE /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -88,6 +99,7 @@
 		608A4D60248CB59F00D439AE /* LayoutConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConfiguration.swift; sourceTree = "<group>"; };
 		608A4D63248CB60500D439AE /* AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
 		608A4D65248CB9FA00D439AE /* LayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutBuilder.swift; sourceTree = "<group>"; };
+		60CA7A20249C843400154B56 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		60EECB69248E716200F029FA /* mongKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mongKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EECB6B248E716200F029FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60EECB6D248E716200F029FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +158,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		6066B30E249BC4110035A740 /* Utilitiy */ = {
+			isa = PBXGroup;
+			children = (
+				6066B30F249BC4190035A740 /* Language.swift */,
+				60CA7A20249C843400154B56 /* Weak.swift */,
+			);
+			path = Utilitiy;
+			sourceTree = "<group>";
+		};
+		6066B311249BC57C0035A740 /* Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				60F94B332494F49300E34301 /* Bottom.swift */,
+				6066B312249BC5C80035A740 /* Center.swift */,
+				6066B314249BC9CE0035A740 /* Edge.swift */,
+				6066B316249BC9D40035A740 /* Horizontal.swift */,
+				60F94B292494F0DF00E34301 /* Leading.swift */,
+				60F94B2F2494F1D600E34301 /* Raw.swift */,
+				60F94B312494F3D100E34301 /* Top.swift */,
+				60F94B2D2494F15C00E34301 /* Trailing.swift */,
+				6066B318249BC9D80035A740 /* Vertical.swift */,
+			);
+			path = Definitions;
+			sourceTree = "<group>";
+		};
 		608A4D33248BF33300D439AE = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +215,7 @@
 				60D056BD248F940300EA7BD8 /* Coordinator */,
 				608A4D62248CB5F700D439AE /* Layout */,
 				608A4D5B248C03A600D439AE /* Style */,
+				6066B30E249BC4110035A740 /* Utilitiy */,
 				191D8E9EAA5098CF8E6F572B /* View */,
 			);
 			path = mongKit;
@@ -268,14 +306,10 @@
 		60F94B242494EA0500E34301 /* Auto Layout Constraint */ = {
 			isa = PBXGroup;
 			children = (
-				60F94B332494F49300E34301 /* Bottom.swift */,
+				6066B311249BC57C0035A740 /* Definitions */,
 				60F94B252494EA0F00E34301 /* Constraint.swift */,
 				60F94B2B2494F0ED00E34301 /* ConstraintHelper.swift */,
 				60F94B272494EA6200E34301 /* ConstraintModifier.swift */,
-				60F94B292494F0DF00E34301 /* Leading.swift */,
-				60F94B2F2494F1D600E34301 /* Raw.swift */,
-				60F94B312494F3D100E34301 /* Top.swift */,
-				60F94B2D2494F15C00E34301 /* Trailing.swift */,
 			);
 			path = "Auto Layout Constraint";
 			sourceTree = "<group>";
@@ -378,12 +412,16 @@
 				60F94B342494F49300E34301 /* Bottom.swift in Sources */,
 				608A4D58248C00B800D439AE /* StyleConfiguration.swift in Sources */,
 				60F94B262494EA0F00E34301 /* Constraint.swift in Sources */,
+				60CA7A21249C843400154B56 /* Weak.swift in Sources */,
 				608A4D66248CB9FA00D439AE /* LayoutBuilder.swift in Sources */,
 				608A4D61248CB59F00D439AE /* LayoutConfiguration.swift in Sources */,
 				60EECB88248F480600F029FA /* FrameLayout.swift in Sources */,
+				6066B313249BC5C80035A740 /* Center.swift in Sources */,
 				608A4D4E248BFE5800D439AE /* ArrayComponent.swift in Sources */,
 				60EECB84248EB7D600F029FA /* ConstructorComponentBuilder.swift in Sources */,
+				6066B315249BC9CE0035A740 /* Edge.swift in Sources */,
 				60F94B282494EA6200E34301 /* ConstraintModifier.swift in Sources */,
+				6066B317249BC9D40035A740 /* Horizontal.swift in Sources */,
 				608A4D64248CB60500D439AE /* AutoLayout.swift in Sources */,
 				608A4D52248BFE8500D439AE /* UIView+Component.swift in Sources */,
 				608A4D50248BFE6B00D439AE /* ChoiceComponent.swift in Sources */,
@@ -395,9 +433,11 @@
 				608A4D4A248BFDF600D439AE /* Component.swift in Sources */,
 				608A4D56248C006600D439AE /* Configuration.swift in Sources */,
 				608A4D40248BF33300D439AE /* mongKit.swift in Sources */,
+				6066B310249BC4190035A740 /* Language.swift in Sources */,
 				608A4D5D248C03AD00D439AE /* UIView+Style.swift in Sources */,
 				608A4D5F248CB25900D439AE /* ConstructorComponent.swift in Sources */,
 				608A4D5A248C01E700D439AE /* StyleBuilder.swift in Sources */,
+				6066B319249BC9D80035A740 /* Vertical.swift in Sources */,
 				191D8AD8413DF9809F3C051D /* Coordinator.swift in Sources */,
 				191D842D14C79084243455A6 /* Controller.swift in Sources */,
 				191D859C294067995129B277 /* View.swift in Sources */,

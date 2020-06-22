@@ -11,8 +11,8 @@ public class mongKit {
 
   private func swizzleUIViewDidMoveToSubview() {
 
-    let orig_method = class_getInstanceMethod(UIView.self,  #selector(UIView.didMoveToSuperview   ))
-    let swzz_method = class_getInstanceMethod(mongKit.self, #selector(mongKit .didMoveToSuperview ))
+    let orig_method = class_getInstanceMethod(UIView.self,  #selector(UIView  .didMoveToSuperview))
+    let swzz_method = class_getInstanceMethod(mongKit.self, #selector(mongKit .didMoveToSuperview))
 
     let imp         = method_getImplementation(swzz_method!)
 

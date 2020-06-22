@@ -27,18 +27,20 @@ class ViewController: UIViewController {
 
     view.addSubview {
       UIStackView {
-        Style(for: UIView.self) {
+        Style(for: UIStackView.self) {
           VerticalStack(spacing: 10)
           LayoutMarginStack(value: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
           Ref { (v: UIView) in self.container = v } }
+
         AutoLayout {
-          Leading(equalTo: salg)
-          Trailing(equalTo: salg)
-          Top(equalTo: salg) }
+          Leading   (equalTo: salg)
+          Trailing  (equalTo: salg)
+          Top       (equalTo: salg) }
 
         UILabel {
           Style(for: UILabel.self) {
             Ref { (v: UILabel) in self.line1 = v }
+            Header()
             Text(value: "Hello world!") }
           Layout() }
 

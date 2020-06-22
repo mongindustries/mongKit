@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol Constraint {
-  var constraint: (UIView) -> NSLayoutConstraint { get }
+  var constraint: (UIView) -> [NSLayoutConstraint] { get }
 }
 
 
@@ -56,4 +56,11 @@ extension UIView: HorizontalConstraint, VerticalConstraint {
 }
 
 extension UILayoutGuide: HorizontalConstraint, VerticalConstraint {
+}
+
+public protocol SizeConstraint {
+
+}
+
+extension NSLayoutDimension: SizeConstraint {
 }

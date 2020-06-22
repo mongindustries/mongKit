@@ -49,3 +49,17 @@ public struct Alignment<Target: UILabel>: StyleConfiguration {
     target.textAlignment = value
   }
 }
+
+/**
+ Changes `font` and `textColor` for a `UILabel` type.
+ */
+public struct Header<Target: UILabel>: StyleConfiguration {
+  public typealias Comp = Target
+
+  public init() { }
+
+  public func apply(_ target: Target) {
+    target.font = .systemFont(ofSize: 30, weight: .bold)
+    target.textColor = .black
+  }
+}

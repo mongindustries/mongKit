@@ -16,15 +16,13 @@ public struct AutoLayoutBuilder: Constraint {
   }
 
 
-  public let constraint: (UIView) -> NSLayoutConstraint
+  public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  init(constraints: [(UIView) -> NSLayoutConstraint]) {
+  init(constraints: [(UIView) -> [NSLayoutConstraint]]) {
     constraint = { view in
 
       view.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate(constraints.map { $0(view) })
-
-      return .init() // special case
+      return constraints.flatMap { $0(view) }
     }
   }
 }
@@ -39,6 +37,6 @@ public class AutoLayout: Layout {
   }
 
   public override func apply(_ target: UIView) {
-    _ = constraints.constraint(target)
+    NSLayoutConstraint.activate(constraints.constraint(target))
   }
 }

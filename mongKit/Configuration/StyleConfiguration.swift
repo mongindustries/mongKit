@@ -10,10 +10,6 @@ import UIKit
 
 public protocol StyleConfiguration: Configuration {
 
-  associatedtype ApplyType
-
-  var value: ApplyType { get }
-
   func apply(_ target: Comp)
 }
 
@@ -27,12 +23,9 @@ public struct AnyStyleConfiguration: StyleConfiguration {
 
   public typealias Comp = UIView
 
-  public let value: () -> Any
-
   let apply: (Comp) -> Void
 
   public init<Config: StyleConfiguration>(_ style: Config) {
-    value = { style.value }
     apply = { c in style.apply(c as! Config.Comp) }
   }
 
