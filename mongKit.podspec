@@ -15,4 +15,7 @@ Pod::Spec.new do |spec|
 
     spec.source_files           = "mongKit/**/*.swift"
 
+    spec.dependency 'ReactiveSwift'
+    spec.dependency 'ReactiveCocoa'
+
 end
