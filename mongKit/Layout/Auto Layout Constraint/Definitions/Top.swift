@@ -18,29 +18,38 @@ public struct Top: Constraint, VerticalConstraintConstructible {
     }
   }
 
-  public init(equalTo target: @autoclosure @escaping () -> VerticalConstraint, @ConstraintModifierBuilder _ modifier: () -> ConstraintModifier) {
+  public init(
+    equalTo target: @autoclosure @escaping () -> VerticalConstraint,
+    @ConstraintModifierBuilder _ modifier: () -> ConstraintModifier) {
     constraint = { view in [generateEqualConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
   }
 
-  public init(equalTo target: @autoclosure @escaping () -> VerticalConstraint) {
+  public init(
+    equalTo target: @autoclosure @escaping () -> VerticalConstraint) {
     constraint = { view in [generateEqualConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
   }
 
 
-  public init(greaterThan target: @autoclosure @escaping () -> VerticalConstraint, _ builder: () -> ConstraintModifier) {
+  public init(
+    greaterThan target: @autoclosure @escaping () -> VerticalConstraint,
+    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     constraint = { view in [generateGreaterConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
   }
 
-  public init(greaterThan target: @autoclosure @escaping () -> VerticalConstraint) {
+  public init(
+    greaterThan target: @autoclosure @escaping () -> VerticalConstraint) {
     constraint = { view in [generateGreaterConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
   }
 
 
-  public init(lessThan target: @autoclosure @escaping () -> VerticalConstraint, _ builder: () -> ConstraintModifier) {
+  public init(
+    lessThan target: @autoclosure @escaping () -> VerticalConstraint,
+    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     constraint = { view in [generateLesserConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
   }
 
-  public init(lessThan target: @autoclosure @escaping () -> VerticalConstraint) {
+  public init(
+    lessThan target: @autoclosure @escaping () -> VerticalConstraint) {
     constraint = { view in [generateLesserConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
   }
 }

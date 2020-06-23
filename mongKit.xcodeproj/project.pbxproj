@@ -37,6 +37,9 @@
 		60DC3F3D24A1D07E00A9320F /* CenterX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F3C24A1D07E00A9320F /* CenterX.swift */; };
 		60DC3F3F24A1D2C200A9320F /* CenterY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F3E24A1D2C200A9320F /* CenterY.swift */; };
 		60DC3F4124A1ED6C00A9320F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4024A1ED6C00A9320F /* Constant.swift */; };
+		60DC3F4324A1F44700A9320F /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4224A1F44700A9320F /* Size.swift */; };
+		60DC3F4524A20EF900A9320F /* Width.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4424A20EF900A9320F /* Width.swift */; };
+		60DC3F4724A212FD00A9320F /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4624A212FD00A9320F /* Height.swift */; };
 		60EECB6C248E716200F029FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6B248E716200F029FA /* AppDelegate.swift */; };
 		60EECB6E248E716200F029FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6D248E716200F029FA /* SceneDelegate.swift */; };
 		60EECB70248E716200F029FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6F248E716200F029FA /* ViewController.swift */; };
@@ -112,6 +115,9 @@
 		60DC3F3C24A1D07E00A9320F /* CenterX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterX.swift; sourceTree = "<group>"; };
 		60DC3F3E24A1D2C200A9320F /* CenterY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterY.swift; sourceTree = "<group>"; };
 		60DC3F4024A1ED6C00A9320F /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		60DC3F4224A1F44700A9320F /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		60DC3F4424A20EF900A9320F /* Width.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Width.swift; sourceTree = "<group>"; };
+		60DC3F4624A212FD00A9320F /* Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Height.swift; sourceTree = "<group>"; };
 		60EECB69248E716200F029FA /* mongKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mongKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EECB6B248E716200F029FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60EECB6D248E716200F029FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -187,12 +193,15 @@
 				60DC3F3C24A1D07E00A9320F /* CenterX.swift */,
 				60DC3F3E24A1D2C200A9320F /* CenterY.swift */,
 				6066B314249BC9CE0035A740 /* Edge.swift */,
+				60DC3F4624A212FD00A9320F /* Height.swift */,
 				6066B316249BC9D40035A740 /* Horizontal.swift */,
 				60F94B292494F0DF00E34301 /* Leading.swift */,
 				60F94B2F2494F1D600E34301 /* Raw.swift */,
+				60DC3F4224A1F44700A9320F /* Size.swift */,
 				60F94B312494F3D100E34301 /* Top.swift */,
 				60F94B2D2494F15C00E34301 /* Trailing.swift */,
 				6066B318249BC9D80035A740 /* Vertical.swift */,
+				60DC3F4424A20EF900A9320F /* Width.swift */,
 			);
 			path = Definitions;
 			sourceTree = "<group>";
@@ -439,10 +448,12 @@
 				608A4D58248C00B800D439AE /* StyleConfiguration.swift in Sources */,
 				60F94B262494EA0F00E34301 /* Constraint.swift in Sources */,
 				60CA7A21249C843400154B56 /* Weak.swift in Sources */,
+				60DC3F4524A20EF900A9320F /* Width.swift in Sources */,
 				608A4D66248CB9FA00D439AE /* LayoutBuilder.swift in Sources */,
 				608A4D61248CB59F00D439AE /* LayoutConfiguration.swift in Sources */,
 				60EECB88248F480600F029FA /* FrameLayout.swift in Sources */,
 				60DC3F3624A1BF3600A9320F /* Inset.swift in Sources */,
+				60DC3F4724A212FD00A9320F /* Height.swift in Sources */,
 				6066B313249BC5C80035A740 /* Center.swift in Sources */,
 				608A4D4E248BFE5800D439AE /* ArrayComponent.swift in Sources */,
 				60EECB84248EB7D600F029FA /* ConstructorComponentBuilder.swift in Sources */,
@@ -462,6 +473,7 @@
 				608A4D40248BF33300D439AE /* mongKit.swift in Sources */,
 				6066B310249BC4190035A740 /* Language.swift in Sources */,
 				608A4D5D248C03AD00D439AE /* UIView+Style.swift in Sources */,
+				60DC3F4324A1F44700A9320F /* Size.swift in Sources */,
 				608A4D5F248CB25900D439AE /* ConstructorComponent.swift in Sources */,
 				608A4D5A248C01E700D439AE /* StyleBuilder.swift in Sources */,
 				6066B319249BC9D80035A740 /* Vertical.swift in Sources */,
