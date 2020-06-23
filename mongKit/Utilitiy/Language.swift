@@ -14,6 +14,18 @@ public func tell<Target: AnyObject>(_ target: Target, _ builder: (Target) -> Voi
   return target
 }
 
+@discardableResult
+public func tell<Target: AnyObject>(fromOptional target: Target?, _ builder: (Target) -> Void) -> Target? {
+
+  guard let target = target else {
+    return nil
+  }
+
+  builder(target)
+  return target
+}
+
+
 public func apply<Target, Return>(_ target: Target, _ transform: (Target) -> Return) -> Return {
   transform(target)
 }

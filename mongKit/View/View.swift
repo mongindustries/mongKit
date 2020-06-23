@@ -8,18 +8,25 @@
 
 import UIKit
 
-open class View: UIView {
+open class View: UIView, CodedView {
+
+  open var body: Component {
+    EmptyComponent()
+  }
 
   public required override init(frame: CGRect) {
     super.init(frame: frame)
-    setup()
+
+    addSubview {
+      body
+    }
   }
 
   public required init?(coder: NSCoder) {
     super.init(coder: coder)
-    setup()
-  }
 
-  open func setup() {
+    addSubview {
+      body
+    }
   }
 }

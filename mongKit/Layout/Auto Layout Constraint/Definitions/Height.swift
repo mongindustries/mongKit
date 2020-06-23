@@ -16,13 +16,29 @@ public struct Height: Constraint {
     }
   }
 
-  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis) {
+
+  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis = .vertical) {
     constraint = { target in
       [ target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
     }
   }
 
-  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis = .vertical, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+    let modifier = builder()
+    constraint = { target in
+      [ tell(target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
+          { modifier.apply(target: Height.self, $0) } ]
+    }
+  }
+
+
+  public init(_ view: UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .vertical) {
+    constraint = { target in
+      [ target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
+    }
+  }
+
+  public init(_ view: UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .vertical, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
       [ tell(target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))

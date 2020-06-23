@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol AnyCoordinator {
+public protocol AnyCoordinator: class {
   var parent: AnyCoordinator? { get }
 
   init(parent: AnyCoordinator?)

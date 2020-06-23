@@ -16,13 +16,29 @@ public struct Width: Constraint {
     }
   }
 
-  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis) {
+
+  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis = .horizontal) {
     constraint = { target in
       [ target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
     }
   }
 
   public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+    let modifier = builder()
+    constraint = { target in
+      [ tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
+          { modifier.apply(target: Width.self, $0) } ]
+    }
+  }
+
+
+  public init(_ view: UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .horizontal) {
+    constraint = { target in
+      [ target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
+    }
+  }
+
+  public init(_ view: UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .horizontal, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
       [ tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
