@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="169b55a2-6f55-4d97-b8b4-1564aa00994f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/mongkit.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/xcode.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongKit.xcodeproj/xcuserdata/rantingmong.xcuserdatad/xcschemes/mongKitSample.xcscheme" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongKit/Controller/Controller+Coordinator.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongKit/Controller/Controller.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongKit/Coordinator/Coordinator.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongKit/View/View.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongKit.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongKit.xcodeproj/xcuserdata/rantingmong.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit.xcodeproj/xcuserdata/rantingmong.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongKit/Builder/ConstructorComponentBuilder.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit/Builder/ConstructorComponentBuilder.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongKit/Configuration/StyleConfiguration.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit/Configuration/StyleConfiguration.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongKit/Style/UIStackView+Style.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKit/Style/UIStackView+Style.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongKitSample/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/mongKitSample/ViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +51,7 @@
       <item itemvalue="Application.mongKitSample" />
     </list>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="WindowStateProjectService">
     <state x="1864" y="201" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591697985343">
       <screen x="1440" y="0" width="1920" height="1080" />
