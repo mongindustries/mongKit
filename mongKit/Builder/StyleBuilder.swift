@@ -11,7 +11,8 @@ import UIKit
 @_functionBuilder
 public struct StyleBuilder<Target: UIView> {
 
-  public static func buildExpression<C: StyleConfiguration>(_ style: C) -> AnyStyleConfiguration where C.Comp == Target {
+  public static func buildExpression<C: StyleConfiguration>(
+    _ style: C) -> AnyStyleConfiguration where C.Comp == Target {
     style.any
   }
 
@@ -26,10 +27,6 @@ public class Style {
 
   public init() {
     styles = []
-  }
-
-  public init<V: UIView, C: StyleConfiguration>(for: V.Type, _ style: () -> C) where C.Comp == V {
-    styles = [ style().any ]
   }
 
   public init<V: UIView>(for: V.Type, @StyleBuilder<V> _ builder: () -> CompositeStyleConfiguration<V>) {

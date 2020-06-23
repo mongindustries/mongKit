@@ -19,10 +19,47 @@ public struct Vertical: Constraint {
     }
   }
 
+  public init(@ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+    let modifier = builder()
+    constraint = { target in
+      [ tell(target.topAnchor     .constraint(equalTo: target.superview!.topAnchor     )) {
+          modifier.apply(target: Top.self , $0) } ,
+        tell(target.bottomAnchor  .constraint(equalTo: target.superview!.bottomAnchor  )) {
+          modifier.apply(target: Bottom.self, $0) } ]
+    }
+  }
+
   public init(_ view: UIView) {
     constraint = { target in
     [ target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
       target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
+    }
+  }
+
+  public init(_ view: UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+    let modifier = builder()
+    constraint = { target in
+      [ tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
+          modifier.apply(target: Top.self , $0) } ,
+        tell(target.bottomAnchor  .constraint(equalTo: view.bottomAnchor  )) {
+          modifier.apply(target: Bottom.self, $0) } ]
+    }
+  }
+
+  public init(_ view: UILayoutGuide) {
+    constraint = { target in
+    [ target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
+      target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
+    }
+  }
+
+  public init(_ view: UILayoutGuide, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+    let modifier = builder()
+    constraint = { target in
+      [ tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
+          modifier.apply(target: Top.self , $0) } ,
+        tell(target.bottomAnchor  .constraint(equalTo: view.bottomAnchor  )) {
+          modifier.apply(target: Bottom.self, $0) } ]
     }
   }
 }

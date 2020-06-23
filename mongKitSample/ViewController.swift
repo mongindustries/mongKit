@@ -9,49 +9,18 @@
 import UIKit
 import mongKit
 
-class ViewController: UIViewController {
+import ReactiveSwift
+import ReactiveCocoa
 
-  weak var container: UIView!
-
-  weak var line1: UILabel!
-
-  weak var line2: UILabel!
-
+class ViewController: Controller<CustomScrollView> {
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    mongKit.initialize()
+    rootView.backgroundColor = .white
+    rootView.alwaysBounceVertical = true
 
-    let salg = view.safeAreaLayoutGuide
-
-    view.addSubview {
-      UIStackView {
-        Style(for: UIStackView.self) {
-          VerticalStack(spacing: 10)
-          LayoutMarginStack(value: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
-          Ref { (v: UIView) in self.container = v } }
-
-        AutoLayout {
-          Leading   (equalTo: salg)
-          Trailing  (equalTo: salg)
-          Top       (equalTo: salg) }
-
-        UILabel {
-          Style(for: UILabel.self) {
-            Ref { (v: UILabel) in self.line1 = v }
-            Header()
-            Text(value: "Hello world!") }
-          Layout() }
-
-        UILabel {
-          Style(for: UILabel.self) {
-            Ref { (v: UILabel) in self.line2 = v }
-            Text(value: "Nice to meet you!") }
-          Layout() }
-
-        UIView {
-          Style(for: UIView.self) {
-            SpacerStack(axis: [ .vertical ]) } } } }
+    scope += rootView.line2.reactive.text
+          <~ rootView.textField.reactive.continuousTextValues
   }
 }

@@ -19,44 +19,55 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
   }
 
 
-  public init(equalTo target: @autoclosure @escaping () -> HorizontalConstraint, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(
+    equalTo target: @autoclosure @escaping () -> HorizontalConstraint,
+    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
 
     let modifiers = builder()
 
     constraint = { view in
-      [tell(generateEqualConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
-        modifiers.apply($0) }] }
+      return [
+        tell(generateEqualConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
+          modifiers.apply(target: Leading.self, $0) } ] }
   }
 
-  public init(equalTo target: @autoclosure @escaping () -> HorizontalConstraint) {
+  public init(
+    equalTo target: @autoclosure @escaping () -> HorizontalConstraint) {
     constraint = { view in [generateEqualConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())] }
   }
 
 
-  public init(greaterThan target: @autoclosure @escaping () -> HorizontalConstraint, _ builder: () -> ConstraintModifier) {
+  public init(
+    greaterThan target: @autoclosure @escaping () -> HorizontalConstraint,
+    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
 
     let modifiers = builder()
 
     constraint = { view in
       [tell(generateGreaterConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
-        modifiers.apply($0) }] }
+        modifiers.apply(target: Leading.self, $0) }] }
   }
 
-  public init(greaterThan target: @autoclosure @escaping () -> HorizontalConstraint) {
-    constraint = { view in [generateGreaterConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())] }
+  public init(
+    greaterThan target: @autoclosure @escaping () -> HorizontalConstraint) {
+    constraint = { view in
+      [generateGreaterConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())] }
   }
 
 
-  public init(lessThan target: @autoclosure @escaping () -> HorizontalConstraint, _ builder: () -> ConstraintModifier) {
+  public init(
+    lessThan target: @autoclosure @escaping () -> HorizontalConstraint,
+    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
 
     let modifiers = builder()
 
     constraint = { view in
       [tell(generateLesserConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
-        modifiers.apply($0) }] }
+        modifiers.apply(target: Leading.self, $0) }] }
   }
 
-  public init(lessThan target: @autoclosure @escaping () -> HorizontalConstraint) {
+  public init(
+    lessThan target: @autoclosure @escaping () -> HorizontalConstraint) {
     constraint = { view in [generateLesserConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())] }
   }
 }

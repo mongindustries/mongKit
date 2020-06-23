@@ -7,6 +7,9 @@
 //
 import UIKit
 
+/**
+ Module class for mongKit
+ */
 public class mongKit {
 
   private func swizzleUIViewDidMoveToSubview() {
@@ -34,6 +37,9 @@ public class mongKit {
   }
 
 
+  /**
+   Call this method so that mongKit can initialize its thing.
+   */
   public static func initialize() {
 
     let instance = mongKit()
