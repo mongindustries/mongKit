@@ -1,12 +1,11 @@
 Pod::Spec.new do |spec|
     spec.name                   = 'mongKit'
-    spec.version                = '0.0.4'
+    spec.version                = '0.0.5'
     spec.homepage               = 'https://www.whitecloak.com'
-    spec.source                 = { :git => "https://gitlab.whitecloak.io/michael.ong/mongkit.git", :tag => "0.0.4" }
+    spec.source                 = { :git => "https://gitlab.whitecloak.io/michael.ong/mongkit.git", :tag => "0.0.5" }
     spec.authors                = { 'Michael Ong' => 'michael.ong@whitecloak.com' }
     spec.license                = { :type => 'MIT' }
     spec.summary                = 'Boilerplate code for iOS projects.'
-    spec.static_framework       = true
 
     spec.module_name            = "mongKit"
 
@@ -15,7 +14,7 @@ Pod::Spec.new do |spec|
 
     spec.source_files           = "mongKit/**/*.swift"
 
-    spec.dependency 'ReactiveSwift'
-    spec.dependency 'ReactiveCocoa'
+    spec.dependency 'ReactiveSwift', '~> 6.3.0'
+    spec.dependency 'ReactiveCocoa', '~> 11.0.0'
 
 end
