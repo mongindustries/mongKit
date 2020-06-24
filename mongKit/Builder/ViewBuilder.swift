@@ -12,6 +12,6 @@ import UIKit
 public struct ComponentBuilder {
 
   public static func buildBlock(_ items: Component...) -> Component {
-    ArrayComponent(items: items)
+    GroupComponent(items: items)
   }
 }

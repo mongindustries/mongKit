@@ -15,7 +15,7 @@ extension UIView: Component {
 
   private func constructComponent(_ component: Component) {
     switch component {
-    case let list as ArrayComponent:
+    case let list as GroupComponent:
       list.items.forEach(constructComponent(_:))
     case let view as UIView:
       addSubview(view)

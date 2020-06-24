@@ -1,5 +1,5 @@
 //
-//  ArrayComponent.swift
+//  GroupComponent.swift
 //  mongKit
 //
 //  Created by Michael Ong on 7/6/20.
@@ -8,6 +8,10 @@
 
 import Foundation
 
-public struct ArrayComponent: Component {
+public struct GroupComponent: Component {
   let items: [Component]
+
+  public init(items: [Component]) {
+    self.items = items
+  }
 }

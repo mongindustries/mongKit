@@ -29,7 +29,7 @@ public struct ConstructorComponentBuilder {
   }
 
   public static func buildBlock(_ style: Style, _ layout: Layout, _ children: Component...) -> ConstructorComponent {
-    .init(style: style, layout: layout, children: { ArrayComponent(items: children) })
+    .init(style: style, layout: layout, children: { GroupComponent(items: children) })
   }
 }
 
@@ -90,7 +90,7 @@ extension UIView {
 
       climbLayout(sview)
 
-    case let array as ArrayComponent:
+    case let array as GroupComponent:
       array.items.forEach {
         buildChildren($0)
       }

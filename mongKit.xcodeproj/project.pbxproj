@@ -19,7 +19,7 @@
 		608A4D40248BF33300D439AE /* mongKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D3F248BF33300D439AE /* mongKit.swift */; };
 		608A4D4A248BFDF600D439AE /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D49248BFDF600D439AE /* Component.swift */; };
 		608A4D4C248BFE4600D439AE /* EmptyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D4B248BFE4600D439AE /* EmptyComponent.swift */; };
-		608A4D4E248BFE5800D439AE /* ArrayComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D4D248BFE5800D439AE /* ArrayComponent.swift */; };
+		608A4D4E248BFE5800D439AE /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D4D248BFE5800D439AE /* GroupComponent.swift */; };
 		608A4D50248BFE6B00D439AE /* ChoiceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D4F248BFE6B00D439AE /* ChoiceComponent.swift */; };
 		608A4D52248BFE8500D439AE /* UIView+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D51248BFE8500D439AE /* UIView+Component.swift */; };
 		608A4D56248C006600D439AE /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4D55248C006600D439AE /* Configuration.swift */; };
@@ -46,7 +46,6 @@
 		60DC3F5624A2616600A9320F /* CodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5524A2616600A9320F /* CodedView.swift */; };
 		60DC3F5824A269AE00A9320F /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5724A269AE00A9320F /* CustomScrollView.swift */; };
 		60DC3F5A24A26D1000A9320F /* UIEdgeInsets+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5924A26D1000A9320F /* UIEdgeInsets+.swift */; };
-		60EC685C24A3062C0068D811 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EC685B24A3062C0068D811 /* Group.swift */; };
 		60EECB6C248E716200F029FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6B248E716200F029FA /* AppDelegate.swift */; };
 		60EECB6E248E716200F029FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6D248E716200F029FA /* SceneDelegate.swift */; };
 		60EECB70248E716200F029FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6F248E716200F029FA /* ViewController.swift */; };
@@ -106,7 +105,7 @@
 		608A4D3F248BF33300D439AE /* mongKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mongKit.swift; sourceTree = "<group>"; };
 		608A4D49248BFDF600D439AE /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		608A4D4B248BFE4600D439AE /* EmptyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyComponent.swift; sourceTree = "<group>"; };
-		608A4D4D248BFE5800D439AE /* ArrayComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayComponent.swift; sourceTree = "<group>"; };
+		608A4D4D248BFE5800D439AE /* GroupComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupComponent.swift; sourceTree = "<group>"; };
 		608A4D4F248BFE6B00D439AE /* ChoiceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceComponent.swift; sourceTree = "<group>"; };
 		608A4D51248BFE8500D439AE /* UIView+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Component.swift"; sourceTree = "<group>"; };
 		608A4D55248C006600D439AE /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -133,7 +132,6 @@
 		60DC3F5524A2616600A9320F /* CodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodedView.swift; sourceTree = "<group>"; };
 		60DC3F5724A269AE00A9320F /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		60DC3F5924A26D1000A9320F /* UIEdgeInsets+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+.swift"; sourceTree = "<group>"; };
-		60EC685B24A3062C0068D811 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		60EECB69248E716200F029FA /* mongKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mongKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EECB6B248E716200F029FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60EECB6D248E716200F029FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -273,12 +271,11 @@
 		608A4D48248BFDED00D439AE /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				608A4D4D248BFE5800D439AE /* ArrayComponent.swift */,
 				608A4D4F248BFE6B00D439AE /* ChoiceComponent.swift */,
 				608A4D49248BFDF600D439AE /* Component.swift */,
 				608A4D5E248CB25900D439AE /* ConstructorComponent.swift */,
 				608A4D4B248BFE4600D439AE /* EmptyComponent.swift */,
-				60EC685B24A3062C0068D811 /* Group.swift */,
+				608A4D4D248BFE5800D439AE /* GroupComponent.swift */,
 				608A4D51248BFE8500D439AE /* UIView+Component.swift */,
 			);
 			path = Component;
@@ -578,7 +575,6 @@
 				60DC3F5A24A26D1000A9320F /* UIEdgeInsets+.swift in Sources */,
 				60F94B2C2494F0ED00E34301 /* ConstraintHelper.swift in Sources */,
 				60F94B2E2494F15C00E34301 /* Trailing.swift in Sources */,
-				60EC685C24A3062C0068D811 /* Group.swift in Sources */,
 				60F94B342494F49300E34301 /* Bottom.swift in Sources */,
 				608A4D58248C00B800D439AE /* StyleConfiguration.swift in Sources */,
 				60F94B262494EA0F00E34301 /* Constraint.swift in Sources */,
@@ -591,7 +587,7 @@
 				60DC3F3624A1BF3600A9320F /* Inset.swift in Sources */,
 				60DC3F4724A212FD00A9320F /* Height.swift in Sources */,
 				6066B313249BC5C80035A740 /* Center.swift in Sources */,
-				608A4D4E248BFE5800D439AE /* ArrayComponent.swift in Sources */,
+				608A4D4E248BFE5800D439AE /* GroupComponent.swift in Sources */,
 				60EECB84248EB7D600F029FA /* ConstructorComponentBuilder.swift in Sources */,
 				6066B315249BC9CE0035A740 /* Edge.swift in Sources */,
 				60F94B282494EA6200E34301 /* ConstraintModifier.swift in Sources */,
