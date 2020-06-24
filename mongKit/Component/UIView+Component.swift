@@ -13,18 +13,7 @@ import UIKit
  */
 extension UIView: Component {
 
-  private func constructComponent(_ component: Component) {
-    switch component {
-    case let list as GroupComponent:
-      list.items.forEach(constructComponent(_:))
-    case let view as UIView:
-      addSubview(view)
-    default:
-      break
-    }
-  }
-
   public func addSubview(@ComponentBuilder _ builder: () -> Component) {
-    constructComponent(builder())
+    buildChildren(builder())
   }
 }

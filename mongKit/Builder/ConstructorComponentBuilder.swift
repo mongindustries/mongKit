@@ -12,6 +12,8 @@ fileprivate var constructedKey = 0x1000_1118
 fileprivate var viewlayout_Key = 0x1000_0911
 fileprivate var sublayout__Key = 0x1000_ffff
 
+fileprivate var style______Key = 0x1000_abcd
+
 struct SublayoutApply {
   weak var view: UIView?
   let layout: Layout
@@ -62,12 +64,17 @@ extension UIView {
     set { objc_setAssociatedObject(self, &sublayout__Key, newValue, .OBJC_ASSOCIATION_RETAIN) }
   }
 
+  var styleConfig: [AnyStyleConfiguration] {
+    get { objc_getAssociatedObject(self, &style______Key) as? [AnyStyleConfiguration] ?? [] }
+    set { objc_setAssociatedObject(self, &style______Key, newValue, .OBJC_ASSOCIATION_RETAIN) }
+  }
+
   public convenience init(@ConstructorComponentBuilder _ builder: () -> Style) {
     self.init(frame: .zero)
 
     mongConstructed = true
 
-    builder().styles.forEach { $0.apply(self) }
+    styleConfig = builder().styles
   }
 
   public convenience init(@ConstructorComponentBuilder _ builder: () -> ConstructorComponent) {
@@ -78,7 +85,7 @@ extension UIView {
     let config = builder()
 
     layout = config.layout // defer execution of layout instructions
-    config.style.styles.forEach { $0.apply(self) }
+    styleConfig = config.style.styles
 
     buildChildren(config.children())
   }
@@ -98,6 +105,12 @@ extension UIView {
         stack.addArrangedSubview(sview)
       } else {
         addSubview(sview)
+      }
+
+      if sview.mongConstructed {
+        for config in sview.styleConfig {
+          config.apply(sview)
+        }
       }
 
       climbLayout(sview)
