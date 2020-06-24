@@ -8,14 +8,8 @@
 
 import UIKit
 
-public enum ConstraintPriority: CGFloat, ConstraintModifier {
-  case yield = 1
-  case low = 250
-  case medium = 750
-  case high = 999
-  case required = 1000
-
-  public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target: Constraint {
-    constraint.priority = .init(Float(rawValue))
+extension UILayoutPriority: ConstraintModifier {
+  public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target : Constraint {
+    constraint.priority = self
   }
 }
