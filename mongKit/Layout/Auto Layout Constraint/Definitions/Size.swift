@@ -25,16 +25,20 @@ public struct Size: Constraint {
     }
   }
 
-  public init(_ view: UIView) {
+  public init(_ view: @escaping @autoclosure () -> UIView) {
     constraint = {
-      [ $0.widthAnchor  .constraint(equalTo: view.widthAnchor   ) ,
+      let view = view()
+      return [
+        $0.widthAnchor  .constraint(equalTo: view.widthAnchor   ) ,
         $0.heightAnchor .constraint(equalTo: view.heightAnchor  ) ]
     }
   }
 
-  public init(_ view: UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     constraint = {
-      [ $0.widthAnchor  .constraint(equalTo: view.widthAnchor   ) ,
+      let view = view()
+      return [
+        $0.widthAnchor  .constraint(equalTo: view.widthAnchor   ) ,
         $0.heightAnchor .constraint(equalTo: view.heightAnchor  ) ]
     }
   }

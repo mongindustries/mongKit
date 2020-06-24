@@ -29,34 +29,42 @@ public struct Vertical: Constraint {
     }
   }
 
-  public init(_ view: UIView) {
+  public init(_ view: @escaping @autoclosure () -> UIView) {
     constraint = { target in
-    [ target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
-      target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
+      let view = view()
+      return [
+        target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
+        target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
     }
   }
 
-  public init(_ view: UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
-      [ tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
+      let view = view()
+      return [
+        tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
           modifier.apply(target: Top.self , $0) } ,
         tell(target.bottomAnchor  .constraint(equalTo: view.bottomAnchor  )) {
           modifier.apply(target: Bottom.self, $0) } ]
     }
   }
 
-  public init(_ view: UILayoutGuide) {
+  public init(_ view: @escaping @autoclosure () -> UILayoutGuide) {
     constraint = { target in
-    [ target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
-      target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
+      let view = view()
+      return [
+        target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
+        target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
     }
   }
 
-  public init(_ view: UILayoutGuide, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UILayoutGuide, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
-      [ tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
+      let view = view()
+      return [
+        tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
           modifier.apply(target: Top.self , $0) } ,
         tell(target.bottomAnchor  .constraint(equalTo: view.bottomAnchor  )) {
           modifier.apply(target: Bottom.self, $0) } ]

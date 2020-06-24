@@ -29,34 +29,42 @@ public struct Horizontal: Constraint {
     }
   }
 
-  public init(_ view: UIView) {
+  public init(_ view: @escaping @autoclosure () -> UIView) {
     constraint = { target in
-    [ target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  ) ,
-      target.trailingAnchor .constraint(equalTo: view.trailingAnchor ) ]
+      let view = view()
+      return [
+        target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  ) ,
+        target.trailingAnchor .constraint(equalTo: view.trailingAnchor ) ]
     }
   }
 
-  public init(_ view: UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
-      [ tell(target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  )) {
+      let view = view()
+      return [
+        tell(target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  )) {
           modifier.apply(target: Leading.self , $0) } ,
         tell(target.trailingAnchor .constraint(equalTo: view.trailingAnchor )) {
           modifier.apply(target: Trailing.self, $0) } ]
     }
   }
 
-  public init(_ view: UILayoutGuide) {
+  public init(_ view: @escaping @autoclosure () -> UILayoutGuide) {
     constraint = { target in
-    [ target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  ) ,
-      target.trailingAnchor .constraint(equalTo: view.trailingAnchor ) ]
+      let view = view()
+      return [
+        target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  ) ,
+        target.trailingAnchor .constraint(equalTo: view.trailingAnchor ) ]
     }
   }
 
-  public init(_ view: UILayoutGuide, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UILayoutGuide, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
-      [ tell(target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  )) {
+      let view = view()
+      return [
+        tell(target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  )) {
           modifier.apply(target: Leading.self , $0) } ,
         tell(target.trailingAnchor .constraint(equalTo: view.trailingAnchor )) {
           modifier.apply(target: Trailing.self, $0) } ]
