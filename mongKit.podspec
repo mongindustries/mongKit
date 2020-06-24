@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
     spec.name                   = 'mongKit'
-    spec.version                = '0.0.9'
+    spec.version                = '0.0.10'
     spec.homepage               = 'https://www.whitecloak.com'
-    spec.source                 = { :git => "https://gitlab.whitecloak.io/michael.ong/mongkit.git", :tag => "0.0.9" }
+    spec.source                 = { :git => "https://gitlab.whitecloak.io/michael.ong/mongkit.git", :tag => "0.0.10" }
     spec.authors                = { 'Michael Ong' => 'michael.ong@whitecloak.com' }
     spec.license                = { :type => 'MIT' }
     spec.summary                = 'Boilerplate code for iOS projects.'
