@@ -17,31 +17,47 @@ public struct Width: Constraint {
   }
 
 
-  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis = .horizontal) {
+  public init(_ view: @escaping @autoclosure () -> UIView, _ dimension: NSLayoutConstraint.Axis = .horizontal) {
     constraint = { target in
-      [ target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
+
+      let view = view()
+
+      return [
+        target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
     }
   }
 
-  public init(_ view: UIView, _ dimension: NSLayoutConstraint.Axis, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UIView, _ dimension: NSLayoutConstraint.Axis, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
-      [ tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
+
+      let view = view()
+
+      return [
+        tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
           { modifier.apply(target: Width.self, $0) } ]
     }
   }
 
 
-  public init(_ view: UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .horizontal) {
+  public init(_ view: @escaping @autoclosure () -> UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .horizontal) {
     constraint = { target in
-      [ target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
+
+      let view = view()
+
+      return [
+        target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
     }
   }
 
-  public init(_ view: UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .horizontal, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .horizontal, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
     constraint = { target in
-      [ tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
+
+      let view = view()
+
+      return [
+        tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
           { modifier.apply(target: Width.self, $0) } ]
     }
   }
