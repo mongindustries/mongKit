@@ -12,57 +12,38 @@ public struct Trailing: Constraint, HorizontalConstraintConstructible {
 
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public init() {
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
     constraint = { view in
-      return [view.trailingAnchor.constraint(equalTo: view.superview!.trailingAnchor)]
-    }
+      [ tell(view.trailingAnchor.constraint(equalTo: view.superview!.trailingAnchor)) {
+        modifier.apply(target: Trailing.self, $0) } ] }
   }
 
-
-  public init(
-    equalTo target: @autoclosure @escaping () -> HorizontalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(equalTo     target                    : @autoclosure @escaping () -> HorizontalConstraint,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     let modifier = builder()
-    constraint = { view in [
-      tell(generateEqualConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())) {
-        modifier.apply(target: Trailing.self, $0)
-      } ] }
+    constraint = { view in
+      [ tell(generateEqualConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())) {
+        modifier.apply(target: Trailing.self, $0) } ] }
   }
 
-  public init(
-    equalTo target: @autoclosure @escaping () -> HorizontalConstraint) {
-    constraint = { view in [generateEqualConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())] }
-  }
-
-
-  public init(
-    greaterThan target: @autoclosure @escaping () -> HorizontalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(greaterThan target                    : @autoclosure @escaping () -> HorizontalConstraint,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     let modifier = builder()
-    constraint = { view in [
-      tell(generateGreaterConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())) {
-        modifier.apply(target: Trailing.self, $0)
-      } ] }
+    constraint = { view in
+      [ tell(generateGreaterConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target(), multiplier: multiplier)) {
+        modifier.apply(target: Trailing.self, $0) } ] }
   }
 
-  public init(
-    greaterThan target: @autoclosure @escaping () -> HorizontalConstraint) {
-    constraint = { view in [generateGreaterConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())] }
-  }
-
-
-  public init(
-    lessThan target: @autoclosure @escaping () -> HorizontalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(lessThan    target                    : @autoclosure @escaping () -> HorizontalConstraint,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     let modifier = builder()
-    constraint = { view in [
-      tell(generateLesserConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())) {
-        modifier.apply(target: Trailing.self, $0)
-      } ] }
-  }
-
-  public init(
-    lessThan target: @autoclosure @escaping () -> HorizontalConstraint) {
-    constraint = { view in [generateLesserConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())] }
+    constraint = { view in
+      [ tell(generateLesserConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target(), multiplier: multiplier)) {
+        modifier.apply(target: Trailing.self, $0) } ] }
   }
 }

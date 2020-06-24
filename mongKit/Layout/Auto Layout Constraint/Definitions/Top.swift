@@ -12,44 +12,44 @@ public struct Top: Constraint, VerticalConstraintConstructible {
 
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public init() {
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
     constraint = { view in
-      return [view.topAnchor.constraint(equalTo: view.superview!.topAnchor)]
-    }
+      [ tell(view.topAnchor.constraint(equalTo: view.superview!.topAnchor)) {
+        modifier.apply(target: Top.self, $0) } ] }
   }
 
-  public init(
-    equalTo target: @autoclosure @escaping () -> VerticalConstraint,
-    @ConstraintModifierBuilder _ modifier: () -> ConstraintModifier) {
-    constraint = { view in [generateEqualConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
+  public init(equalTo target                        : @autoclosure @escaping () -> VerticalConstraint,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
+    constraint = { view in
+      [ tell(generateEqualConstraint(for: view, \.topAnchor, \.topAnchor, to: target())) {
+        modifier.apply(target: Top.self, $0) } ] }
   }
 
-  public init(
-    equalTo target: @autoclosure @escaping () -> VerticalConstraint) {
-    constraint = { view in [generateEqualConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
+  public init(greaterThan target                    : @autoclosure @escaping () -> VerticalConstraint,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
+    constraint = { view in
+      [ tell(generateGreaterConstraint(for: view, \.topAnchor, \.topAnchor, to: target(), multiplier: multiplier)) {
+        modifier.apply(target: Top.self, $0) } ] }
   }
 
+  public init(lessThan target                       : @autoclosure @escaping () -> VerticalConstraint,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
-  public init(
-    greaterThan target: @autoclosure @escaping () -> VerticalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
-    constraint = { view in [generateGreaterConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
-  }
+    let modifier = builder()
 
-  public init(
-    greaterThan target: @autoclosure @escaping () -> VerticalConstraint) {
-    constraint = { view in [generateGreaterConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
-  }
-
-
-  public init(
-    lessThan target: @autoclosure @escaping () -> VerticalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
-    constraint = { view in [generateLesserConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
-  }
-
-  public init(
-    lessThan target: @autoclosure @escaping () -> VerticalConstraint) {
-    constraint = { view in [generateLesserConstraint(for: view, \.topAnchor, \.topAnchor, to: target())] }
+    constraint = { view in
+      [ tell(generateLesserConstraint(for: view, \.topAnchor, \.topAnchor, to: target(), multiplier: multiplier)) {
+        modifier.apply(target: Top.self, $0) } ] }
   }
 }

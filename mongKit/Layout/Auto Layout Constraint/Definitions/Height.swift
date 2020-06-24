@@ -16,48 +16,36 @@ public struct Height: Constraint {
     }
   }
 
+  public init(_ view                                : @escaping @autoclosure () -> UIView,
+              _ dimension                           : NSLayoutConstraint.Axis = .vertical,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
-  public init(_ view: @escaping @autoclosure () -> UIView, _ dimension: NSLayoutConstraint.Axis = .vertical) {
-    constraint = { target in
-
-      let view = view()
-
-      return [
-        target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
-    }
-  }
-
-  public init(_ view: @escaping @autoclosure () -> UIView, _ dimension: NSLayoutConstraint.Axis = .vertical, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
+
     constraint = { target in
 
       let view = view()
 
       return [
-        tell(target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
+        tell(target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor, multiplier: multiplier))
           { modifier.apply(target: Height.self, $0) } ]
     }
   }
 
+  public init(_ view                                : @escaping @autoclosure () -> UILayoutGuide,
+              _ dimension                           : NSLayoutConstraint.Axis = .vertical,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
-  public init(_ view: @escaping @autoclosure () -> UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .vertical) {
-    constraint = { target in
-
-      let view = view()
-
-      return [
-        target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor) ]
-    }
-  }
-
-  public init(_ view: @escaping @autoclosure () -> UILayoutGuide, _ dimension: NSLayoutConstraint.Axis = .vertical, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
+
     constraint = { target in
 
       let view = view()
 
       return [
-        tell(target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor))
+        tell(target.heightAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor, multiplier: multiplier))
           { modifier.apply(target: Height.self, $0) } ]
     }
   }

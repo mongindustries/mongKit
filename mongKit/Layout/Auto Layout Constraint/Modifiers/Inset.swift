@@ -25,6 +25,10 @@ extension UIEdgeInsets: ConstraintModifier {
       constraint.constant = left
     case is CenterY.Type:
       constraint.constant = top
+    case is Width.Type:
+      constraint.constant = left + right
+    case is Height.Type:
+      constraint.constant = top + bottom
     default:
       break // do nothing
     }

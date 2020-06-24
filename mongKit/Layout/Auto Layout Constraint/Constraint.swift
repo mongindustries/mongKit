@@ -12,21 +12,23 @@ public protocol Constraint {
   var constraint: (UIView) -> [NSLayoutConstraint] { get }
 }
 
-
 public protocol HorizontalConstraint {
 }
 
 public protocol HorizontalConstraintConstructible {
 
-  init()
-  init(equalTo: @autoclosure @escaping () -> HorizontalConstraint)
-  init(equalTo: @autoclosure @escaping () -> HorizontalConstraint, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier)
+  init(@ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
 
-  init(greaterThan: @autoclosure @escaping () -> HorizontalConstraint)
-  init(greaterThan: @autoclosure @escaping () -> HorizontalConstraint, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier)
+  init(equalTo                              : @autoclosure @escaping () -> HorizontalConstraint,
+       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
 
-  init(lessThan: @autoclosure @escaping () -> HorizontalConstraint)
-  init(lessThan: @autoclosure @escaping () -> HorizontalConstraint, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier)
+  init(greaterThan                          : @autoclosure @escaping () -> HorizontalConstraint,
+       multiplier                           : CGFloat,
+       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
+
+  init(lessThan                             : @autoclosure @escaping () -> HorizontalConstraint,
+       multiplier                           : CGFloat,
+       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
 }
 
 public protocol VerticalConstraint {
@@ -34,15 +36,18 @@ public protocol VerticalConstraint {
 
 public protocol VerticalConstraintConstructible {
 
-  init()
-  init(equalTo: @autoclosure @escaping () -> VerticalConstraint)
-  init(equalTo: @autoclosure @escaping () -> VerticalConstraint, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier)
+  init(@ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
 
-  init(greaterThan: @autoclosure @escaping () -> VerticalConstraint)
-  init(greaterThan: @autoclosure @escaping () -> VerticalConstraint, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier)
+  init(equalTo                              : @autoclosure @escaping () -> VerticalConstraint,
+       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
 
-  init(lessThan: @autoclosure @escaping () -> VerticalConstraint)
-  init(lessThan: @autoclosure @escaping () -> VerticalConstraint, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier)
+  init(greaterThan                          : @autoclosure @escaping () -> VerticalConstraint,
+       multiplier                           : CGFloat,
+       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
+
+  init(lessThan                             : @autoclosure @escaping () -> VerticalConstraint,
+       multiplier                           : CGFloat,
+       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier)
 }
 
 

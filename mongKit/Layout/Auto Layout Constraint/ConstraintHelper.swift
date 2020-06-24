@@ -8,99 +8,135 @@
 
 import UIKit
 
-func generateEqualConstraint(for view: UIView, _ prop: KeyPath<UIView, NSLayoutXAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutXAxisAnchor>, to horizontalTarget: HorizontalConstraint) -> NSLayoutConstraint {
+func generateEqualConstraint
+  (for view: UIView, _ prop: KeyPath<UIView, NSLayoutXAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutXAxisAnchor>, to horizontalTarget: HorizontalConstraint) -> NSLayoutConstraint {
+
+  let item2: NSLayoutXAxisAnchor
 
   switch horizontalTarget {
   case let anchor as NSLayoutXAxisAnchor:
-    return view[keyPath: prop].constraint(equalTo: anchor)
+    item2 = anchor
 
   case let target as UIView:
-    return view[keyPath: prop].constraint(equalTo: target[keyPath: prop])
+    item2 = target[keyPath: prop]
 
-  case let uilg as UILayoutGuide:
-    return view[keyPath: prop].constraint(equalTo: uilg[keyPath: guideProp])
+  case let target as UILayoutGuide:
+    item2 = target[keyPath: guideProp]
+
   default:
-    return .init()
+    fatalError()
   }
+
+  return view[keyPath: prop].constraint(equalTo: item2)
 }
 
-func generateGreaterConstraint(for view: UIView, _ prop: KeyPath<UIView, NSLayoutXAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutXAxisAnchor>, to horizontalTarget: HorizontalConstraint) -> NSLayoutConstraint {
+func generateGreaterConstraint
+  (for view: UIView, _ prop: KeyPath<UIView, NSLayoutXAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutXAxisAnchor>, to horizontalTarget: HorizontalConstraint, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+
+  let item2: NSLayoutXAxisAnchor
 
   switch horizontalTarget {
   case let anchor as NSLayoutXAxisAnchor:
-    return view[keyPath: prop].constraint(greaterThanOrEqualTo: anchor)
+    item2 = anchor
 
   case let target as UIView:
-    return view[keyPath: prop].constraint(greaterThanOrEqualTo: target[keyPath: prop])
+    item2 = target[keyPath: prop]
 
-  case let uilg as UILayoutGuide:
-    return view[keyPath: prop].constraint(greaterThanOrEqualTo: uilg[keyPath: guideProp])
+  case let target as UILayoutGuide:
+    item2 = target[keyPath: guideProp]
+
   default:
-    return .init()
+    fatalError()
   }
+
+  return view[keyPath: prop].constraint(greaterThanOrEqualToSystemSpacingAfter: item2, multiplier: multiplier)
 }
 
-func generateLesserConstraint(for view: UIView, _ prop: KeyPath<UIView, NSLayoutXAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutXAxisAnchor>, to horizontalTarget: HorizontalConstraint) -> NSLayoutConstraint {
+func generateLesserConstraint
+  (for view: UIView, _ prop: KeyPath<UIView, NSLayoutXAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutXAxisAnchor>, to horizontalTarget: HorizontalConstraint, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+
+  let item2: NSLayoutXAxisAnchor
 
   switch horizontalTarget {
   case let anchor as NSLayoutXAxisAnchor:
-    return view[keyPath: prop].constraint(lessThanOrEqualTo: anchor)
+    item2 = anchor
 
   case let target as UIView:
-    return view[keyPath: prop].constraint(lessThanOrEqualTo: target[keyPath: prop])
+    item2 = target[keyPath: prop]
 
-  case let uilg as UILayoutGuide:
-    return view[keyPath: prop].constraint(lessThanOrEqualTo: uilg[keyPath: guideProp])
+  case let target as UILayoutGuide:
+    item2 = target[keyPath: guideProp]
+
   default:
-    return .init()
+    fatalError()
   }
+
+  return view[keyPath: prop].constraint(lessThanOrEqualToSystemSpacingAfter: item2, multiplier: multiplier)
 }
 
 
-func generateEqualConstraint(for view: UIView, _ prop: KeyPath<UIView, NSLayoutYAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutYAxisAnchor>, to horizontalTarget: VerticalConstraint) -> NSLayoutConstraint {
+func generateEqualConstraint
+  (for view: UIView, _ prop: KeyPath<UIView, NSLayoutYAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutYAxisAnchor>, to horizontalTarget: VerticalConstraint) -> NSLayoutConstraint {
+
+  let item2: NSLayoutYAxisAnchor
 
   switch horizontalTarget {
   case let anchor as NSLayoutYAxisAnchor:
-    return view[keyPath: prop].constraint(equalTo: anchor)
+    item2 = anchor
 
   case let target as UIView:
-    return view[keyPath: prop].constraint(equalTo: target[keyPath: prop])
+    item2 = target[keyPath: prop]
 
-  case let uilg as UILayoutGuide:
-    return view[keyPath: prop].constraint(equalTo: uilg[keyPath: guideProp])
+  case let target as UILayoutGuide:
+    item2 = target[keyPath: guideProp]
+
   default:
-    return .init()
+    fatalError()
   }
+
+  return view[keyPath: prop].constraint(equalTo: item2)
 }
 
-func generateGreaterConstraint(for view: UIView, _ prop: KeyPath<UIView, NSLayoutYAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutYAxisAnchor>, to horizontalTarget: VerticalConstraint) -> NSLayoutConstraint {
+func generateGreaterConstraint
+  (for view: UIView, _ prop: KeyPath<UIView, NSLayoutYAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutYAxisAnchor>, to horizontalTarget: VerticalConstraint, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+
+  let item2: NSLayoutYAxisAnchor
 
   switch horizontalTarget {
   case let anchor as NSLayoutYAxisAnchor:
-    return view[keyPath: prop].constraint(greaterThanOrEqualTo: anchor)
+    item2 = anchor
 
   case let target as UIView:
-    return view[keyPath: prop].constraint(greaterThanOrEqualTo: target[keyPath: prop])
+    item2 = target[keyPath: prop]
 
-  case let uilg as UILayoutGuide:
-    return view[keyPath: prop].constraint(greaterThanOrEqualTo: uilg[keyPath: guideProp])
+  case let target as UILayoutGuide:
+    item2 = target[keyPath: guideProp]
+
   default:
-    return .init()
+    fatalError()
   }
+
+  return view[keyPath: prop].constraint(greaterThanOrEqualToSystemSpacingBelow: item2, multiplier: multiplier)
 }
 
-func generateLesserConstraint(for view: UIView, _ prop: KeyPath<UIView, NSLayoutYAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutYAxisAnchor>, to horizontalTarget: VerticalConstraint) -> NSLayoutConstraint {
+func generateLesserConstraint
+  (for view: UIView, _ prop: KeyPath<UIView, NSLayoutYAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutYAxisAnchor>, to horizontalTarget: VerticalConstraint, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+
+  let item2: NSLayoutYAxisAnchor
 
   switch horizontalTarget {
   case let anchor as NSLayoutYAxisAnchor:
-    return view[keyPath: prop].constraint(lessThanOrEqualTo: anchor)
+    item2 = anchor
 
   case let target as UIView:
-    return view[keyPath: prop].constraint(lessThanOrEqualTo: target[keyPath: prop])
+    item2 = target[keyPath: prop]
 
-  case let uilg as UILayoutGuide:
-    return view[keyPath: prop].constraint(lessThanOrEqualTo: uilg[keyPath: guideProp])
+  case let target as UILayoutGuide:
+    item2 = target[keyPath: guideProp]
+
   default:
-    return .init()
+    fatalError()
   }
+
+  return view[keyPath: prop].constraint(lessThanOrEqualToSystemSpacingBelow: item2, multiplier: multiplier)
 }

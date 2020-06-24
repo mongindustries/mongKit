@@ -12,14 +12,8 @@ public struct Center: Constraint {
 
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public init() {
-    constraint = { target in
-      [ target.centerXAnchor.constraint(equalTo: target.superview!.centerXAnchor) ,
-        target.centerYAnchor.constraint(equalTo: target.superview!.centerYAnchor) ]
-    }
-  }
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
-  public init(@ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
 
     constraint = { target in
@@ -30,18 +24,9 @@ public struct Center: Constraint {
     }
   }
 
-  public init(_ view: @autoclosure @escaping () -> UIView) {
-    constraint = { target in
+  public init(_ view                                : @autoclosure @escaping () -> UIView,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
-      let view = view()
-
-      return [
-        target.centerXAnchor.constraint(equalTo: view.centerXAnchor) ,
-        target.centerYAnchor.constraint(equalTo: view.centerYAnchor) ]
-    }
-  }
-
-  public init(_ view: @autoclosure @escaping () -> UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
 
     constraint = { target in
@@ -56,18 +41,9 @@ public struct Center: Constraint {
     }
   }
 
-  public init(_ view: @autoclosure @escaping () -> UILayoutGuide) {
-    constraint = { target in
+  public init(_ view                                : @autoclosure @escaping () -> UILayoutGuide,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
-      let view = view()
-
-      return [
-        target.centerXAnchor.constraint(equalTo: view.centerXAnchor) ,
-        target.centerYAnchor.constraint(equalTo: view.centerYAnchor) ]
-    }
-  }
-
-  public init(_ view: @autoclosure @escaping () -> UILayoutGuide, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
     let modifier = builder()
 
     constraint = { target in

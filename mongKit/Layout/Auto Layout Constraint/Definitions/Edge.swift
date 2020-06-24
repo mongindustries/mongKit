@@ -12,16 +12,8 @@ public struct Edge: Constraint {
 
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public init() {
-    constraint = { target in
-      [ target.leadingAnchor  .constraint(equalTo: target.superview!.leadingAnchor  ) ,
-        target.trailingAnchor .constraint(equalTo: target.superview!.trailingAnchor ) ,
-        target.topAnchor      .constraint(equalTo: target.superview!.topAnchor      ) ,
-        target.bottomAnchor   .constraint(equalTo: target.superview!.bottomAnchor   ) ]
-    }
-  }
 
-  public init(@ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifier = builder()
 
@@ -37,20 +29,8 @@ public struct Edge: Constraint {
     }
   }
 
-  public init(_ view: @escaping @autoclosure () -> UIView) {
-    constraint = { target in
-
-      let view = view()
-
-      return [
-        target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  ) ,
-        target.trailingAnchor .constraint(equalTo: view.trailingAnchor ) ,
-        target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
-        target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
-    }
-  }
-
-  public init(_ view: @escaping @autoclosure () -> UIView, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view                                : @escaping @autoclosure () -> UIView,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifier = builder()
 
@@ -70,20 +50,8 @@ public struct Edge: Constraint {
     }
   }
 
-  public init(_ view: @escaping @autoclosure () -> UILayoutGuide) {
-    constraint = { target in
-
-      let view = view()
-
-      return [
-        target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  ) ,
-        target.trailingAnchor .constraint(equalTo: view.trailingAnchor ) ,
-        target.topAnchor      .constraint(equalTo: view.topAnchor      ) ,
-        target.bottomAnchor   .constraint(equalTo: view.bottomAnchor   ) ]
-    }
-  }
-
-  public init(_ view: @escaping @autoclosure () -> UILayoutGuide, @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(_ view: @escaping @autoclosure () -> UILayoutGuide,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifier = builder()
 

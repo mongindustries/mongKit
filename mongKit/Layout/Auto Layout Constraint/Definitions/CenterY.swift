@@ -12,56 +12,44 @@ public class CenterY: Constraint, VerticalConstraintConstructible {
 
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public required init() {
+  public required init(@ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifiers = builder()
+
     constraint = { target in
-      [ target.centerYAnchor.constraint(equalTo: target.superview!.centerYAnchor) ]
-    }
+      [ tell(target.centerYAnchor.constraint(equalTo: target.superview!.centerYAnchor)) {
+        modifiers.apply(target: CenterY.self, $0) } ] }
   }
 
-  public required init(equalTo anchor: @autoclosure @escaping () -> VerticalConstraint) {
-    constraint = { target in
-      [ generateEqualConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor()) ]
-    }
-  }
-
-  public required init(equalTo anchor: @autoclosure @escaping () -> VerticalConstraint, _ builder: () -> ConstraintModifier) {
+  public required init(equalTo      anchor                  : @autoclosure @escaping () -> VerticalConstraint,
+                       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
     constraint = { target in
       [ tell(generateEqualConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor())) {
-        modifiers.apply(target: CenterY.self, $0) } ]
-    }
+        modifiers.apply(target: CenterY.self, $0) } ] }
   }
 
-  public required init(greaterThan anchor: @autoclosure @escaping () -> VerticalConstraint) {
-    constraint = { target in
-      [ generateGreaterConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor()) ]
-    }
-  }
-
-  public required init(greaterThan anchor: @autoclosure @escaping () -> VerticalConstraint, _ builder: () -> ConstraintModifier) {
+  public required init(greaterThan  anchor                  : @autoclosure @escaping () -> VerticalConstraint,
+                       multiplier                           : CGFloat,
+                       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
     constraint = { target in
-      [ tell(generateGreaterConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor())) {
-        modifiers.apply(target: CenterY.self, $0) } ]
-    }
+      [ tell(generateGreaterConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor(), multiplier: multiplier)) {
+        modifiers.apply(target: CenterY.self, $0) } ] }
   }
 
-  public required init(lessThan anchor: @autoclosure @escaping () -> VerticalConstraint) {
-    constraint = { target in
-      [ generateLesserConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor()) ]
-    }
-  }
-
-  public required init(lessThan anchor: @autoclosure @escaping () -> VerticalConstraint, _ builder: () -> ConstraintModifier) {
+  public required init(lessThan     anchor                  : @autoclosure @escaping () -> VerticalConstraint,
+                       multiplier                           : CGFloat,
+                       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
     constraint = { target in
-      [ tell(generateLesserConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor())) {
+      [ tell(generateLesserConstraint(for: target, \.centerYAnchor, \.centerYAnchor, to: anchor(), multiplier: multiplier)) {
         modifiers.apply(target: CenterY.self, $0) } ]
     }
   }

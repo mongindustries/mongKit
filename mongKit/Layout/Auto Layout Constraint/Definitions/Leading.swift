@@ -12,62 +12,44 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
 
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public init() {
-    constraint = { view in
-      return [view.leadingAnchor.constraint(equalTo: view.superview!.leadingAnchor)]
-    }
-  }
-
-
-  public init(
-    equalTo target: @autoclosure @escaping () -> HorizontalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
     constraint = { view in
-      return [
-        tell(generateEqualConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
-          modifiers.apply(target: Leading.self, $0) } ] }
+      [ tell(view.leadingAnchor.constraint(equalTo: view.superview!.leadingAnchor)) {
+        modifiers.apply(target: Leading.self, $0) } ] }
   }
 
-  public init(
-    equalTo target: @autoclosure @escaping () -> HorizontalConstraint) {
-    constraint = { view in [generateEqualConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())] }
-  }
-
-
-  public init(
-    greaterThan target: @autoclosure @escaping () -> HorizontalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(equalTo     target                    : @autoclosure @escaping () -> HorizontalConstraint,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
     constraint = { view in
-      [tell(generateGreaterConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
+      [ tell(generateEqualConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
+        modifiers.apply(target: Leading.self, $0) } ] }
+  }
+
+  public init(greaterThan target                    : @autoclosure @escaping () -> HorizontalConstraint,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifiers = builder()
+
+    constraint = { view in
+      [ tell(generateGreaterConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target(), multiplier: multiplier)) {
         modifiers.apply(target: Leading.self, $0) }] }
   }
 
-  public init(
-    greaterThan target: @autoclosure @escaping () -> HorizontalConstraint) {
-    constraint = { view in
-      [generateGreaterConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())] }
-  }
-
-
-  public init(
-    lessThan target: @autoclosure @escaping () -> HorizontalConstraint,
-    @ConstraintModifierBuilder _ builder: () -> ConstraintModifier) {
+  public init(lessThan    target                    : @autoclosure @escaping () -> HorizontalConstraint,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
     constraint = { view in
-      [tell(generateLesserConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())) {
+      [ tell(generateLesserConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target(), multiplier: multiplier)) {
         modifiers.apply(target: Leading.self, $0) }] }
-  }
-
-  public init(
-    lessThan target: @autoclosure @escaping () -> HorizontalConstraint) {
-    constraint = { view in [generateLesserConstraint(for: view, \.leadingAnchor, \.leadingAnchor, to: target())] }
   }
 }

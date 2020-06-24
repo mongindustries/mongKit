@@ -32,3 +32,10 @@ public struct ConstraintModifierBuilder {
     CompositeConstraintModifier(builder)
   }
 }
+
+public struct EmptyConstraintModifier: ConstraintModifier {
+
+  public init() { }
+
+  public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target : Constraint { }
+}
