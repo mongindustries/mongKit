@@ -46,6 +46,7 @@
 		60DC3F5624A2616600A9320F /* CodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5524A2616600A9320F /* CodedView.swift */; };
 		60DC3F5824A269AE00A9320F /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5724A269AE00A9320F /* CustomScrollView.swift */; };
 		60DC3F5A24A26D1000A9320F /* UIEdgeInsets+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5924A26D1000A9320F /* UIEdgeInsets+.swift */; };
+		60EC685C24A3062C0068D811 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EC685B24A3062C0068D811 /* Group.swift */; };
 		60EECB6C248E716200F029FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6B248E716200F029FA /* AppDelegate.swift */; };
 		60EECB6E248E716200F029FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6D248E716200F029FA /* SceneDelegate.swift */; };
 		60EECB70248E716200F029FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6F248E716200F029FA /* ViewController.swift */; };
@@ -132,6 +133,7 @@
 		60DC3F5524A2616600A9320F /* CodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodedView.swift; sourceTree = "<group>"; };
 		60DC3F5724A269AE00A9320F /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		60DC3F5924A26D1000A9320F /* UIEdgeInsets+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+.swift"; sourceTree = "<group>"; };
+		60EC685B24A3062C0068D811 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		60EECB69248E716200F029FA /* mongKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mongKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EECB6B248E716200F029FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60EECB6D248E716200F029FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				608A4D49248BFDF600D439AE /* Component.swift */,
 				608A4D5E248CB25900D439AE /* ConstructorComponent.swift */,
 				608A4D4B248BFE4600D439AE /* EmptyComponent.swift */,
+				60EC685B24A3062C0068D811 /* Group.swift */,
 				608A4D51248BFE8500D439AE /* UIView+Component.swift */,
 			);
 			path = Component;
@@ -575,6 +578,7 @@
 				60DC3F5A24A26D1000A9320F /* UIEdgeInsets+.swift in Sources */,
 				60F94B2C2494F0ED00E34301 /* ConstraintHelper.swift in Sources */,
 				60F94B2E2494F15C00E34301 /* Trailing.swift in Sources */,
+				60EC685C24A3062C0068D811 /* Group.swift in Sources */,
 				60F94B342494F49300E34301 /* Bottom.swift in Sources */,
 				608A4D58248C00B800D439AE /* StyleConfiguration.swift in Sources */,
 				60F94B262494EA0F00E34301 /* Constraint.swift in Sources */,

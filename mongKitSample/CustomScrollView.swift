@@ -15,7 +15,7 @@ class CustomScrollView: ScrollView {
 
   weak var textField: UITextField!
 
-  override var body: Component {
+  @ComponentBuilder override var body: Component {
     UIStackView {
       Style(for: UIStackView.self) {
         VerticalStack(spacing: 8, alignment: .fill)
