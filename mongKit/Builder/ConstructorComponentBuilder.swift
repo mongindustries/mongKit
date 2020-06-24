@@ -20,6 +20,18 @@ struct SublayoutApply {
 @_functionBuilder
 public struct ConstructorComponentBuilder {
 
+  public static func buildExpression<C: Component>(_ component: @escaping @autoclosure () -> C) -> Component {
+    RedirectComponent(item: component)
+  }
+
+  public static func buildExpression(_ style: Style) -> Style {
+    style
+  }
+
+  public static func buildExpression(_ layout: Layout) -> Layout {
+    layout
+  }
+
   public static func buildBlock(_ style: Style) -> Style {
     style
   }
@@ -97,6 +109,9 @@ extension UIView {
 
     case let choice as ChoiceResolverComponent:
       buildChildren(choice.result)
+
+    case let redirect as RedirectComponent:
+      buildChildren(redirect.item())
 
     default:
       break

@@ -46,6 +46,7 @@
 		60DC3F5624A2616600A9320F /* CodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5524A2616600A9320F /* CodedView.swift */; };
 		60DC3F5824A269AE00A9320F /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5724A269AE00A9320F /* CustomScrollView.swift */; };
 		60DC3F5A24A26D1000A9320F /* UIEdgeInsets+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5924A26D1000A9320F /* UIEdgeInsets+.swift */; };
+		60E507F624A31C46005E6937 /* RedirectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E507F524A31C46005E6937 /* RedirectComponent.swift */; };
 		60EECB6C248E716200F029FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6B248E716200F029FA /* AppDelegate.swift */; };
 		60EECB6E248E716200F029FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6D248E716200F029FA /* SceneDelegate.swift */; };
 		60EECB70248E716200F029FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB6F248E716200F029FA /* ViewController.swift */; };
@@ -132,6 +133,7 @@
 		60DC3F5524A2616600A9320F /* CodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodedView.swift; sourceTree = "<group>"; };
 		60DC3F5724A269AE00A9320F /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		60DC3F5924A26D1000A9320F /* UIEdgeInsets+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+.swift"; sourceTree = "<group>"; };
+		60E507F524A31C46005E6937 /* RedirectComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedirectComponent.swift; sourceTree = "<group>"; };
 		60EECB69248E716200F029FA /* mongKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mongKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EECB6B248E716200F029FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60EECB6D248E716200F029FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				608A4D4B248BFE4600D439AE /* EmptyComponent.swift */,
 				608A4D4D248BFE5800D439AE /* GroupComponent.swift */,
 				608A4D51248BFE8500D439AE /* UIView+Component.swift */,
+				60E507F524A31C46005E6937 /* RedirectComponent.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				60EECB84248EB7D600F029FA /* ConstructorComponentBuilder.swift in Sources */,
 				6066B315249BC9CE0035A740 /* Edge.swift in Sources */,
 				60F94B282494EA6200E34301 /* ConstraintModifier.swift in Sources */,
+				60E507F624A31C46005E6937 /* RedirectComponent.swift in Sources */,
 				6066B317249BC9D40035A740 /* Horizontal.swift in Sources */,
 				608A4D64248CB60500D439AE /* AutoLayout.swift in Sources */,
 				608A4D52248BFE8500D439AE /* UIView+Component.swift in Sources */,
