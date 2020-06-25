@@ -29,9 +29,14 @@ public class Style {
     styles = []
   }
 
+
+  #if swift(<5.2) // this does not compile on 5.3: ambiguous use of 'init(for:_:)'
+
   public init<V: UIView, Style: StyleConfiguration>(for: V.Type, _ item: () -> Style) {
     styles = [ item().any ]
   }
+
+  #endif
 
   public init<V: UIView>(for: V.Type, @StyleBuilder<V> _ builder: () -> CompositeStyleConfiguration<V>) {
     styles = builder().styles
