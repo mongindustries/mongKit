@@ -30,7 +30,7 @@ public class Style {
   }
 
 
-  #if swift(<5.2) // this does not compile on 5.3: ambiguous use of 'init(for:_:)'
+  #if swift(<5.3) // this does not compile on 5.3: ambiguous use of 'init(for:_:)'
 
   public init<V: UIView, Style: StyleConfiguration>(for: V.Type, _ item: () -> Style) {
     styles = [ item().any ]
