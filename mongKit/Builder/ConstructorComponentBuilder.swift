@@ -34,8 +34,13 @@ public struct ConstructorComponentBuilder {
     layout
   }
 
+
   public static func buildBlock(_ style: Style) -> Style {
     style
+  }
+
+  public static func buildBlock(_ style: Style, _ children: Component...) -> ConstructorComponent {
+    .init(style: style, layout: .init(), children: { GroupComponent(items: children) })
   }
 
   public static func buildBlock(_ style: Style, _ layout: Layout) -> ConstructorComponent {

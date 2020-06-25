@@ -11,6 +11,10 @@ import UIKit
 @_functionBuilder
 public struct ComponentBuilder {
 
+  public static func buildBlock<C: Component>(_ item: C) -> Component {
+    item
+  }
+
   public static func buildBlock(_ items: Component...) -> Component {
     GroupComponent(items: items)
   }

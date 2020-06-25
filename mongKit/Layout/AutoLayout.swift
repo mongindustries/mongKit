@@ -11,6 +11,10 @@ import UIKit
 @_functionBuilder
 public struct AutoLayoutBuilder: Constraint {
 
+  public static func buildBlock<C: Constraint>(_ children: C) -> AutoLayoutBuilder {
+    .init(constraints: [ children.constraint ])
+  }
+
   public static func buildBlock(_ children: Constraint...) -> AutoLayoutBuilder {
     .init(constraints: children.map { $0.constraint })
   }

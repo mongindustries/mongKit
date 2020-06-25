@@ -29,6 +29,10 @@ public class Style {
     styles = []
   }
 
+  public init<V: UIView, Style: StyleConfiguration>(for: V.Type, _ item: () -> Style) {
+    styles = [ item().any ]
+  }
+
   public init<V: UIView>(for: V.Type, @StyleBuilder<V> _ builder: () -> CompositeStyleConfiguration<V>) {
     styles = builder().styles
   }
