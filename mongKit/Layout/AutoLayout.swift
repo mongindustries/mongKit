@@ -11,12 +11,12 @@ import UIKit
 @_functionBuilder
 public struct AutoLayoutBuilder: Constraint {
 
-  public static func buildBlock<C: Constraint>(_ children: C) -> AutoLayoutBuilder {
-    .init(constraints: [ children.constraint ])
+  public static func buildBlock<C: Constraint>(_ children: C) -> Constraint {
+    AutoLayoutBuilder(constraints: [ children.constraint ])
   }
 
-  public static func buildBlock(_ children: Constraint...) -> AutoLayoutBuilder {
-    .init(constraints: children.map { $0.constraint })
+  public static func buildBlock(_ children: Constraint...) -> Constraint {
+    AutoLayoutBuilder(constraints: children.map { $0.constraint })
   }
 
 
@@ -37,7 +37,14 @@ public class AutoLayout: Layout {
   let constraints: AutoLayoutBuilder
 
   public init(@AutoLayoutBuilder _ builder: () -> Constraint) {
-    constraints = builder() as! AutoLayoutBuilder
+
+    let x = builder()
+
+    if let bbuilder = x as? AutoLayoutBuilder {
+      constraints = bbuilder
+    } else {
+      constraints = .init(constraints: [ x.constraint ])
+    }
   }
 
   public override func apply(_ target: UIView) {
