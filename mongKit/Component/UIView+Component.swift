@@ -16,4 +16,10 @@ extension UIView: Component {
   public func addSubview(@ComponentBuilder _ builder: () -> Component) {
     buildChildren(builder())
   }
+
+  public func replaceViews(@ComponentBuilder with builder: () -> Component) {
+    self.subviews.forEach { $0.removeFromSuperview() }
+
+    buildChildren(builder())
+  }
 }

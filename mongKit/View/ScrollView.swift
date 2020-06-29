@@ -72,9 +72,9 @@ open class ScrollView: UIScrollView, CodedView {
 
     ControllerState.instance.doRootViewStuff(for: self) { state in
       contentInset =
-        .init(top: 0, sides: 0, bottom: state.bottomOffset)
+        .init(top: 0, sides: 0, bottom: state.bottomOffset - safeAreaInsets.bottom)
       scrollIndicatorInsets =
-        .init(top: 0, sides: 0, bottom: state.bottomOffset)
+        .init(top: 0, sides: 0, bottom: state.bottomOffset - safeAreaInsets.bottom)
     }
   }
 }
