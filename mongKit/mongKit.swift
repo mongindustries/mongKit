@@ -22,18 +22,25 @@ public class mongKit {
     method_setImplementation(orig_method!, imp)
   }
 
+  private func scanLayouts(for view: UIView) {
+    guard view.mongConstructed, let layout = view.layout else {
+      return
+    }
+
+    for subview in view.subviews {
+      scanLayouts(for: subview)
+    }
+
+    layout.apply(view)
+    view.layout = nil
+  }
+
   @objc
   private func didMoveToSuperview(_: Any, selector: Selector) {
 
     let this = unsafeBitCast(self, to: UIView.self)
 
-    if this.mongConstructed, let parent = this.superview, parent.mongConstructed == false, let layout = this.layout {
-      layout.apply(this)
-
-      for sublayout in this.sublayouts {
-        sublayout.layout.apply(sublayout.view!)
-      }
-    }
+    scanLayouts(for: this)
   }
 
 

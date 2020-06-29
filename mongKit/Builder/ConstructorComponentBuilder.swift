@@ -10,14 +10,8 @@ import UIKit
 
 fileprivate var constructedKey = 0x1000_1118
 fileprivate var viewlayout_Key = 0x1000_0911
-fileprivate var sublayout__Key = 0x1000_ffff
 
 fileprivate var style______Key = 0x1000_abcd
-
-struct SublayoutApply {
-  weak var view: UIView?
-  let layout: Layout
-}
 
 @_functionBuilder
 public struct ConstructorComponentBuilder {
@@ -64,11 +58,6 @@ extension UIView {
     set { objc_setAssociatedObject(self, &viewlayout_Key, newValue, .OBJC_ASSOCIATION_RETAIN) }
   }
 
-  var sublayouts: [SublayoutApply] {
-    get { objc_getAssociatedObject(self, &sublayout__Key) as? [SublayoutApply] ?? [] }
-    set { objc_setAssociatedObject(self, &sublayout__Key, newValue, .OBJC_ASSOCIATION_RETAIN) }
-  }
-
   var styleConfig: [AnyStyleConfiguration] {
     get { objc_getAssociatedObject(self, &style______Key) as? [AnyStyleConfiguration] ?? [] }
     set { objc_setAssociatedObject(self, &style______Key, newValue, .OBJC_ASSOCIATION_RETAIN) }
@@ -95,13 +84,6 @@ extension UIView {
     buildChildren(config.children())
   }
 
-  func climbLayout(_ target: UIView) {
-    if let layout = target.layout, let parent = target.superview {
-      parent.sublayouts.append(SublayoutApply(view: target, layout: layout))
-      parent.sublayouts.append(contentsOf: target.sublayouts)
-    }
-  }
-
   func buildChildren(_ component: Component) {
 
     switch component {
@@ -117,8 +99,6 @@ extension UIView {
           config.apply(sview)
         }
       }
-
-      climbLayout(sview)
 
     case let array as GroupComponent:
       array.items.forEach {

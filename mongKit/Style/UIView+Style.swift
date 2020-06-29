@@ -8,23 +8,17 @@
 
 import UIKit
 
-public struct Ref<Target: UIView>: StyleConfiguration {
+extension Ref: Configuration where Target: UIView { }
+
+extension Ref: StyleConfiguration where Target: UIView {
   public typealias Comp = Target
 
-  public let value: (Target) -> Void
-
   public init(_ action: @escaping (Target) -> Void) {
-    self.value = action
-  }
-
-  public init(to target: UnsafeMutablePointer<Target>) {
-    self.value = { view in
-      target.pointee = view
-    }
+    __apply = { any in action(any as! Target) }
   }
 
   public func apply(_ target: Target) {
-    value(target)
+    __apply(target)
   }
 }
 
