@@ -8,8 +8,8 @@
 
 import UIKit
 
-public struct SpacerStack: StyleConfiguration {
-  public typealias Comp = UIView
+public struct SpacerStack<Target: UIView>: StyleConfiguration {
+  public typealias Comp = Target
 
   public let value: Float = 1
   public let axis: Set<NSLayoutConstraint.Axis>
@@ -18,7 +18,7 @@ public struct SpacerStack: StyleConfiguration {
     self.axis = axis
   }
 
-  public func apply(_ target: UIView) {
+  public func apply(_ target: Comp) {
     for axis in self.axis {
       target.setContentHuggingPriority(.init(value), for: axis)
     }
