@@ -36,7 +36,7 @@ public class mongKit {
   }
 
   @objc
-  private func didMoveToSuperview(_: Any, selector: Selector) {
+  private func didMoveToSuperview() {
 
     let this = unsafeBitCast(self, to: UIView.self)
 
