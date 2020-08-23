@@ -10,6 +10,16 @@ import UIKit
 public struct Width: Constraint {
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
+    constraint = { target in
+      [ tell(target.widthAnchor.constraint(equalTo: target.superview!.widthAnchor)) {
+        modifier.apply(target: Width.self, $0) } ]
+    }
+  }
+  
   public init(_ value                               : CGFloat,
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 

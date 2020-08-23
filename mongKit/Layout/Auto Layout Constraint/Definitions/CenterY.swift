@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class CenterY: Constraint, VerticalConstraintConstructible {
+public struct CenterY: Constraint, VerticalConstraintConstructible {
 
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public required init(@ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+  public init(@ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
@@ -21,8 +21,8 @@ public class CenterY: Constraint, VerticalConstraintConstructible {
         modifiers.apply(target: CenterY.self, $0) } ] }
   }
 
-  public required init(equalTo      anchor                  : @autoclosure @escaping () -> VerticalConstraint,
-                       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+  public init(equalTo      anchor                  : @autoclosure @escaping () -> VerticalConstraint,
+              @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
@@ -31,9 +31,9 @@ public class CenterY: Constraint, VerticalConstraintConstructible {
         modifiers.apply(target: CenterY.self, $0) } ] }
   }
 
-  public required init(greaterThan  anchor                  : @autoclosure @escaping () -> VerticalConstraint,
-                       multiplier                           : CGFloat,
-                       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+  public init(greaterThan  anchor                  : @autoclosure @escaping () -> VerticalConstraint,
+              multiplier                           : CGFloat,
+              @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 
@@ -42,9 +42,9 @@ public class CenterY: Constraint, VerticalConstraintConstructible {
         modifiers.apply(target: CenterY.self, $0) } ] }
   }
 
-  public required init(lessThan     anchor                  : @autoclosure @escaping () -> VerticalConstraint,
-                       multiplier                           : CGFloat,
-                       @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+  public init(lessThan     anchor                  : @autoclosure @escaping () -> VerticalConstraint,
+              multiplier                           : CGFloat,
+              @ConstraintModifierBuilder _ builder : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifiers = builder()
 

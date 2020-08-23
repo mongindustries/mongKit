@@ -10,9 +10,23 @@ import UIKit
 public struct Height: Constraint {
   public let constraint: (UIView) -> [NSLayoutConstraint]
 
-  public init(_ value: CGFloat) {
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
     constraint = { target in
-      [ target.heightAnchor.constraint(equalToConstant: value) ]
+      [ tell(target.heightAnchor.constraint(equalTo: target.superview!.heightAnchor)) {
+        modifier.apply(target: Height.self, $0) } ]
+    }
+  }
+  
+  public init(_ value                               : CGFloat,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    let modifier = builder()
+
+    constraint = { target in
+      [ tell(target.heightAnchor.constraint(equalToConstant: value)) {
+        modifier.apply(target: Height.self, $0) } ]
     }
   }
 

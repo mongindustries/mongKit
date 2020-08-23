@@ -69,6 +69,7 @@
 		60F94B322494F3D100E34301 /* Top.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B312494F3D100E34301 /* Top.swift */; };
 		60F94B342494F49300E34301 /* Bottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F94B332494F49300E34301 /* Bottom.swift */; };
 		C06B1682E76C86956462B34E /* Pods_MongKit_mongKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6DB89315405043EC09F5DC /* Pods_MongKit_mongKit.framework */; };
+		FA28BD3924F2E3EA00862A6E /* ConstraintGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA28BD3824F2E3EA00862A6E /* ConstraintGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		75B60A1B97292B3182199735 /* Pods-MongKit-mongKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MongKit-mongKitSample.release.xcconfig"; path = "Target Support Files/Pods-MongKit-mongKitSample/Pods-MongKit-mongKitSample.release.xcconfig"; sourceTree = "<group>"; };
 		8A69AF9AFD66FDB9973213EE /* Pods_MongKit_mongKitSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MongKit_mongKitSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE6DB89315405043EC09F5DC /* Pods_MongKit_mongKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MongKit_mongKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA28BD3824F2E3EA00862A6E /* ConstraintGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,19 +217,15 @@
 		6066B311249BC57C0035A740 /* Definitions */ = {
 			isa = PBXGroup;
 			children = (
+				FA28BD3A24F2E6C500862A6E /* Helpers */,
 				60F94B332494F49300E34301 /* Bottom.swift */,
-				6066B312249BC5C80035A740 /* Center.swift */,
 				60DC3F3C24A1D07E00A9320F /* CenterX.swift */,
 				60DC3F3E24A1D2C200A9320F /* CenterY.swift */,
-				6066B314249BC9CE0035A740 /* Edge.swift */,
 				60DC3F4624A212FD00A9320F /* Height.swift */,
-				6066B316249BC9D40035A740 /* Horizontal.swift */,
 				60F94B292494F0DF00E34301 /* Leading.swift */,
-				60F94B2F2494F1D600E34301 /* Raw.swift */,
 				60DC3F4224A1F44700A9320F /* Size.swift */,
 				60F94B312494F3D100E34301 /* Top.swift */,
 				60F94B2D2494F15C00E34301 /* Trailing.swift */,
-				6066B318249BC9D80035A740 /* Vertical.swift */,
 				60DC3F4424A20EF900A9320F /* Width.swift */,
 			);
 			path = Definitions;
@@ -413,6 +411,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FA28BD3A24F2E6C500862A6E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6066B312249BC5C80035A740 /* Center.swift */,
+				FA28BD3824F2E3EA00862A6E /* ConstraintGroup.swift */,
+				6066B314249BC9CE0035A740 /* Edge.swift */,
+				6066B316249BC9D40035A740 /* Horizontal.swift */,
+				60F94B2F2494F1D600E34301 /* Raw.swift */,
+				6066B318249BC9D80035A740 /* Vertical.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -577,6 +588,7 @@
 				60F94B2C2494F0ED00E34301 /* ConstraintHelper.swift in Sources */,
 				60F94B2E2494F15C00E34301 /* Trailing.swift in Sources */,
 				60F94B342494F49300E34301 /* Bottom.swift in Sources */,
+				FA28BD3924F2E3EA00862A6E /* ConstraintGroup.swift in Sources */,
 				608A4D58248C00B800D439AE /* StyleConfiguration.swift in Sources */,
 				60F94B262494EA0F00E34301 /* Constraint.swift in Sources */,
 				60DC3F5424A2615E00A9320F /* ScrollView.swift in Sources */,

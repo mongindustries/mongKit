@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol ConstraintModifier {
-  func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target: Constraint
+  func apply(target: Constraint.Type, _ constraint: NSLayoutConstraint)
 }
 
 public struct CompositeConstraintModifier: ConstraintModifier {
@@ -20,7 +20,7 @@ public struct CompositeConstraintModifier: ConstraintModifier {
     self.constraints = constraints
   }
 
-  public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target: Constraint {
+  public func apply(target: Constraint.Type, _ constraint: NSLayoutConstraint) {
     constraints.forEach{ $0.apply(target: target, constraint) }
   }
 }
@@ -37,5 +37,5 @@ public struct EmptyConstraintModifier: ConstraintModifier {
 
   public init() { }
 
-  public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target : Constraint { }
+  public func apply(target: Constraint.Type, _ constraint: NSLayoutConstraint) { }
 }

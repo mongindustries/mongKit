@@ -9,7 +9,7 @@
 import UIKit
 
 extension UILayoutPriority: ConstraintModifier {
-  public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target : Constraint {
+  public func apply(target: Constraint.Type, _ constraint: NSLayoutConstraint) {
     constraint.priority = self
   }
 }

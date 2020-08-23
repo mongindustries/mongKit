@@ -19,7 +19,7 @@ extension Ref: ConstraintModifier where Target: NSLayoutConstraint {
         __apply = { any in value(any as! ConstraintRef)}
     }
 
-    public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target : Constraint {
+    public func apply(target: Constraint.Type, _ constraint: NSLayoutConstraint) {
         __apply(ConstraintRef(target: target, reference: constraint))
     }
 }

@@ -9,14 +9,14 @@
 import UIKit
 
 public struct Constant: ConstraintModifier {
-
+  
   let value: CGFloat
 
   public init(_ value: CGFloat) {
     self.value = value
   }
 
-  public func apply<Target>(target: Target.Type, _ constraint: NSLayoutConstraint) where Target: Constraint {
+  public func apply(target: Constraint.Type, _ constraint: NSLayoutConstraint) {
     constraint.constant = value
   }
 }
