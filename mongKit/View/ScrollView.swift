@@ -70,11 +70,11 @@ open class ScrollView: UIScrollView, CodedView {
   open override func layoutSubviews() {
     super.layoutSubviews()
 
-    ControllerState.instance.doRootViewStuff(for: self) { state in
+    if let viewController = next as? BaseController {
       contentInset =
-        .init(top: 0, sides: 0, bottom: state.bottomOffset - safeAreaInsets.bottom)
+        .init(top: 0, sides: 0, bottom: viewController.__mngkit_state.bottomOffset - safeAreaInsets.bottom)
       scrollIndicatorInsets =
-        .init(top: 0, sides: 0, bottom: state.bottomOffset - safeAreaInsets.bottom)
+        .init(top: 0, sides: 0, bottom: viewController.__mngkit_state.bottomOffset - safeAreaInsets.bottom)
     }
   }
 }

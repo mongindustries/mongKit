@@ -43,7 +43,6 @@
 		60DC3F4324A1F44700A9320F /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4224A1F44700A9320F /* Size.swift */; };
 		60DC3F4524A20EF900A9320F /* Width.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4424A20EF900A9320F /* Width.swift */; };
 		60DC3F4724A212FD00A9320F /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4624A212FD00A9320F /* Height.swift */; };
-		60DC3F4C24A256DA00A9320F /* ControllerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4B24A256DA00A9320F /* ControllerState.swift */; };
 		60DC3F4F24A2577C00A9320F /* Scopeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F4E24A2577C00A9320F /* Scopeable.swift */; };
 		60DC3F5424A2615E00A9320F /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5324A2615E00A9320F /* ScrollView.swift */; };
 		60DC3F5624A2616600A9320F /* CodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC3F5524A2616600A9320F /* CodedView.swift */; };
@@ -133,7 +132,6 @@
 		60DC3F4224A1F44700A9320F /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		60DC3F4424A20EF900A9320F /* Width.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Width.swift; sourceTree = "<group>"; };
 		60DC3F4624A212FD00A9320F /* Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Height.swift; sourceTree = "<group>"; };
-		60DC3F4B24A256DA00A9320F /* ControllerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerState.swift; sourceTree = "<group>"; };
 		60DC3F4E24A2577C00A9320F /* Scopeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scopeable.swift; sourceTree = "<group>"; };
 		60DC3F5324A2615E00A9320F /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		60DC3F5524A2616600A9320F /* CodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodedView.swift; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 		191D8246DFF3CCC433C58AD9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				60DC3F4A24A256D200A9320F /* Private */,
 				191D8363DD86558EB30FCD2C /* Controller.swift */,
 			);
 			path = Controller;
@@ -349,14 +346,6 @@
 				60B3965324A9BED0007358FA /* Ref+Constraint.swift */,
 			);
 			path = Modifiers;
-			sourceTree = "<group>";
-		};
-		60DC3F4A24A256D200A9320F /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				60DC3F4B24A256DA00A9320F /* ControllerState.swift */,
-			);
-			path = Private;
 			sourceTree = "<group>";
 		};
 		60DC3F4D24A2577500A9320F /* Conformance */ = {
@@ -610,7 +599,6 @@
 				608A4D52248BFE8500D439AE /* UIView+Component.swift in Sources */,
 				608A4D50248BFE6B00D439AE /* ChoiceComponent.swift in Sources */,
 				60EECB86248F414000F029FA /* UIStackView+Style.swift in Sources */,
-				60DC3F4C24A256DA00A9320F /* ControllerState.swift in Sources */,
 				60F94B302494F1D600E34301 /* Raw.swift in Sources */,
 				60EECB82248E7E6C00F029FA /* UILabel+Style.swift in Sources */,
 				608A4D4C248BFE4600D439AE /* EmptyComponent.swift in Sources */,

@@ -8,7 +8,7 @@ DEPENDENCIES:
   - ReactiveSwift
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - ReactiveCocoa
     - ReactiveSwift
 
@@ -18,4 +18,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 899774ba1b3b60eeda5ca67ac41fc418180d7067
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

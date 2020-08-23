@@ -9,6 +9,10 @@
 import UIKit
 import mongKit
 
+protocol CustomScrollViewDelegate: UIScrollViewDelegate {
+  func showDeets()
+}
+
 class CustomScrollView: ScrollView {
 
   weak var line2: UILabel!
@@ -25,6 +29,16 @@ class CustomScrollView: ScrollView {
         Edge    (self)
         Width   (self)
       }
+      
+      UIView {
+        Style(for: UIView.self) {
+          \.backgroundColor ==> .blue
+        }
+        AutoLayout {
+          Height(400)
+        }
+      }
+      
       UILabel {
         Style(for: UILabel.self) {
           Text(value: "Line 1")
@@ -45,14 +59,25 @@ class CustomScrollView: ScrollView {
         }
       }
 
+      UIButton {
+        Style(for: UIButton.self) {
+          Ref{
+            $0.setTitle("Show", for: .normal)
+            $0.setTitleColor(.black, for: .normal)
+            $0.addTarget(self, action: #selector(self.doDeets), for: .touchUpInside)
+          }
+        }
+      }
+
       UIView {
         Style(for: UIView.self) {
           SpacerStack(axis: [ .vertical ])
         }
-        UIView()
       }
-
-      UIView()
     }
+  }
+  
+  @objc func doDeets() {
+    (delegate as? CustomScrollViewDelegate)?.showDeets()
   }
 }

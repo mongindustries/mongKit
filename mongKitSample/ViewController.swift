@@ -17,10 +17,18 @@ class ViewController: Controller<CustomScrollView> {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    rootView.delegate = self
+    
     rootView.backgroundColor = .white
     rootView.alwaysBounceVertical = true
 
     scope += rootView.line2.reactive.text
           <~ rootView.textField.reactive.continuousTextValues
+  }
+}
+
+extension ViewController: CustomScrollViewDelegate {
+  func showDeets() {
+    present(ViewController(), animated: true, completion: nil)
   }
 }
