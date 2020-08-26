@@ -63,7 +63,7 @@ public struct Height: Constraint {
 
   public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
-  public init(@ConstraintModifierBuilder _ builder: () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifier = builder()
 
@@ -73,6 +73,18 @@ public struct Height: Constraint {
     }
   }
   
+  public init(_ dimension                           : KeyPath<UIView, NSLayoutDimension>,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
+    constraint = { target in
+      [ tell(target.wrappedValue!.heightAnchor.constraint(equalTo: target.wrappedValue![keyPath: dimension], multiplier: multiplier)) {
+        modifier.apply(target: Width.self, $0) } ]
+    }
+  }
+
   public init(_ value                               : CGFloat,
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     let modifier = builder()

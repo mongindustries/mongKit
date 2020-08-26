@@ -68,11 +68,23 @@ public struct Width: Constraint {
     let modifier = builder()
 
     constraint = { target in
-      [ tell(target.wrappedValue!.widthAnchor.constraint(greaterThanOrEqualTo: target.wrappedValue!.superview!.widthAnchor)) {
+      [ tell(target.wrappedValue!.widthAnchor.constraint(equalTo: target.wrappedValue!.superview!.widthAnchor)) {
         modifier.apply(target: Width.self, $0) } ]
     }
   }
   
+  public init(_ dimension                           : KeyPath<UIView, NSLayoutDimension>,
+              multiplier                            : CGFloat = 1,
+              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+
+    let modifier = builder()
+
+    constraint = { target in
+      [ tell(target.wrappedValue!.widthAnchor.constraint(equalTo: target.wrappedValue![keyPath: dimension], multiplier: multiplier)) {
+        modifier.apply(target: Width.self, $0) } ]
+    }
+  }
+
   public init(_ value                               : CGFloat,
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
