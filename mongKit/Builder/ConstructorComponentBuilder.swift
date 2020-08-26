@@ -55,17 +55,19 @@ extension UIView {
 
   public var mongConstructed: Bool {
     get { objc_getAssociatedObject(self, &constructedKey) as? Bool ?? false }
-    set { objc_setAssociatedObject(self, &constructedKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
+    set { objc_setAssociatedObject(self, &constructedKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
   }
 
-  var layout: LayoutConfiguration? {
-    get { objc_getAssociatedObject(self, &viewlayout_Key) as? LayoutConfiguration }
-    set { objc_setAssociatedObject(self, &viewlayout_Key, newValue, .OBJC_ASSOCIATION_COPY) }
+  var layout: Any? {
+    get {
+      objc_getAssociatedObject(self, &viewlayout_Key) }
+    set {
+      objc_setAssociatedObject(self, &viewlayout_Key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
   }
 
   var styleConfig: [AnyStyleConfiguration] {
     get { objc_getAssociatedObject(self, &style______Key) as? [AnyStyleConfiguration] ?? [] }
-    set { objc_setAssociatedObject(self, &style______Key, newValue, .OBJC_ASSOCIATION_RETAIN) }
+    set { objc_setAssociatedObject(self, &style______Key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
   }
 
   public convenience init(@ConstructorComponentBuilder _ builder: () -> Style) {
@@ -73,6 +75,7 @@ extension UIView {
 
     mongConstructed = true
 
+    layout      = BlankLayout()
     styleConfig = builder().styles
   }
 

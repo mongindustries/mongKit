@@ -61,7 +61,7 @@ class CustomScrollView: ScrollView {
 
       UIButton {
         Style(for: UIButton.self) {
-          Ref{ [unowned self] view in
+          Ref{ [unowned self] (view: UIButton) in
             view.setTitle("Show", for: .normal)
             view.setTitleColor(.black, for: .normal)
             view.addTarget(self, action: #selector(self.doDeets), for: .touchUpInside)

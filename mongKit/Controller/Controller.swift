@@ -60,7 +60,7 @@ open class BaseController: UIViewController, Scopeable {
         var newState              = self.__mngkit_state
             newState.bottomOffset = context.endFrame.height
 
-        __mngkit_state = newState
+        self.__mngkit_state = newState
 
         self.view.setNeedsLayout()
 
