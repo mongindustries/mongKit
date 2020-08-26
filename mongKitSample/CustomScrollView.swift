@@ -26,7 +26,7 @@ class CustomScrollView: ScrollView {
       Style(for: UIStackView.self) {
         VerticalStack(spacing: 8, alignment: .fill)
         LayoutMarginStack(value: .init(top: 10, left: 10, bottom: 20, right: 10))
-        Ref{ [unowned self] view in self.content = view }
+        Ref(self, ref: \.content)
       }
       AutoLayout {
         Edge()
@@ -46,7 +46,7 @@ class CustomScrollView: ScrollView {
       }
       UILabel {
         Style(for: UILabel.self) {
-          Ref { [unowned self] view in self.line2 = view }
+          Ref(self, ref: \.line2)
           Text(value: "Line 2")
         }
       }

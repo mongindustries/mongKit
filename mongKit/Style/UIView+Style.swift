@@ -17,6 +17,14 @@ extension Ref: StyleConfiguration where Target: UIView {
     __apply = { any in action(any as! Target) }
   }
 
+  public init<Owner: AnyObject>(_ target: Owner, ref: ReferenceWritableKeyPath<Owner, Target?>) {
+
+    let weak = Weak(wrappedValue: target)
+    __apply = { view in
+      weak.wrappedValue?[keyPath: ref] = .some(view as! Target)
+    }
+  }
+
   public func apply(_ target: Target) {
     __apply(target)
   }
