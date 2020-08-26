@@ -13,12 +13,11 @@ public struct Bottom: Constraint, VerticalConstraintConstructible {
   public static func equalTo<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
     let weak = Weak(wrappedValue: target)
     return Raw { view -> NSLayoutConstraint in
       let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.bottomAnchor, guideSelector: \.bottomAnchor)
-      return  tell(view.wrappedValue!.bottomAnchor.constraint(equalToSystemSpacingBelow: dest, multiplier: multiplier)) {
+      return  tell(view.wrappedValue!.bottomAnchor.constraint(equalTo: dest)) {
         builder().apply(target: Bottom.self, $0)
       }
     }
@@ -27,12 +26,11 @@ public struct Bottom: Constraint, VerticalConstraintConstructible {
   public static func lessThan<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
     let weak = Weak(wrappedValue: target)
     return Raw { view -> NSLayoutConstraint in
       let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.bottomAnchor, guideSelector: \.bottomAnchor)
-      return  tell(view.wrappedValue!.bottomAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: dest, multiplier: multiplier)) {
+      return  tell(view.wrappedValue!.bottomAnchor.constraint(lessThanOrEqualTo: dest)) {
         builder().apply(target: Bottom.self, $0)
       }
     }
@@ -41,12 +39,11 @@ public struct Bottom: Constraint, VerticalConstraintConstructible {
   public static func moreThan<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
     let weak = Weak(wrappedValue: target)
     return Raw { view -> NSLayoutConstraint in
       let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.bottomAnchor, guideSelector: \.bottomAnchor)
-      return  tell(view.wrappedValue!.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: dest, multiplier: multiplier)) {
+      return  tell(view.wrappedValue!.bottomAnchor.constraint(greaterThanOrEqualTo: dest)) {
         builder().apply(target: Bottom.self, $0)
       }
     }

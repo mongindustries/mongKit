@@ -13,7 +13,6 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
   public static func equalTo<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
 
     let target = Weak(wrappedValue: target)
@@ -25,7 +24,7 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
       let dest  = convertHorizontalConstraint(mx, viewSelector: \.leadingAnchor, guideSelector: \.leadingAnchor)
 
       return [
-        tell(view.leadingAnchor.constraint(equalToSystemSpacingAfter: dest, multiplier: multiplier)) {
+        tell(view.leadingAnchor.constraint(equalTo: dest)) {
           builder().apply(target: Leading.self, $0) }
       ]
     }
@@ -34,7 +33,6 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
   public static func lessThan<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
     
     let target = Weak(wrappedValue: target)
@@ -46,7 +44,7 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
       let dest  = convertHorizontalConstraint(mx, viewSelector: \.leadingAnchor, guideSelector: \.leadingAnchor)
 
       return [
-        tell(view.leadingAnchor.constraint(lessThanOrEqualToSystemSpacingAfter: dest, multiplier: multiplier)) {
+        tell(view.leadingAnchor.constraint(lessThanOrEqualTo: dest)) {
           builder().apply(target: Leading.self, $0) }
       ]
     }
@@ -55,7 +53,6 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
   public static func moreThan<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
 
     let target = Weak(wrappedValue: target)
@@ -67,7 +64,7 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
       let dest  = convertHorizontalConstraint(mx, viewSelector: \.leadingAnchor, guideSelector: \.leadingAnchor)
 
       return [
-        tell(view.leadingAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: dest, multiplier: multiplier)) {
+        tell(view.leadingAnchor.constraint(greaterThanOrEqualTo: dest)) {
           builder().apply(target: Leading.self, $0) }
       ]
     }

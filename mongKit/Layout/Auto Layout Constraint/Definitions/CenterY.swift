@@ -13,12 +13,11 @@ public struct CenterY: Constraint, VerticalConstraintConstructible {
   public static func equalTo<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
     let weak = Weak(wrappedValue: target)
     return Raw { view -> NSLayoutConstraint in
       let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.centerYAnchor, guideSelector: \.centerYAnchor)
-      return  tell(view.wrappedValue!.centerYAnchor.constraint(equalToSystemSpacingBelow: dest, multiplier: multiplier)) {
+      return  tell(view.wrappedValue!.centerYAnchor.constraint(equalTo: dest)) {
         builder().apply(target: CenterY.self, $0)
       }
     }
@@ -27,12 +26,11 @@ public struct CenterY: Constraint, VerticalConstraintConstructible {
   public static func lessThan<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
     let weak = Weak(wrappedValue: target)
     return Raw { view -> NSLayoutConstraint in
       let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.centerYAnchor, guideSelector: \.centerYAnchor)
-      return  tell(view.wrappedValue!.centerYAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: dest, multiplier: multiplier)) {
+      return  tell(view.wrappedValue!.centerYAnchor.constraint(lessThanOrEqualTo: dest)) {
         builder().apply(target: CenterY.self, $0)
       }
     }
@@ -41,12 +39,11 @@ public struct CenterY: Constraint, VerticalConstraintConstructible {
   public static func moreThan<Target, TConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
     let weak = Weak(wrappedValue: target)
     return Raw { view -> NSLayoutConstraint in
       let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.centerYAnchor, guideSelector: \.centerYAnchor)
-      return  tell(view.wrappedValue!.centerYAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: dest, multiplier: multiplier)) {
+      return  tell(view.wrappedValue!.centerYAnchor.constraint(greaterThanOrEqualTo: dest)) {
         builder().apply(target: CenterY.self, $0)
       }
     }

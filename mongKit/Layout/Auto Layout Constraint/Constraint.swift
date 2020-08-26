@@ -20,19 +20,16 @@ public protocol HorizontalConstraintConstructible {
   static func equalTo<Target: NSObject, TConstraint: HorizontalConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint
 
   static func lessThan<Target: NSObject, TConstraint: HorizontalConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint
 
   static func moreThan<Target: NSObject, TConstraint: HorizontalConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint
 
 
@@ -62,19 +59,16 @@ public protocol VerticalConstraintConstructible {
   static func equalTo<Target: NSObject, TConstraint: VerticalConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint
 
   static func lessThan<Target: NSObject, TConstraint: VerticalConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint
 
   static func moreThan<Target: NSObject, TConstraint: VerticalConstraint>(
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
-    multiplier                            : CGFloat,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint
 
 
