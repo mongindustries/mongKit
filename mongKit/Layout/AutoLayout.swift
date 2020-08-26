@@ -16,16 +16,15 @@ public struct AutoLayoutBuilder: Constraint {
   }
 
   public static func buildBlock(_ children: Constraint...) -> Constraint {
-    AutoLayoutBuilder(constraints: children.map { $0.constraint })
+    AutoLayoutBuilder(constraints: children.compactMap { $0.constraint })
   }
 
 
-  public let constraint: (UIView) -> [NSLayoutConstraint]
+  public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
-  init(constraints: [(UIView) -> [NSLayoutConstraint]]) {
+  init(constraints: [(Weak<UIView>) -> [NSLayoutConstraint]]) {
     constraint = { view in
-
-      view.translatesAutoresizingMaskIntoConstraints = false
+      view.wrappedValue!.translatesAutoresizingMaskIntoConstraints = false
       return constraints.flatMap { $0(view) }
     }
   }
@@ -34,7 +33,7 @@ public struct AutoLayoutBuilder: Constraint {
 
 public struct AutoLayout: LayoutConfiguration {
 
-  let constraints: (UIView) -> [NSLayoutConstraint]
+  let constraints: (Weak<UIView>) -> [NSLayoutConstraint]
 
   public init(@AutoLayoutBuilder _ builder: () -> Constraint) {
 
@@ -48,6 +47,13 @@ public struct AutoLayout: LayoutConfiguration {
   }
 
   public func apply(_ target: UIView) {
-    NSLayoutConstraint.activate(constraints(target))
+    NSLayoutConstraint.activate(constraints(Weak(wrappedValue: target)))
+  }
+}
+
+extension UIView {
+  
+  public func buildConstraints(@AutoLayoutBuilder _ builder: () -> Constraint) {
+    AutoLayout(builder).apply(self)
   }
 }

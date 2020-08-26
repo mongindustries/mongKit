@@ -10,41 +10,45 @@ import UIKit
 
 public struct Vertical: Constraint {
 
-  public let constraint: (UIView) -> [NSLayoutConstraint]
+  public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
-  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-    let modifier = builder()
+  public init(
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     constraint = { target in
-      [ tell(target.topAnchor     .constraint(equalTo: target.superview!.topAnchor     )) {
-          modifier.apply(target: Top.self , $0) } ,
-        tell(target.bottomAnchor  .constraint(equalTo: target.superview!.bottomAnchor  )) {
-          modifier.apply(target: Bottom.self, $0) } ]
+
+      guard let view: UIView = target.wrappedValue?.superview else { fatalError() }
+
+      return
+        Top     .equalTo(view, constraint: \UIView.topAnchor,     builder).constraint(target) +
+        Bottom  .equalTo(view, constraint: \UIView.bottomAnchor,  builder).constraint(target)
     }
   }
-
-  public init(_ view                                : @escaping @autoclosure () -> UIView,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-    let modifier = builder()
+  
+  public init<Target: UIView>(
+    _ target                              : Target,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    let weak = Weak(wrappedValue: target)
     constraint = { target in
-      let view = view()
-      return [
-        tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
-          modifier.apply(target: Top.self , $0) } ,
-        tell(target.bottomAnchor  .constraint(equalTo: view.bottomAnchor  )) {
-          modifier.apply(target: Bottom.self, $0) } ]
+
+      guard let view = weak.wrappedValue else { fatalError() }
+
+      return
+        Top     .equalTo(view, constraint: \UIView.topAnchor,     builder).constraint(target) +
+        Bottom  .equalTo(view, constraint: \UIView.bottomAnchor,  builder).constraint(target)
     }
   }
-
-  public init(_ view                                : @escaping @autoclosure () -> UILayoutGuide,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-    let modifier = builder()
+  
+  public init<Target: UILayoutGuide>(
+    _ target                              : Target,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    let weak = Weak(wrappedValue: target)
     constraint = { target in
-      let view = view()
-      return [
-        tell(target.topAnchor     .constraint(equalTo: view.topAnchor     )) {
-          modifier.apply(target: Top.self , $0) } ,
-        tell(target.bottomAnchor  .constraint(equalTo: view.bottomAnchor  )) {
-          modifier.apply(target: Bottom.self, $0) } ]
+
+      guard let view = weak.wrappedValue else { fatalError() }
+
+      return
+        Top     .equalTo(view, constraint: \UILayoutGuide.topAnchor,    builder).constraint(target) +
+        Bottom  .equalTo(view, constraint: \UILayoutGuide.bottomAnchor, builder).constraint(target)
     }
   }
 }

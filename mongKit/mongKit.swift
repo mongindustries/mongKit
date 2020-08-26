@@ -23,7 +23,7 @@ public class mongKit {
   }
 
   private func scanLayouts(for view: UIView) {
-    guard view.mongConstructed else {
+    guard view.mongConstructed, let layout = view.layout else {
       return
     }
 
@@ -31,23 +31,7 @@ public class mongKit {
       scanLayouts(for: subview)
     }
 
-    #if swift(>=5.3)
-    if let layout = view.layout as? LayoutConfiguration {
-      layout.apply(view)
-    } else {
-      switch view.layout {
-      case let auto as AutoLayout:
-        auto.apply(view)
-      case let fram as FrameLayout:
-        fram.apply(view)
-      case let blnk as BlankLayout:
-        blnk.apply(view)
-      default:
-        break
-      }
-    }
-    #else
-    switch view.layout {
+    switch layout {
     case let auto as AutoLayout:
       auto.apply(view)
     case let fram as FrameLayout:
@@ -57,7 +41,6 @@ public class mongKit {
     default:
       break
     }
-    #endif
 
     view.layout = nil
   }

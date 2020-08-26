@@ -9,38 +9,50 @@
 import UIKit
 
 public struct Size: Constraint {
-  public var constraint: (UIView) -> [NSLayoutConstraint]
+  
+  public var constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
   public init(_ value                               : CGFloat,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-
-    let modifier = builder()
-
-    constraint = {
-      [ tell($0.widthAnchor  .constraint(equalToConstant: value)) { modifier.apply(target: Width.self , $0) } ,
-        tell($0.heightAnchor .constraint(equalToConstant: value)) { modifier.apply(target: Height.self, $0) } ] }
+              @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    constraint = { target in
+      return Width(value, builder).constraint(target) +
+            Height(value, builder).constraint(target)
+    }
   }
 
   public init(_ size                                : CGSize,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-
-    let modifier = builder()
-
-    constraint = {
-      [ tell($0.widthAnchor  .constraint(equalToConstant: size.width   )) { modifier.apply(target: Width.self , $0) } ,
-        tell($0.heightAnchor .constraint(equalToConstant: size.height  )) { modifier.apply(target: Height.self, $0) } ] }
+              @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    constraint = { target in
+      return Width(size.width,  builder).constraint(target) +
+            Height(size.height, builder).constraint(target)
+    }
   }
 
-  public init(_ view                                : @escaping @autoclosure () -> UIView,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+  public init<Target: UIView>(
+    _ target                              : Target,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    let weak = Weak(wrappedValue: target)
+    constraint = { target in
 
-    let modifier = builder()
+      guard let view = weak.wrappedValue else { fatalError() }
 
-    constraint = {
-      let view = view()
-      return [
-        tell($0.widthAnchor  .constraint(equalTo: view.widthAnchor   )) { modifier.apply(target: Width.self , $0) } ,
-        tell($0.heightAnchor .constraint(equalTo: view.heightAnchor  )) { modifier.apply(target: Height.self, $0) } ]
+      return
+        Height  .equalTo(view, constraint: \UIView.heightAnchor , builder).constraint(target) +
+        Width   .equalTo(view, constraint: \UIView.widthAnchor  , builder).constraint(target)
+    }
+  }
+  
+  public init<Target: UILayoutGuide>(
+    _ target                              : Target,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    let weak = Weak(wrappedValue: target)
+    constraint = { target in
+
+      guard let view = weak.wrappedValue else { fatalError() }
+
+      return
+        Height  .equalTo(view, constraint: \UILayoutGuide.heightAnchor , builder).constraint(target) +
+        Width   .equalTo(view, constraint: \UILayoutGuide.widthAnchor  , builder).constraint(target)
     }
   }
 }

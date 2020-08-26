@@ -30,12 +30,15 @@ class CustomScrollView: ScrollView {
       }
       AutoLayout {
         Edge()
-        Width(self)
+        Width.equalTo(self, constraint: \.widthAnchor)
       }
 
       UIView {
         Style(for: UIView.self) {
           \.backgroundColor ==> .blue
+        }
+        AutoLayout {
+          Height(300)
         }
       }
 

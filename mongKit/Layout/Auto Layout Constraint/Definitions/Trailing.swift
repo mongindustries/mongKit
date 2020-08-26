@@ -9,15 +9,85 @@
 import UIKit
 
 public struct Trailing: Constraint, HorizontalConstraintConstructible {
+  
+  public static func equalTo<Target, TConstraint>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, TConstraint>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
+    
+    let target = Weak(wrappedValue: target)
+    return Raw { view -> [NSLayoutConstraint] in
+      guard let view    = view  .wrappedValue,
+            let target  = target.wrappedValue else { fatalError("Prerequisites not satisfied!") }
 
-  public let constraint: (UIView) -> [NSLayoutConstraint]
+      let mx    = target[keyPath: constraint]
+      let dest  = convertHorizontalConstraint(mx, viewSelector: \.trailingAnchor, guideSelector: \.trailingAnchor)
+
+      return [
+        tell(view.trailingAnchor.constraint(equalToSystemSpacingAfter: dest, multiplier: multiplier)) {
+          builder().apply(target: Leading.self, $0) }
+      ]
+    }
+  }
+  
+  public static func lessThan<Target, TConstraint>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, TConstraint>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
+    
+    let target = Weak(wrappedValue: target)
+    return Raw { view -> [NSLayoutConstraint] in
+      guard let view    = view  .wrappedValue,
+            let target  = target.wrappedValue else { fatalError("Prerequisites not satisfied!") }
+
+      let mx    = target[keyPath: constraint]
+      let dest  = convertHorizontalConstraint(mx, viewSelector: \.trailingAnchor, guideSelector: \.trailingAnchor)
+
+      return [
+        tell(view.trailingAnchor.constraint(lessThanOrEqualToSystemSpacingAfter: dest, multiplier: multiplier)) {
+          builder().apply(target: Leading.self, $0) }
+      ]
+    }
+  }
+  
+  public static func moreThan<Target, TConstraint>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, TConstraint>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
+    
+    let target = Weak(wrappedValue: target)
+    return Raw { view -> [NSLayoutConstraint] in
+      guard let view    = view  .wrappedValue,
+            let target  = target.wrappedValue else { fatalError("Prerequisites not satisfied!") }
+
+      let mx    = target[keyPath: constraint]
+      let dest  = convertHorizontalConstraint(mx, viewSelector: \.trailingAnchor, guideSelector: \.trailingAnchor)
+
+      return [
+        tell(view.trailingAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: dest, multiplier: multiplier)) {
+          builder().apply(target: Leading.self, $0) }
+      ]
+    }
+  }
+
+
+  public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
+
 
   public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifier = builder()
 
     constraint = { view in
-      [ tell(view.trailingAnchor.constraint(equalTo: view.superview!.trailingAnchor)) {
+      
+      guard let view = view.wrappedValue else {
+        return []
+      }
+      
+      return [ tell(view.trailingAnchor.constraint(equalTo: view.superview!.trailingAnchor)) {
         modifier.apply(target: Trailing.self, $0) } ] }
   }
 
@@ -25,7 +95,12 @@ public struct Trailing: Constraint, HorizontalConstraintConstructible {
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     let modifier = builder()
     constraint = { view in
-      [ tell(generateEqualConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())) {
+      
+      guard let view = view.wrappedValue else {
+        return []
+      }
+      
+      return [ tell(generateEqualConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target())) {
         modifier.apply(target: Trailing.self, $0) } ] }
   }
 
@@ -34,7 +109,12 @@ public struct Trailing: Constraint, HorizontalConstraintConstructible {
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     let modifier = builder()
     constraint = { view in
-      [ tell(generateGreaterConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target(), multiplier: multiplier)) {
+      
+      guard let view = view.wrappedValue else {
+        return []
+      }
+      
+      return [ tell(generateGreaterConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target(), multiplier: multiplier)) {
         modifier.apply(target: Trailing.self, $0) } ] }
   }
 
@@ -43,7 +123,12 @@ public struct Trailing: Constraint, HorizontalConstraintConstructible {
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     let modifier = builder()
     constraint = { view in
-      [ tell(generateLesserConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target(), multiplier: multiplier)) {
+      
+      guard let view = view.wrappedValue else {
+        return []
+      }
+      
+      return [ tell(generateLesserConstraint(for: view, \.trailingAnchor, \.trailingAnchor, to: target(), multiplier: multiplier)) {
         modifier.apply(target: Trailing.self, $0) } ] }
   }
 }

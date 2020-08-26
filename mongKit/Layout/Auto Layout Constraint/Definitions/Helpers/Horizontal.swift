@@ -10,41 +10,45 @@ import UIKit
 
 public struct Horizontal: Constraint {
 
-  public let constraint: (UIView) -> [NSLayoutConstraint]
+  public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
-  public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-    let modifier = builder()
+  public init(
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
     constraint = { target in
-      [ tell(target.leadingAnchor  .constraint(equalTo: target.superview!.leadingAnchor  )) {
-          modifier.apply(target: Leading.self , $0) } ,
-        tell(target.trailingAnchor .constraint(equalTo: target.superview!.trailingAnchor )) {
-          modifier.apply(target: Trailing.self, $0) } ]
+
+      guard let view: UIView = target.wrappedValue?.superview else { fatalError() }
+
+      return
+        Leading .equalTo(view, constraint: \UIView.leadingAnchor,   builder).constraint(target) +
+        Trailing.equalTo(view, constraint: \UIView.trailingAnchor,  builder).constraint(target)
     }
   }
-
-  public init(_ view                                : @escaping @autoclosure () -> UIView,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-    let modifier = builder()
+  
+  public init<Target: UIView>(
+    _ target                              : Target,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    let weak = Weak(wrappedValue: target)
     constraint = { target in
-      let view = view()
-      return [
-        tell(target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  )) {
-          modifier.apply(target: Leading.self , $0) } ,
-        tell(target.trailingAnchor .constraint(equalTo: view.trailingAnchor )) {
-          modifier.apply(target: Trailing.self, $0) } ]
+
+      guard let view = weak.wrappedValue else { fatalError() }
+
+      return
+        Leading .equalTo(view, constraint: \UIView.leadingAnchor,   builder).constraint(target) +
+        Trailing.equalTo(view, constraint: \UIView.trailingAnchor,  builder).constraint(target)
     }
   }
-
-  public init(_ view                                : @escaping @autoclosure () -> UILayoutGuide,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-    let modifier = builder()
+  
+  public init<Target: UILayoutGuide>(
+    _ target                              : Target,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) {
+    let weak = Weak(wrappedValue: target)
     constraint = { target in
-      let view = view()
-      return [
-        tell(target.leadingAnchor  .constraint(equalTo: view.leadingAnchor  )) {
-          modifier.apply(target: Leading.self , $0) } ,
-        tell(target.trailingAnchor .constraint(equalTo: view.trailingAnchor )) {
-          modifier.apply(target: Trailing.self, $0) } ]
+
+      guard let view = weak.wrappedValue else { fatalError() }
+
+      return
+        Leading .equalTo(view, constraint: \UILayoutGuide.leadingAnchor,   builder).constraint(target) +
+        Trailing.equalTo(view, constraint: \UILayoutGuide.trailingAnchor,  builder).constraint(target)
     }
   }
 }

@@ -8,14 +8,67 @@
 import UIKit
 
 public struct Width: Constraint {
-  public let constraint: (UIView) -> [NSLayoutConstraint]
+
+  public static func equalTo<Target: AnyObject>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, NSLayoutDimension>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint {
+
+    let weak = Weak(wrappedValue: target)
+    return Raw { view -> NSLayoutConstraint in
+
+      let dimension = weak.wrappedValue![keyPath: constraint]
+
+      return tell(view.wrappedValue!.widthAnchor.constraint(equalTo: dimension, multiplier: multiplier)) {
+        builder().apply(target: Width.self, $0)
+      }
+    }
+  }
+  
+  public static func lessThan<Target: AnyObject>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, NSLayoutDimension>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint {
+
+    let weak = Weak(wrappedValue: target)
+    return Raw { view -> NSLayoutConstraint in
+
+      let dimension = weak.wrappedValue![keyPath: constraint]
+
+      return tell(view.wrappedValue!.widthAnchor.constraint(equalTo: dimension, multiplier: multiplier)) {
+        builder().apply(target: Width.self, $0)
+      }
+    }
+  }
+  
+  public static func moreThan<Target: AnyObject>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, NSLayoutDimension>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint {
+
+    let weak = Weak(wrappedValue: target)
+    return Raw { view -> NSLayoutConstraint in
+
+      let dimension = weak.wrappedValue![keyPath: constraint]
+
+      return tell(view.wrappedValue!.widthAnchor.constraint(lessThanOrEqualTo: dimension, multiplier: multiplier)) {
+        builder().apply(target: Width.self, $0)
+      }
+    }
+  }
+  
+  
+  public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
   public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifier = builder()
 
     constraint = { target in
-      [ tell(target.widthAnchor.constraint(equalTo: target.superview!.widthAnchor)) {
+      [ tell(target.wrappedValue!.widthAnchor.constraint(greaterThanOrEqualTo: target.wrappedValue!.superview!.widthAnchor)) {
         modifier.apply(target: Width.self, $0) } ]
     }
   }
@@ -26,40 +79,8 @@ public struct Width: Constraint {
     let modifier = builder()
 
     constraint = { target in
-      [ tell(target.widthAnchor.constraint(equalToConstant: value)) {
+      [ tell(target.wrappedValue!.widthAnchor.constraint(equalToConstant: value)) {
         modifier.apply(target: Width.self, $0) } ]
-    }
-  }
-
-  public init(_ view                                : @escaping @autoclosure () -> UIView,
-              _ dimension                           : NSLayoutConstraint.Axis = .horizontal,
-              multiplier                            : CGFloat = 1,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-
-    let modifier = builder()
-    constraint = { target in
-
-      let view = view()
-
-      return [
-        tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor, multiplier: multiplier))
-          { modifier.apply(target: Width.self, $0) } ]
-    }
-  }
-
-  public init(_ view                                : @escaping @autoclosure () -> UILayoutGuide,
-              _ dimension                           : NSLayoutConstraint.Axis = .horizontal,
-              multiplier                            : CGFloat = 1,
-              @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
-
-    let modifier = builder()
-    constraint = { target in
-
-      let view = view()
-
-      return [
-        tell(target.widthAnchor.constraint(equalTo: dimension == .horizontal ? view.widthAnchor : view.heightAnchor, multiplier: multiplier))
-          { modifier.apply(target: Width.self, $0) } ]
     }
   }
 }

@@ -74,8 +74,6 @@ extension UIView {
     self.init(frame: .zero)
 
     mongConstructed = true
-
-    layout      = BlankLayout()
     styleConfig = builder().styles
   }
 

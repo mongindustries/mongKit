@@ -10,7 +10,7 @@ import UIKit
 
 public struct ConstraintGroup: Constraint {
 
-  public let constraint: (UIView) -> [NSLayoutConstraint]
+  public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
   public init(_ items                               : [Constraint],
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
@@ -18,14 +18,14 @@ public struct ConstraintGroup: Constraint {
     let modifier = builder()
 
     constraint = { target in
-      items.map { (item: Constraint) in
-        (item.constraint(target), type(of: item))
-      }.flatMap { constraint, type -> [NSLayoutConstraint] in
-        constraint.map { item -> NSLayoutConstraint in
-          modifier.apply(target: type, item)
-          return item
+      items
+        .map      { ($0.constraint(target), type(of: $0)) }
+        .flatMap  { constraint, type -> [NSLayoutConstraint] in
+          constraint.map { item -> NSLayoutConstraint in
+            modifier.apply(target: type, item)
+            return item
+          }
         }
-      }
     }
   }
 }

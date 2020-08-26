@@ -10,14 +10,57 @@ import UIKit
 
 public struct Top: Constraint, VerticalConstraintConstructible {
 
-  public let constraint: (UIView) -> [NSLayoutConstraint]
+  public static func equalTo<Target, TConstraint>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, TConstraint>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
+    let weak = Weak(wrappedValue: target)
+    return Raw { view -> NSLayoutConstraint in
+      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
+      return  tell(view.wrappedValue!.topAnchor.constraint(equalToSystemSpacingBelow: dest, multiplier: multiplier)) {
+        builder().apply(target: Top.self, $0)
+      }
+    }
+  }
+  
+  public static func lessThan<Target, TConstraint>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, TConstraint>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
+    let weak = Weak(wrappedValue: target)
+    return Raw { view -> NSLayoutConstraint in
+      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
+      return  tell(view.wrappedValue!.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: dest, multiplier: multiplier)) {
+        builder().apply(target: Top.self, $0)
+      }
+    }
+  }
+  
+  public static func moreThan<Target, TConstraint>(
+    _ target                              : Target,
+    constraint                            : KeyPath<Target, TConstraint>,
+    multiplier                            : CGFloat = 1,
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
+    let weak = Weak(wrappedValue: target)
+    return Raw { view -> NSLayoutConstraint in
+      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
+      return  tell(view.wrappedValue!.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: dest, multiplier: multiplier)) {
+        builder().apply(target: Top.self, $0)
+      }
+    }
+  }
+
+
+  public let constraint: (Weak<UIView>) -> [NSLayoutConstraint]
 
   public init(@ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
     let modifier = builder()
 
     constraint = { view in
-      [ tell(view.topAnchor.constraint(equalTo: view.superview!.topAnchor)) {
+      [ tell(view.wrappedValue!.topAnchor.constraint(equalTo: view.wrappedValue!.superview!.topAnchor)) {
         modifier.apply(target: Top.self, $0) } ] }
   }
 
@@ -27,7 +70,7 @@ public struct Top: Constraint, VerticalConstraintConstructible {
     let modifier = builder()
 
     constraint = { view in
-      [ tell(generateEqualConstraint(for: view, \.topAnchor, \.topAnchor, to: target())) {
+      [ tell(generateEqualConstraint(for: view.wrappedValue!, \.topAnchor, \.topAnchor, to: target())) {
         modifier.apply(target: Top.self, $0) } ] }
   }
 
@@ -38,7 +81,7 @@ public struct Top: Constraint, VerticalConstraintConstructible {
     let modifier = builder()
 
     constraint = { view in
-      [ tell(generateGreaterConstraint(for: view, \.topAnchor, \.topAnchor, to: target(), multiplier: multiplier)) {
+      [ tell(generateGreaterConstraint(for: view.wrappedValue!, \.topAnchor, \.topAnchor, to: target(), multiplier: multiplier)) {
         modifier.apply(target: Top.self, $0) } ] }
   }
 
@@ -49,7 +92,7 @@ public struct Top: Constraint, VerticalConstraintConstructible {
     let modifier = builder()
 
     constraint = { view in
-      [ tell(generateLesserConstraint(for: view, \.topAnchor, \.topAnchor, to: target(), multiplier: multiplier)) {
+      [ tell(generateLesserConstraint(for: view.wrappedValue!, \.topAnchor, \.topAnchor, to: target(), multiplier: multiplier)) {
         modifier.apply(target: Top.self, $0) } ] }
   }
 }
