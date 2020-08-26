@@ -15,6 +15,8 @@ protocol CustomScrollViewDelegate: UIScrollViewDelegate {
 
 class CustomScrollView: ScrollView {
 
+  weak var content: UIStackView!
+  
   weak var line2: UILabel!
 
   weak var textField: UITextField!
@@ -24,21 +26,19 @@ class CustomScrollView: ScrollView {
       Style(for: UIStackView.self) {
         VerticalStack(spacing: 8, alignment: .fill)
         LayoutMarginStack(value: .init(top: 10, left: 10, bottom: 20, right: 10))
+        Ref{ [unowned self] view in self.content = view }
       }
       AutoLayout {
-        Edge    (self)
-        Width   (self)
+        Edge()
+        Width(self)
       }
-      
+
       UIView {
         Style(for: UIView.self) {
           \.backgroundColor ==> .blue
         }
-        AutoLayout {
-          Height(400)
-        }
       }
-      
+
       UILabel {
         Style(for: UILabel.self) {
           Text(value: "Line 1")
@@ -46,14 +46,14 @@ class CustomScrollView: ScrollView {
       }
       UILabel {
         Style(for: UILabel.self) {
-          Ref { self.line2 = $0 }
+          Ref { [unowned self] view in self.line2 = view }
           Text(value: "Line 2")
         }
       }
 
       UITextField {
         Style(for: UITextField.self) {
-          Ref { self.textField = $0 }
+          Ref { [unowned self] view in self.textField = view }
           Property(\UITextField.borderStyle,
                    value: UITextField.BorderStyle.roundedRect)
         }
@@ -61,10 +61,10 @@ class CustomScrollView: ScrollView {
 
       UIButton {
         Style(for: UIButton.self) {
-          Ref{
-            $0.setTitle("Show", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
-            $0.addTarget(self, action: #selector(self.doDeets), for: .touchUpInside)
+          Ref{ [unowned self] view in
+            view.setTitle("Show", for: .normal)
+            view.setTitleColor(.black, for: .normal)
+            view.addTarget(self, action: #selector(self.doDeets), for: .touchUpInside)
           }
         }
       }

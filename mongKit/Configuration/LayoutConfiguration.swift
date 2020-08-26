@@ -8,6 +8,6 @@
 
 import UIKit
 
-public protocol LayoutConfiguration: Configuration where Comp == UIView {
-  func apply(_ target: Comp)
+public protocol LayoutConfiguration {
+  func apply(_ target: UIView)
 }

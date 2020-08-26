@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FrameLayout: Layout {
+public struct FrameLayout: LayoutConfiguration {
 
   let frame: CGRect
 
@@ -16,7 +16,7 @@ public class FrameLayout: Layout {
     self.frame = frame
   }
 
-  public override func apply(_ target: UIView) {
+  public func apply(_ target: UIView) {
     target.frame = frame
   }
 }

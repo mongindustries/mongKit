@@ -8,11 +8,12 @@
 
 import Foundation
 
-@dynamicMemberLookup
-public struct WeakReference<Type: AnyObject> {
-  weak var instance: Type?
+@propertyWrapper
+public struct Weak<Type: AnyObject> {
 
-  subscript<Value>(dynamicMember path: KeyPath<Type, Value>) -> Value? {
-    return instance?[keyPath: path]
+  public weak var wrappedValue: Type?
+
+  public init(wrappedValue: Type?) {
+    self.wrappedValue = wrappedValue
   }
 }

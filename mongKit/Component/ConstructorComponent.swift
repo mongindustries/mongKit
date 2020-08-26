@@ -11,7 +11,7 @@ import UIKit
 public struct ConstructorComponent: Component {
 
   let style     : Style
-  let layout    : Layout
+  let layout    : LayoutConfiguration
 
   let children  : () -> Component
 }

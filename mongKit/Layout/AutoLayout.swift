@@ -32,22 +32,22 @@ public struct AutoLayoutBuilder: Constraint {
 }
 
 
-public class AutoLayout: Layout {
+public struct AutoLayout: LayoutConfiguration {
 
-  let constraints: AutoLayoutBuilder
+  let constraints: (UIView) -> [NSLayoutConstraint]
 
   public init(@AutoLayoutBuilder _ builder: () -> Constraint) {
 
     let x = builder()
 
     if let bbuilder = x as? AutoLayoutBuilder {
-      constraints = bbuilder
+      constraints = bbuilder.constraint
     } else {
-      constraints = .init(constraints: [ x.constraint ])
+      constraints = x.constraint
     }
   }
 
-  public override func apply(_ target: UIView) {
-    NSLayoutConstraint.activate(constraints.constraint(target))
+  public func apply(_ target: UIView) {
+    NSLayoutConstraint.activate(constraints(target))
   }
 }

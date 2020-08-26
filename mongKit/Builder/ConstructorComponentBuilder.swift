@@ -13,6 +13,11 @@ fileprivate var viewlayout_Key = 0x1000_0911
 
 fileprivate var style______Key = 0x1000_abcd
 
+struct BlankLayout: LayoutConfiguration {
+  func apply(_ target: UIView) {
+  }
+}
+
 @_functionBuilder
 public struct ConstructorComponentBuilder {
 
@@ -24,7 +29,7 @@ public struct ConstructorComponentBuilder {
     style
   }
 
-  public static func buildExpression(_ layout: Layout) -> Layout {
+  public static func buildExpression(_ layout: LayoutConfiguration) -> LayoutConfiguration {
     layout
   }
 
@@ -34,14 +39,14 @@ public struct ConstructorComponentBuilder {
   }
 
   public static func buildBlock(_ style: Style, _ children: Component...) -> ConstructorComponent {
-    .init(style: style, layout: .init(), children: { GroupComponent(items: children) })
+    .init(style: style, layout: BlankLayout(), children: { GroupComponent(items: children) })
   }
 
-  public static func buildBlock(_ style: Style, _ layout: Layout) -> ConstructorComponent {
+  public static func buildBlock(_ style: Style, _ layout: LayoutConfiguration) -> ConstructorComponent {
     .init(style: style, layout: layout, children: { EmptyComponent() })
   }
 
-  public static func buildBlock(_ style: Style, _ layout: Layout, _ children: Component...) -> ConstructorComponent {
+  public static func buildBlock(_ style: Style, _ layout: LayoutConfiguration, _ children: Component...) -> ConstructorComponent {
     .init(style: style, layout: layout, children: { GroupComponent(items: children) })
   }
 }
@@ -53,9 +58,9 @@ extension UIView {
     set { objc_setAssociatedObject(self, &constructedKey, newValue, .OBJC_ASSOCIATION_RETAIN) }
   }
 
-  var layout: Layout? {
-    get { objc_getAssociatedObject(self, &viewlayout_Key) as? Layout }
-    set { objc_setAssociatedObject(self, &viewlayout_Key, newValue, .OBJC_ASSOCIATION_RETAIN) }
+  var layout: LayoutConfiguration? {
+    get { objc_getAssociatedObject(self, &viewlayout_Key) as? LayoutConfiguration }
+    set { objc_setAssociatedObject(self, &viewlayout_Key, newValue, .OBJC_ASSOCIATION_COPY) }
   }
 
   var styleConfig: [AnyStyleConfiguration] {
@@ -78,7 +83,7 @@ extension UIView {
 
     let config = builder()
 
-    layout = config.layout // defer execution of layout instructions
+    layout      = config.layout // defer execution of layout instructions
     styleConfig = config.style.styles
 
     buildChildren(config.children())
