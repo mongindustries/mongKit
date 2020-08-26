@@ -14,7 +14,7 @@ public struct CenterX: Constraint, HorizontalConstraintConstructible {
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
     multiplier                            : CGFloat = 1,
-    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
 
     let target = Weak(wrappedValue: target)
     return Raw { view -> [NSLayoutConstraint] in
@@ -35,7 +35,7 @@ public struct CenterX: Constraint, HorizontalConstraintConstructible {
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
     multiplier                            : CGFloat = 1,
-    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
     
     let target = Weak(wrappedValue: target)
     return Raw { view -> [NSLayoutConstraint] in
@@ -56,7 +56,7 @@ public struct CenterX: Constraint, HorizontalConstraintConstructible {
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
     multiplier                            : CGFloat = 1,
-    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
+    @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
 
     let target = Weak(wrappedValue: target)
     return Raw { view -> [NSLayoutConstraint] in
