@@ -25,7 +25,7 @@ public struct Trailing: Constraint, HorizontalConstraintConstructible {
 
       return [
         tell(view.trailingAnchor.constraint(equalTo: dest)) {
-          builder().apply(target: Leading.self, $0) }
+          builder().apply(target: Trailing.self, $0) }
       ]
     }
   }
@@ -45,7 +45,7 @@ public struct Trailing: Constraint, HorizontalConstraintConstructible {
 
       return [
         tell(view.trailingAnchor.constraint(lessThanOrEqualTo: dest)) {
-          builder().apply(target: Leading.self, $0) }
+          builder().apply(target: Trailing.self, $0) }
       ]
     }
   }
@@ -65,7 +65,7 @@ public struct Trailing: Constraint, HorizontalConstraintConstructible {
 
       return [
         tell(view.trailingAnchor.constraint(greaterThanOrEqualTo: dest)) {
-          builder().apply(target: Leading.self, $0) }
+          builder().apply(target: Trailing.self, $0) }
       ]
     }
   }
