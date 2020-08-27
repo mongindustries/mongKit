@@ -14,9 +14,12 @@ public struct Top: Constraint, VerticalConstraintConstructible {
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
-    let weak = Weak(wrappedValue: target)
+
+    let weak        = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+
     return Raw { view -> NSLayoutConstraint in
-      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
+      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint.wrappedValue!], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
       return  tell(view.wrappedValue!.topAnchor.constraint(equalTo: dest)) {
         builder().apply(target: Top.self, $0)
       }
@@ -27,9 +30,12 @@ public struct Top: Constraint, VerticalConstraintConstructible {
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
-    let weak = Weak(wrappedValue: target)
+
+    let weak        = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+
     return Raw { view -> NSLayoutConstraint in
-      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
+      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint.wrappedValue!], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
       return  tell(view.wrappedValue!.topAnchor.constraint(lessThanOrEqualTo: dest)) {
         builder().apply(target: Top.self, $0)
       }
@@ -40,9 +46,12 @@ public struct Top: Constraint, VerticalConstraintConstructible {
     _ target                              : Target,
     constraint                            : KeyPath<Target, TConstraint>,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : VerticalConstraint {
-    let weak = Weak(wrappedValue: target)
+    
+    let weak        = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+    
     return Raw { view -> NSLayoutConstraint in
-      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
+      let     dest = convertVerticalConstraint(weak.wrappedValue![keyPath: constraint.wrappedValue!], viewSelector: \.topAnchor, guideSelector: \.topAnchor)
       return  tell(view.wrappedValue!.topAnchor.constraint(greaterThanOrEqualTo: dest)) {
         builder().apply(target: Top.self, $0)
       }

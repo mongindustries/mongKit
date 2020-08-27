@@ -15,12 +15,14 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
     constraint                            : KeyPath<Target, TConstraint>,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
 
-    let target = Weak(wrappedValue: target)
+    let target      = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+    
     return Raw { view -> [NSLayoutConstraint] in
       guard let view    = view  .wrappedValue,
             let target  = target.wrappedValue else { fatalError("Prerequisites not satisfied!") }
 
-      let mx    = target[keyPath: constraint]
+      let mx    = target[keyPath: constraint.wrappedValue!]
       let dest  = convertHorizontalConstraint(mx, viewSelector: \.leadingAnchor, guideSelector: \.leadingAnchor)
 
       return [
@@ -35,12 +37,14 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
     constraint                            : KeyPath<Target, TConstraint>,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
     
-    let target = Weak(wrappedValue: target)
+    let target      = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+    
     return Raw { view -> [NSLayoutConstraint] in
       guard let view    = view  .wrappedValue,
             let target  = target.wrappedValue else { fatalError("Prerequisites not satisfied!") }
 
-      let mx    = target[keyPath: constraint]
+      let mx    = target[keyPath: constraint.wrappedValue!]
       let dest  = convertHorizontalConstraint(mx, viewSelector: \.leadingAnchor, guideSelector: \.leadingAnchor)
 
       return [
@@ -55,12 +59,14 @@ public struct Leading: Constraint, HorizontalConstraintConstructible {
     constraint                            : KeyPath<Target, TConstraint>,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint where Target : NSObject, TConstraint : HorizontalConstraint {
 
-    let target = Weak(wrappedValue: target)
+    let target      = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+    
     return Raw { view -> [NSLayoutConstraint] in
       guard let view    = view  .wrappedValue,
             let target  = target.wrappedValue else { fatalError("Prerequisites not satisfied!") }
 
-      let mx    = target[keyPath: constraint]
+      let mx    = target[keyPath: constraint.wrappedValue!]
       let dest  = convertHorizontalConstraint(mx, viewSelector: \.leadingAnchor, guideSelector: \.leadingAnchor)
 
       return [

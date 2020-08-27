@@ -15,10 +15,12 @@ public struct Width: Constraint {
     multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint {
 
-    let weak = Weak(wrappedValue: target)
+    let weak        = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+    
     return Raw { view -> NSLayoutConstraint in
 
-      let dimension = weak.wrappedValue![keyPath: constraint]
+      let dimension = weak.wrappedValue![keyPath: constraint.wrappedValue!]
 
       return tell(view.wrappedValue!.widthAnchor.constraint(equalTo: dimension, multiplier: multiplier)) {
         builder().apply(target: Width.self, $0)
@@ -32,10 +34,12 @@ public struct Width: Constraint {
     multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint {
 
-    let weak = Weak(wrappedValue: target)
+    let weak        = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+    
     return Raw { view -> NSLayoutConstraint in
 
-      let dimension = weak.wrappedValue![keyPath: constraint]
+      let dimension = weak.wrappedValue![keyPath: constraint.wrappedValue!]
 
       return tell(view.wrappedValue!.widthAnchor.constraint(equalTo: dimension, multiplier: multiplier)) {
         builder().apply(target: Width.self, $0)
@@ -49,10 +53,12 @@ public struct Width: Constraint {
     multiplier                            : CGFloat = 1,
     @ConstraintModifierBuilder _ builder  : @escaping () -> ConstraintModifier = { EmptyConstraintModifier() }) -> Constraint {
 
-    let weak = Weak(wrappedValue: target)
+    let weak        = Weak(wrappedValue: target)
+    let constraint  = Weak(wrappedValue: constraint)
+    
     return Raw { view -> NSLayoutConstraint in
 
-      let dimension = weak.wrappedValue![keyPath: constraint]
+      let dimension = weak.wrappedValue![keyPath: constraint.wrappedValue!]
 
       return tell(view.wrappedValue!.widthAnchor.constraint(lessThanOrEqualTo: dimension, multiplier: multiplier)) {
         builder().apply(target: Width.self, $0)
@@ -77,10 +83,11 @@ public struct Width: Constraint {
               multiplier                            : CGFloat = 1,
               @ConstraintModifierBuilder _ builder  : () -> ConstraintModifier = { EmptyConstraintModifier() }) {
 
-    let modifier = builder()
+    let modifier  = builder()
+    let dimension = Weak(wrappedValue: dimension)
 
     constraint = { target in
-      [ tell(target.wrappedValue!.widthAnchor.constraint(equalTo: target.wrappedValue![keyPath: dimension], multiplier: multiplier)) {
+      [ tell(target.wrappedValue!.widthAnchor.constraint(equalTo: target.wrappedValue![keyPath: dimension.wrappedValue!], multiplier: multiplier)) {
         modifier.apply(target: Width.self, $0) } ]
     }
   }

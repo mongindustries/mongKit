@@ -221,7 +221,6 @@
 				60DC3F3E24A1D2C200A9320F /* CenterY.swift */,
 				60DC3F4624A212FD00A9320F /* Height.swift */,
 				60F94B292494F0DF00E34301 /* Leading.swift */,
-				60DC3F4224A1F44700A9320F /* Size.swift */,
 				60F94B312494F3D100E34301 /* Top.swift */,
 				60F94B2D2494F15C00E34301 /* Trailing.swift */,
 				60DC3F4424A20EF900A9320F /* Width.swift */,
@@ -416,6 +415,7 @@
 				6066B314249BC9CE0035A740 /* Edge.swift */,
 				6066B316249BC9D40035A740 /* Horizontal.swift */,
 				60F94B2F2494F1D600E34301 /* Raw.swift */,
+				60DC3F4224A1F44700A9320F /* Size.swift */,
 				6066B318249BC9D80035A740 /* Vertical.swift */,
 			);
 			path = Helpers;
