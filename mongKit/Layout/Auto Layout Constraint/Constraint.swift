@@ -3,7 +3,7 @@
 //  mongKit
 //
 //  Created by Michael Ong on 13/6/20.
-//  Copyright © 2020 White Cloak Technologies, Inc. All rights reserved.
+//  Copyright © 2020 mong Industries / White Cloak Technologies, Inc. All rights reserved.
 //
 
 import UIKit
