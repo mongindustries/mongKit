@@ -17,7 +17,7 @@ public struct StyleBuilder<Target: UIView> {
   }
 
   public static func buildBlock
-  (_ items: ErasedStyleConfiguration...) -> CompositeStyleConfiguration<Target> {
-    CompositeStyleConfiguration(config: items)
+  (_ items: ErasedStyleConfiguration...) -> ErasedStyleConfiguration {
+    ErasedStyleConfiguration(items)
   }
 }

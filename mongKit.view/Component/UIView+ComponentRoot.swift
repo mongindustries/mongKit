@@ -42,7 +42,7 @@ extension UIView {
 
     switch component {
     case let sview as UIView:
-      
+
       switch self {
       case let stack as UIStackView:
         stack.addArrangedSubview(sview)
@@ -53,7 +53,8 @@ extension UIView {
       }
 
       if sview.mongConstructed {
-        style?.config.apply(self)
+        sview.style?.config.apply(sview)
+        sview.style = nil
       }
 
     case let block as Components.Group:
@@ -68,7 +69,7 @@ extension UIView {
       buildChildren(block.result)
 
     default:
-      break
+      fatalError()
     }
   }
 
@@ -79,7 +80,7 @@ extension UIView {
   }
 
   public convenience init<StyleConfig: StyleConfiguration>(
-    style                         : StyleConfig,
+    style                         : StyleConfig         = EmptyStyle() as! StyleConfig,
     layout                        : LayoutConfiguration = FrameLayout(frame: .zero),
     @ComponentBuilder _ children  : () -> Component) {
     self.init(frame: .zero)
@@ -93,7 +94,7 @@ extension UIView {
   }
   
   public convenience init<StyleConfig: StyleConfiguration>(
-    style                         : StyleConfig,
+    style                         : StyleConfig         = EmptyStyle() as! StyleConfig,
     layout                        : LayoutConfiguration = FrameLayout(frame: .zero)) {
     self.init(frame: .zero)
 

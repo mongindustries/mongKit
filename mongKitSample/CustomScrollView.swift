@@ -28,7 +28,9 @@ class CustomScrollView: ScrollView {
       style: Style<UIStackView> {
         StackVertical(spacing: 8, alignment: .fill)
         StackMargin(value: .init(top: 10, left: 10, bottom: 20, right: 10))
-        Ref(self, ref: \.content) },
+        Ref { [unowned self] (view: UIStackView) in
+          print("content")
+          content = view } },
       layout: AutoLayout {
         Edge()
         Width.equalTo(self, constraint: \.widthAnchor) }) {
@@ -44,12 +46,16 @@ class CustomScrollView: ScrollView {
           \.text ~ "Line 1" })
       UILabel(
         style: Style<UILabel> {
-          Ref(self, ref: \.line2)
+          Ref { [unowned self] (view: UILabel) in
+            print("label")
+            line2 = view }
           \.text ~ "Line 2" })
 
       UITextField(
         style: Style<UITextField> {
-          Ref(self, ref: \.textField)
+          Ref{ [unowned self] (view: UITextField) in
+            print("text field")
+            textField = view }
           \.borderStyle ~ .roundedRect })
 
       UIButton(

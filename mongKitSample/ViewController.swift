@@ -20,7 +20,7 @@ class ViewController: Controller<CustomScrollView> {
     super.viewDidLoad()
 
     rootView.delegate = self
-    
+
     rootView.backgroundColor = .white
     rootView.alwaysBounceVertical = true
 

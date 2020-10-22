@@ -11,17 +11,17 @@ public class Style<Target: UIView>: StyleConfiguration {
   
   public typealias Comp = Target
 
-  let styles: [ErasedStyleConfiguration]
+  let styles: ErasedStyleConfiguration
 
   public init() {
-    styles = []
+    styles = ErasedStyleConfiguration([])
   }
 
-  public init(@StyleBuilder<Target> _ builder: () -> CompositeStyleConfiguration<Target>) {
-    styles = []
+  public init(@StyleBuilder<Target> _ builder: () -> ErasedStyleConfiguration) {
+    styles = builder()
   }
 
   public func apply(_ target: Target) {
-
+    styles.apply(target)
   }
 }

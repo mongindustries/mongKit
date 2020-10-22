@@ -10,10 +10,20 @@ import UIKit
 public struct ErasedStyleConfiguration: StyleConfiguration {
   public typealias Comp = UIView
 
+  let identifier: String
   let applyBlock: (UIView) -> Void
   
   public init<Target: StyleConfiguration>(_ prop: Target) {
-    applyBlock = { view in prop.apply(view as! Target.Comp) }
+    identifier = String(describing: prop)
+    applyBlock = { view in
+      prop.apply(view as! Target.Comp) }
+  }
+  
+  public init(_ sub: [ErasedStyleConfiguration]) {
+    identifier = "Composite"
+    applyBlock = { view in
+      sub.forEach {
+        $0.apply(view) } }
   }
   
   public func apply(_ target: UIView) {

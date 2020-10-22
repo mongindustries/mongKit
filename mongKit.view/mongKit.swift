@@ -23,7 +23,7 @@ public class mongKit {
   }
 
   private func scanLayouts(for view: UIView) {
-    guard view.mongConstructed, let layout = view.layout else {
+    guard view.mongConstructed else {
       return
     }
 
@@ -31,10 +31,7 @@ public class mongKit {
       scanLayouts(for: subview)
     }
 
-    if let layout = layout as? LayoutConfiguration {
-      layout.apply(view)
-    }
-
+    view.layout?.apply(view)
     view.layout = nil
   }
 

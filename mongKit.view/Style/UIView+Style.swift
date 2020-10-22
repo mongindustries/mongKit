@@ -19,7 +19,8 @@ extension Ref: StyleConfiguration where Target: UIView {
 
   public init<Owner: AnyObject>(_ target: Owner, ref: ReferenceWritableKeyPath<Owner, Target?>) {
     let weak = Weak(wrappedValue: target)
-    self.init(__apply: { view in weak.wrappedValue?[keyPath: ref] = .some(view as! Target) })
+    self.init(__apply: { view in
+                weak.wrappedValue?[keyPath: ref] = .some(view as! Target) })
   }
 
   public func apply(_ target: Target) {
