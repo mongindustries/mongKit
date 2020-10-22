@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import mongKit
+
+import mongKitCore
+import mongKitStructure
 
 import ReactiveSwift
 import ReactiveCocoa

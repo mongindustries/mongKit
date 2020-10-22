@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import mongKit
+
+import mongKitCore
+import mongKitView
 
 protocol CustomScrollViewDelegate: UIScrollViewDelegate {
   func showDeets()
@@ -23,7 +25,7 @@ class CustomScrollView: ScrollView {
 
   @ComponentBuilder override var body: Component {
     UIStackView(
-      style: Style(for: UIStackView.self) {
+      style: Style<UIStackView> {
         StackVertical(spacing: 8, alignment: .fill)
         StackMargin(value: .init(top: 10, left: 10, bottom: 20, right: 10))
         Ref(self, ref: \.content) },
@@ -32,33 +34,33 @@ class CustomScrollView: ScrollView {
         Width.equalTo(self, constraint: \.widthAnchor) }) {
 
       UIView(
-        style:  Style(for: UIView.self) {
+        style:  Style<UIView> {
           \.backgroundColor ~ .blue },
         layout: AutoLayout {
           Height(300) })
 
       UILabel(
-        style: Style(for: UILabel.self) {
+        style: Style<UILabel> {
           \.text ~ "Line 1" })
       UILabel(
-        style: Style(for: UILabel.self) {
+        style: Style<UILabel> {
           Ref(self, ref: \.line2)
           \.text ~ "Line 2" })
 
       UITextField(
-        style: Style(for: UITextField.self) {
+        style: Style<UITextField> {
           Ref(self, ref: \.textField)
           \.borderStyle ~ .roundedRect })
 
       UIButton(
-        style: Style(for: UIButton.self) {
+        style: Style<UIButton> {
           Ref{ [unowned self] (view: UIButton) in
             view.setTitle("Show", for: .normal)
             view.setTitleColor(.black, for: .normal)
             view.addTarget(self, action: #selector(self.doDeets), for: .touchUpInside) } })
 
       UIView(
-        style: Style(for: UIView.self) {
+        style: Style<UIView> {
           StackFiller(axis: [ .vertical ]) })
     }
   }

@@ -1,14 +1,19 @@
-# Uncomment the next line to define a global platform for your project
 platform :ios, '12.0'
 
-use_frameworks!
+use_modular_headers!
 
 abstract_target 'MongKit' do
 
   pod 'ReactiveSwift'
   pod 'ReactiveCocoa'
 
-  target 'mongKit' do
+  target 'mongKit.core' do
+  end
+
+  target 'mongKit.view' do
+  end
+
+  target 'mongKit.structure' do
   end
 
   target 'mongKitSample' do

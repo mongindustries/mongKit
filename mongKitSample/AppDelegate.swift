@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import mongKit
+import mongKitView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
