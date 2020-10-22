@@ -22,61 +22,44 @@ class CustomScrollView: ScrollView {
   weak var textField: UITextField!
 
   @ComponentBuilder override var body: Component {
-    UIStackView {
-      Style(for: UIStackView.self) {
-        VerticalStack(spacing: 8, alignment: .fill)
-        LayoutMarginStack(value: .init(top: 10, left: 10, bottom: 20, right: 10))
-        Ref(self, ref: \.content)
-      }
-      AutoLayout {
+    UIStackView(
+      style: Style(for: UIStackView.self) {
+        StackVertical(spacing: 8, alignment: .fill)
+        StackMargin(value: .init(top: 10, left: 10, bottom: 20, right: 10))
+        Ref(self, ref: \.content) },
+      layout: AutoLayout {
         Edge()
-        Width.equalTo(self, constraint: \.widthAnchor)
-      }
+        Width.equalTo(self, constraint: \.widthAnchor) }) {
 
-      UIView {
-        Style(for: UIView.self) {
-          \.backgroundColor ==> .blue
-        }
-        AutoLayout {
-          Height(300)
-        }
-      }
+      UIView(
+        style:  Style(for: UIView.self) {
+          \.backgroundColor ~ .blue },
+        layout: AutoLayout {
+          Height(300) })
 
-      UILabel {
-        Style(for: UILabel.self) {
-          Text(value: "Line 1")
-        }
-      }
-      UILabel {
-        Style(for: UILabel.self) {
+      UILabel(
+        style: Style(for: UILabel.self) {
+          \.text ~ "Line 1" })
+      UILabel(
+        style: Style(for: UILabel.self) {
           Ref(self, ref: \.line2)
-          Text(value: "Line 2")
-        }
-      }
+          \.text ~ "Line 2" })
 
-      UITextField {
-        Style(for: UITextField.self) {
-          Ref { [unowned self] view in self.textField = view }
-          Property(\UITextField.borderStyle,
-                   value: UITextField.BorderStyle.roundedRect)
-        }
-      }
+      UITextField(
+        style: Style(for: UITextField.self) {
+          Ref(self, ref: \.textField)
+          \.borderStyle ~ .roundedRect })
 
-      UIButton {
-        Style(for: UIButton.self) {
+      UIButton(
+        style: Style(for: UIButton.self) {
           Ref{ [unowned self] (view: UIButton) in
             view.setTitle("Show", for: .normal)
             view.setTitleColor(.black, for: .normal)
-            view.addTarget(self, action: #selector(self.doDeets), for: .touchUpInside)
-          }
-        }
-      }
+            view.addTarget(self, action: #selector(self.doDeets), for: .touchUpInside) } })
 
-      UIView {
-        Style(for: UIView.self) {
-          SpacerStack(axis: [ .vertical ])
-        }
-      }
+      UIView(
+        style: Style(for: UIView.self) {
+          StackFiller(axis: [ .vertical ]) })
     }
   }
   

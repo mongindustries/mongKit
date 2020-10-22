@@ -53,50 +53,29 @@ public struct ConstructorComponentBuilder {
 
 extension UIView {
 
-  public var mongConstructed: Bool {
-    get { objc_getAssociatedObject(self, &constructedKey) as? Bool ?? false }
-    set { objc_setAssociatedObject(self, &constructedKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
-  }
-
-  var layout: Any? {
+  var layout          : Any? {
     get {
       objc_getAssociatedObject(self, &viewlayout_Key) }
     set {
       objc_setAssociatedObject(self, &viewlayout_Key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
   }
 
-  var styleConfig: [AnyStyleConfiguration] {
+  var styleConfig     : [AnyStyleConfiguration] {
     get { objc_getAssociatedObject(self, &style______Key) as? [AnyStyleConfiguration] ?? [] }
     set { objc_setAssociatedObject(self, &style______Key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
   }
 
-  public convenience init(@ConstructorComponentBuilder _ builder: () -> Style) {
-    self.init(frame: .zero)
-
-    mongConstructed = true
-    styleConfig = builder().styles
-  }
-
-  public convenience init(@ConstructorComponentBuilder _ builder: () -> ConstructorComponent) {
-    self.init(frame: .zero)
-
-    mongConstructed = true
-
-    let config = builder()
-
-    layout      = config.layout // defer execution of layout instructions
-    styleConfig = config.style.styles
-
-    buildChildren(config.children())
-  }
-
-  func buildChildren(_ component: Component) {
+  func buildChildren  (_ component: Component) {
 
     switch component {
     case let sview as UIView:
-      if let stack = self as? UIStackView {
+      
+      switch self {
+      case let stack as UIStackView:
         stack.addArrangedSubview(sview)
-      } else {
+      case let effect as UIVisualEffectView:
+        effect.contentView.addSubview(sview)
+      default:
         addSubview(sview)
       }
 
@@ -120,5 +99,59 @@ extension UIView {
     default:
       break
     }
+  }
+
+
+  @available(*, deprecated, message: "Use constructor with explicit construction parameters.")
+  public convenience init(@ConstructorComponentBuilder _ builder: () -> Style) {
+    self.init(frame: .zero)
+
+    mongConstructed = true
+    styleConfig = builder().styles
+  }
+
+  @available(*, deprecated, message: "Use constructor with explicit construction parameters.")
+  public convenience init(@ConstructorComponentBuilder _ builder: () -> ConstructorComponent) {
+    self.init(frame: .zero)
+
+    mongConstructed = true
+
+    let config = builder()
+
+    layout      = config.layout // defer execution of layout instructions
+    styleConfig = config.style.styles
+
+    buildChildren(config.children())
+  }
+
+
+  public var mongConstructed  : Bool {
+    get { objc_getAssociatedObject(self, &constructedKey) as? Bool ?? false }
+    set { objc_setAssociatedObject(self, &constructedKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+  }
+
+  public convenience init     (
+    style                         : @autoclosure () -> Style = { Style() }(),
+    layout                        : @autoclosure () -> LayoutConfiguration = { FrameLayout(frame: .zero) }(),
+    @ComponentBuilder _ children  : () -> Component) {
+    self.init(frame: .zero)
+
+    mongConstructed = true
+
+    self.layout       = layout()
+    self.styleConfig  = style ().styles
+
+    buildChildren     (children())
+  }
+  
+  public convenience init     (
+    style                         : @autoclosure () -> Style = { Style() }(),
+    layout                        : @autoclosure () -> LayoutConfiguration = { FrameLayout(frame: .zero) }()) {
+    self.init(frame: .zero)
+
+    mongConstructed = true
+
+    self.layout       = layout()
+    self.styleConfig  = style ().styles
   }
 }

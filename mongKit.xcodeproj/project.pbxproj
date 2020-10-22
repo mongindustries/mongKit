@@ -55,7 +55,6 @@
 		60EECB75248E716300F029FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60EECB74248E716300F029FA /* Assets.xcassets */; };
 		60EECB78248E716300F029FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60EECB76248E716300F029FA /* LaunchScreen.storyboard */; };
 		60EECB80248E72DD00F029FA /* libmongKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608A4D3C248BF33300D439AE /* libmongKit.a */; };
-		60EECB82248E7E6C00F029FA /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB81248E7E6C00F029FA /* UILabel+Style.swift */; };
 		60EECB84248EB7D600F029FA /* ConstructorComponentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB83248EB7D600F029FA /* ConstructorComponentBuilder.swift */; };
 		60EECB86248F414000F029FA /* UIStackView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB85248F414000F029FA /* UIStackView+Style.swift */; };
 		60EECB88248F480600F029FA /* FrameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EECB87248F480600F029FA /* FrameLayout.swift */; };
@@ -145,7 +144,6 @@
 		60EECB74248E716300F029FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60EECB77248E716300F029FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60EECB79248E716400F029FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		60EECB81248E7E6C00F029FA /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		60EECB83248EB7D600F029FA /* ConstructorComponentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorComponentBuilder.swift; sourceTree = "<group>"; };
 		60EECB85248F414000F029FA /* UIStackView+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Style.swift"; sourceTree = "<group>"; };
 		60EECB87248F480600F029FA /* FrameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameLayout.swift; sourceTree = "<group>"; };
@@ -277,8 +275,8 @@
 				608A4D5E248CB25900D439AE /* ConstructorComponent.swift */,
 				608A4D4B248BFE4600D439AE /* EmptyComponent.swift */,
 				608A4D4D248BFE5800D439AE /* GroupComponent.swift */,
-				608A4D51248BFE8500D439AE /* UIView+Component.swift */,
 				60E507F524A31C46005E6937 /* RedirectComponent.swift */,
+				608A4D51248BFE8500D439AE /* UIView+Component.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -307,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				608A4D5C248C03AD00D439AE /* UIView+Style.swift */,
-				60EECB81248E7E6C00F029FA /* UILabel+Style.swift */,
 				60EECB85248F414000F029FA /* UIStackView+Style.swift */,
 			);
 			path = Style;
@@ -608,7 +605,6 @@
 				608A4D50248BFE6B00D439AE /* ChoiceComponent.swift in Sources */,
 				60EECB86248F414000F029FA /* UIStackView+Style.swift in Sources */,
 				60F94B302494F1D600E34301 /* Raw.swift in Sources */,
-				60EECB82248E7E6C00F029FA /* UILabel+Style.swift in Sources */,
 				608A4D4C248BFE4600D439AE /* EmptyComponent.swift in Sources */,
 				60F94B2A2494F0DF00E34301 /* Leading.swift in Sources */,
 				608A4D4A248BFDF600D439AE /* Component.swift in Sources */,
