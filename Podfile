@@ -15,6 +15,9 @@ abstract_target 'MongKit' do
 
   target 'mongKit.structure' do
   end
+  
+  target 'mongKit.networking' do
+  end
 
   target 'mongKitSample' do
   end

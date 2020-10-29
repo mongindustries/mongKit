@@ -16,9 +16,10 @@ import Foundation
     - builder: The block to configure the instance.
  - Returns: The newly created instance.
  */
-@discardableResult public func tell<Target: AnyObject>(_ target: Target, _ builder: (Target) -> Void) -> Target {
-  builder(target)
-  return target
+@discardableResult public func tell<Target>(_ target: Target, _ builder: (inout Target) -> Void) -> Target {
+  var back = target // COW this shit
+  builder(&back)
+  return back
 }
 
 /**
@@ -29,14 +30,14 @@ import Foundation
     - builder: The block to configure the instance.
  - Returns: The newly created instance.
  */
-@discardableResult public func tell<Target: AnyObject>(fromOptional target: Target?, _ builder: (Target) -> Void) -> Target? {
+@discardableResult public func tell<Target>(fromOptional target: Target?, _ builder: (inout Target) -> Void) -> Target? {
 
-  guard let target = target else {
+  guard var back = target else { // COW this shit
     return nil
   }
 
-  builder(target)
-  return target
+  builder(&back)
+  return back
 }
 
 /**

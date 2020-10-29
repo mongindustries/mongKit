@@ -80,7 +80,7 @@ extension UIView {
   }
 
   public convenience init<StyleConfig: StyleConfiguration>(
-    style                         : StyleConfig         = EmptyStyle() as! StyleConfig,
+    style                         : StyleConfig,
     layout                        : LayoutConfiguration = FrameLayout(frame: .zero),
     @ComponentBuilder _ children  : () -> Component) {
     self.init(frame: .zero)
@@ -94,7 +94,7 @@ extension UIView {
   }
   
   public convenience init<StyleConfig: StyleConfiguration>(
-    style                         : StyleConfig         = EmptyStyle() as! StyleConfig,
+    style                         : StyleConfig,
     layout                        : LayoutConfiguration = FrameLayout(frame: .zero)) {
     self.init(frame: .zero)
 
