@@ -10,21 +10,18 @@ import ReactiveSwift
 
 import mongKitCore
 
-public struct ObservableSection<Item: Hashable, Supplement: Hashable>: CollectionAdapterSection {
+public struct ObservableSection<Item: Hashable>: CollectionAdapterSection {
 
-  public var list               : ReactiveSwift.Property<Array<Item>>
-  public var supplementarylist  : ReactiveSwift.Property<Array<Item>>
+  public var list : ReactiveSwift.Property<[Item]>
 
-  let builder: ObservableSectionBuilder
+  let builder     : ObservableSectionBuilder
 
   init(
-    listening                           : MutableProperty<Array<Item>>,
+    listening                           : MutableProperty<[Item]>,
     @ObservableSectionBuilder _ builder : () -> ObservableSectionBuilder) {
 
-    self.builder      = builder()
-
-    list              = listening.map { $0 }
-    supplementarylist = .init(value: []) // TODO: mark supplementary items
+    self.builder  = builder()
+    list          = listening.map { $0 }
   }
 
   public func configure(
@@ -32,26 +29,30 @@ public struct ObservableSection<Item: Hashable, Supplement: Hashable>: Collectio
     builder.register(collectionView)
   }
 
+  public func measureCell(
+    _ collectionView  : UICollectionView,
+    at indexPath      : IndexPath,
+    referenceSize     : CGSize,
+    data              : Item) -> CGSize {
+    builder.sizeCell(collectionView, indexPath, referenceSize, AnyHashable(data))
+  }
+
   public func dequeueCell(
     _ collectionView  : UICollectionView,
     at indexPath      : IndexPath,
     data              : Item) -> UICollectionViewCell {
-    fatalError()
-  }
-  
-  public func dequeueSupplementaryView(
-    _ collectionView  : UICollectionView,
-    at indexPath      : IndexPath,
-    data              : Supplement) -> UICollectionReusableView {
-    fatalError()
+    if let cell = builder.dequeueCell(collectionView, indexPath, AnyHashable(data)) {
+      return cell
+    } else {
+      fatalError()
+    }
   }
 
   public typealias Item       = Item
-  public typealias Supplement = Supplement
 }
 
 public func observableSection<Item: Hashable>(
-  listening items: MutableProperty<Array<Item>>,
-  @ObservableSectionBuilder builder: () -> ObservableSectionBuilder) -> ObservableSection<Item, Never> {
+  listening items: MutableProperty<[Item]>,
+  @ObservableSectionBuilder builder: () -> ObservableSectionBuilder) -> ObservableSection<Item> {
   .init(listening: items, builder)
 }

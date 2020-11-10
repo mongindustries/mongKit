@@ -9,7 +9,13 @@
 import Foundation
 
 extension Decodable {
-  public static func parseJson(from data: Data, response: URLResponse) throws -> Self {
-    try JSONDecoder().decode(Self.self, from: data)
+  public static func parseJson(from data: Data, response: URLResponse) -> Result<Self, URLError> {
+    do {
+      return Result.success(try JSONDecoder().decode(Self.self, from: data))
+    } catch let item as DecodingError {
+      return Result.failure(URLError(URLError.cannotDecodeRawData, userInfo: [ "cause" : item ]))
+    } catch {
+      return Result.failure(URLError(URLError.cannotDecodeRawData))
+    }
   }
 }

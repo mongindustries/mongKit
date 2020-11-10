@@ -11,22 +11,20 @@ import ReactiveSwift
 
 public protocol CollectionAdapterSection {
   associatedtype Item: Hashable
-  associatedtype Supplement: Hashable
 
   var list: ReactiveSwift.Property<Array<Item>> { get }
-  
-  var supplementarylist: ReactiveSwift.Property<Array<Item>> { get }
-  
+
   func configure(
     _ collectionView: UICollectionView)
-  
+
+  func measureCell(
+    _ collectionView: UICollectionView,
+    at indexPath: IndexPath,
+    referenceSize: CGSize,
+    data: Item) -> CGSize
+
   func dequeueCell(
     _ collectionView: UICollectionView,
     at indexPath: IndexPath,
     data: Item) -> UICollectionViewCell
-  
-  func dequeueSupplementaryView(
-    _ collectionView: UICollectionView,
-    at indexPath: IndexPath,
-    data: Supplement) -> UICollectionReusableView
 }

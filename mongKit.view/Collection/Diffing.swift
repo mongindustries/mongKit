@@ -21,81 +21,93 @@ internal func diffData(
   oldItems  : [AnyHashable],
   transform : (AnyHashable) -> AnyHashable?) -> DiffingResult {
 
-  let newSections = newItems
+  let newSet = newItems
     .compactMap(transform).asSet
-  let oldSections = oldItems
+  let oldSet = oldItems
     .compactMap(transform).asSet
 
-  assert(newSections.count == newItems.count)
-  assert(oldSections.count == oldItems.count)
+  assert(newSet.count == newItems.count)
+  assert(oldSet.count == oldItems.count)
 
   // diff by section first
 
-  let toDel   = oldSections.subtracting(newSections)
-  let toAdd   = newSections.subtracting(oldSections)
+  let toDel = oldSet.subtracting(newSet)
+  let toAdd = newSet.subtracting(oldSet)
 
-  let toMov   = oldSections.intersection(newSections)
+  let toMov = oldSet.intersection(newSet)
 
-  switch newSections.count - oldSections.count {
-  case ...(-1):
-    // to delete
-    let toRemove = Set<Int>(((oldSections.count - abs(newSections.count - oldSections.count))..<oldSections.count).map { $0 })
-    var toReload = Set<Int>()
-    var relocate = [(f: Int, t: Int)]()
+  switch newSet.count - oldSet.count {
+  case ...(-1): // there are less items to show than the old list
+    if toMov.isEmpty { // no items to relocate, we only need to check which index paths are not needed by the new list
+      var toRemove = [Int]()
+      var toReload = [Int]()
 
-    zip(toMov.map { oldItems.firstIndex(of: $0)! },
-        toMov.map { newItems.firstIndex(of: $0)! })
-      .forEach { a, b in
-        if a != b {
-          toReload.insert(b)
-          relocate.append((f: a, t: b))
+      for item in toDel {
+        guard let index = oldItems.firstIndex(of: item) else {
+          continue
+        }
+
+        if index < newItems.count {
+          toReload.append(index)
+        } else {
+          toRemove.append(index)
         }
       }
 
-    toDel
-      .map      { oldItems.firstIndex(of: $0)! }
-      .forEach  { i in
-        if i < oldItems.count {
-          toReload.insert(i)
+      return DiffingResult(toRemove: toRemove, toInsert: [], toReload: toReload, toMove: [])
+    } else { // there are items to relocate, only remove the items that are removed, as the relocation will fill them up
+      let toRemove = toDel.compactMap { oldItems.firstIndex(of: $0) }
+      var relocate = [(f: Int, t: Int)]()
+
+      zip(toMov.map { oldItems.firstIndex(of: $0)! },
+          toMov.map { newItems.firstIndex(of: $0)! })
+        .forEach { a, b in
+          if a != b {
+            relocate.append((f: a, t: b))
+          }
+        }
+
+      return DiffingResult(toRemove: toRemove, toInsert: [], toReload: [], toMove: relocate)
+    }
+
+  case 1...: // there are more items to show than the old list
+    if toMov.isEmpty {
+      var toInsert = [Int]()
+      var toReload = [Int]()
+
+      for item in toAdd {
+        guard let index = newItems.firstIndex(of: item) else {
+          continue
+        }
+
+        if index < oldItems.count {
+          toReload.append(index)
+        } else {
+          toInsert.append(index)
         }
       }
 
-    return DiffingResult(toRemove: toRemove.asArray, toInsert: [], toReload: toReload.asArray, toMove: relocate)
+      return DiffingResult(toRemove: [], toInsert: toInsert, toReload: toReload, toMove: [])
 
-  case 1...:
-    // to insert
-    let toInsert = Set<Int>((0..<(newSections.count - oldSections.count)).map { offset in oldSections.count + offset })
-    var toReload = Set<Int>()
-    var relocate = [(f: Int, t: Int)]()
+    } else {
+      let toInsert = toAdd.compactMap { newItems.firstIndex(of: $0) }
+      var relocate = [(f: Int, t: Int)]()
 
-    zip(toMov.map { oldItems.firstIndex(of: $0)! },
-        toMov.map { newItems.firstIndex(of: $0)! })
-      .forEach  { a, b in
-        if a != b {
-          toReload.insert(a)
-          relocate.append((f: a, t: b))
+      zip(toMov.map { oldItems.firstIndex(of: $0)! },
+          toMov.map { newItems.firstIndex(of: $0)! })
+        .forEach  { a, b in
+          if a != b {
+            relocate.append((f: a, t: b))
+          }
         }
-      }
 
-    toAdd
-      .map      { newItems.firstIndex(of: $0)! }
-      .forEach  { i in
-        if i < oldItems.count {
-          toReload.insert(i)
-        }
-      }
-
-    return DiffingResult(toRemove: [], toInsert: toInsert.asArray, toReload: toReload.asArray, toMove: relocate)
+      return DiffingResult(toRemove: [], toInsert: toInsert, toReload: [], toMove: relocate)
+    }
 
   default: // TODO: Incomplete!
 
     var relocate = [(f: Int, t: Int)]()
 
-    let toRemove = toDel
-      .map        { oldItems.firstIndex(of: $0)! }
-    let toInsert = toAdd
-      .map        { newItems.firstIndex(of: $0)! }
-
     zip(toMov.map { oldItems.firstIndex(of: $0)! },
         toMov.map { newItems.firstIndex(of: $0)! })
       .forEach  { a, b in
@@ -104,7 +116,7 @@ internal func diffData(
         }
       }
 
-    return DiffingResult(toRemove: toRemove, toInsert: toInsert, toReload: [], toMove: relocate)
+    return DiffingResult(toRemove: [], toInsert: [], toReload: [], toMove: relocate)
   }
 }
 

@@ -6,11 +6,12 @@
 //  Copyright © 2020 mong Industries / White Cloak Technologies, Inc. All rights reserved.
 //
 import UIKit
+import mongKitCore
 
 /**
  Module class for mongKit
  */
-public class mongKit {
+extension mongKit {
 
   private func swizzleUIViewDidMoveToSubview() {
 
@@ -49,7 +50,7 @@ public class mongKit {
    */
   public static func initialize() {
 
-    let instance = mongKit()
+    let instance = mongKit.instance
     instance.swizzleUIViewDidMoveToSubview()
   }
 }

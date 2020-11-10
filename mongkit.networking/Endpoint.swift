@@ -16,10 +16,10 @@ public protocol Endpoint {
 
 extension Endpoint {
   public func performRequest
-    (with session: URLSession = EndpointManager.instance.session) -> SignalProducer<(Data, URLResponse), Error>  {
+    (with session: URLSession = EndpointManager.instance.session) -> SignalProducer<(Data, URLResponse), URLError>  {
       session
         .reactive
-        .data(with: tell(URLRequest(url: path)) {
+        .data     (with: tell(URLRequest(url: path)) {
           $0.httpMethod = method.rawValue
           $0.httpBody   = body.payload
 
@@ -27,5 +27,6 @@ extension Endpoint {
             $0.addValue(body.contentType, forHTTPHeaderField: "Content-Type")
           }
         })
+        .mapError { $0 as! URLError }
     }
 }

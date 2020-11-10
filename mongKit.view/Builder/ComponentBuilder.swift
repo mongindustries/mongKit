@@ -12,10 +12,6 @@ import mongKitCore
 @_functionBuilder
 public struct ComponentBuilder {
 
-  public static func buildBlock<C: Component>
-    (_ item: C) -> Component {
-      item }
-
   public static func buildBlock
     (_ items: Component...) -> Component {
       Components.Group(items: items) }
@@ -32,4 +28,8 @@ public struct ComponentBuilder {
   public static func buildEither
     (second item: Component) -> Component {
       item }
+  
+  public static func buildArray
+    (_ items: [Component]) -> Component {
+    Components.Group(items: items) }
 }
