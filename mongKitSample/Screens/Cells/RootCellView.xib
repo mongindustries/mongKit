@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="root-item" id="Nmj-jD-h3G" customClass="RootCellView" customModule="mongKitSample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="285"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3pd-or-1tN">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="285"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LuV-4j-Dcx">
+                        <rect key="frame" x="0.0" y="190" width="400" height="18"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzx-s6-y2Z">
+                        <rect key="frame" x="0.0" y="213" width="400" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zkL-tD-hz3">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="180"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="zkL-tD-hz3" secondAttribute="height" multiplier="1:0.45" id="c1z-k6-Uje"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="zkL-tD-hz3" secondAttribute="trailing" id="22L-sW-dCh"/>
+                    <constraint firstItem="mzx-s6-y2Z" firstAttribute="leading" secondItem="LuV-4j-Dcx" secondAttribute="leading" id="9LO-2j-d9n"/>
+                    <constraint firstItem="LuV-4j-Dcx" firstAttribute="top" secondItem="zkL-tD-hz3" secondAttribute="bottom" constant="10" id="Bsp-48-YTn"/>
+                    <constraint firstItem="LuV-4j-Dcx" firstAttribute="leading" secondItem="3pd-or-1tN" secondAttribute="leading" id="CUM-ks-qdL"/>
+                    <constraint firstItem="zkL-tD-hz3" firstAttribute="leading" secondItem="3pd-or-1tN" secondAttribute="leading" id="Jdl-kE-XmG"/>
+                    <constraint firstAttribute="trailing" secondItem="mzx-s6-y2Z" secondAttribute="trailing" id="SYf-2T-sfq"/>
+                    <constraint firstItem="zkL-tD-hz3" firstAttribute="top" secondItem="3pd-or-1tN" secondAttribute="top" id="fAT-7d-sn0"/>
+                    <constraint firstAttribute="trailing" secondItem="LuV-4j-Dcx" secondAttribute="trailing" id="mhw-xQ-7Db"/>
+                    <constraint firstItem="mzx-s6-y2Z" firstAttribute="top" secondItem="LuV-4j-Dcx" secondAttribute="bottom" constant="5" id="tBk-8K-fcS"/>
+                    <constraint firstAttribute="bottom" secondItem="mzx-s6-y2Z" secondAttribute="bottom" priority="900" constant="10" id="x3v-Z9-I9O"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="400" height="285"/>
+            <connections>
+                <outlet property="feature" destination="LuV-4j-Dcx" id="0em-u9-0jx"/>
+                <outlet property="featureDescription" destination="mzx-s6-y2Z" id="LEN-w5-aXS"/>
+                <outlet property="heroImage" destination="zkL-tD-hz3" id="BMu-OZ-dCc"/>
+            </connections>
+            <point key="canvasLocation" x="323.1884057971015" y="157.03125"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
