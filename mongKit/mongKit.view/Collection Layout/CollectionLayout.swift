@@ -65,16 +65,17 @@ public class CollectionLayout: UICollectionViewLayout {
 
   public override var collectionViewContentSize: CGSize { overallSize }
 
-  let callback: (Int, Environment) -> CollectionLayoutSection
+  let callback        : (Int, Environment) -> CollectionLayoutSection
+  let rootDirection   : SpanDirection
 
-  let rootDirection: SpanDirection
+  var overallSize     : CGSize = .zero
 
-  var overallSize: CGSize = .zero
+  var cellBounds      : [ IndexPath : UICollectionViewLayoutAttributes ] = [:]
+  var prevCellBounds  : [ IndexPath : UICollectionViewLayoutAttributes ] = [:]
 
-  var cellBounds: [ IndexPath : UICollectionViewLayoutAttributes ] = [:]
-  var prevCellBounds: [ IndexPath : UICollectionViewLayoutAttributes ] = [:]
+  var sectionCache    = [CGSize]()
 
-  var curWidth = CGFloat(0)
+  var curWidth        = CGFloat(0)
 
   public init(scrollDirection: SpanDirection, builder: @escaping (Int, Environment) -> CollectionLayoutSection) {
     self.callback       = builder
@@ -258,6 +259,7 @@ public class CollectionLayout: UICollectionViewLayout {
     cursor: CGPoint,
     _ group: CollectionLayoutGroup,
     parentBounds: CGSize) -> CGSize {
+
     var nominalWidth  = group.width .computeSize(for: parentBounds)
     var nominalHeight = group.height.computeSize(for: parentBounds)
 
@@ -269,15 +271,15 @@ public class CollectionLayout: UICollectionViewLayout {
       nominalHeight = parentBounds.height
     }
 
-    let groupBound = CGSize(width: nominalWidth, height: nominalHeight)
+    let groupBound    = CGSize(width: nominalWidth, height: nominalHeight)
+    var localCursor   = CGPoint.zero
 
-    let prefinalSize = group.items
+    let prefinalSize  = group.items
       .reduce(CGFloat(0)) { sum, item in
         item.value(from: group.direction, parentSize: parentBounds) + sum + group.spacing } - group.spacing
 
     if prefinalSize.isNaN {
 
-      var localCursor = CGPoint.zero
       let initialSize : CGSize
 
       switch group.direction {
@@ -335,7 +337,6 @@ public class CollectionLayout: UICollectionViewLayout {
       }
     } else {
 
-      var localCursor       = CGPoint.zero
       let perpendicularSize = group.items.reduce(CGFloat(0)) { sum, item in
 
         guard !rows.isEmpty else {
@@ -426,22 +427,22 @@ public class CollectionLayout: UICollectionViewLayout {
       cellBounds.removeAll()
     }
 
-    if collectionView!.bounds.width != curWidth {
+    if collectionView!.bounds.size.value(from: rootDirection) != curWidth {
       prevCellBounds = cellBounds
       cellBounds.removeAll()
     }
 
-    curWidth = collectionView!.bounds.width
+    curWidth = collectionView!.bounds.size.value(from: rootDirection)
   }
 
   public override func shouldInvalidateLayout(
     forBoundsChange newBounds: CGRect) -> Bool {
-    if curWidth != newBounds.width {
+    if curWidth != newBounds.size.value(from: rootDirection) {
       prevCellBounds = cellBounds
       cellBounds.removeAll()
     }
 
-    curWidth = newBounds.width
+    curWidth = newBounds.size.value(from: rootDirection)
 
     return true
   }
