@@ -3,8 +3,6 @@
 // Copyright (c) 2020 mong Industries. All rights reserved.
 //
 import Foundation
-import mongKitCore
-
 import ReactiveSwift
 
 public protocol Endpoint {
@@ -16,7 +14,8 @@ public protocol Endpoint {
 
 extension Endpoint {
   public func performRequest
-    (with session: URLSession = EndpointManager.instance.session) -> SignalProducer<(Data, URLResponse), URLError>  {
+  (with session : URLSession = EndpointManager.instance.session,
+   _  config    : (URLRequest) -> Void = { _ in }) -> SignalProducer<(Data, URLResponse), URLError>  {
       session
         .reactive
         .data     (with: tell(URLRequest(url: path)) {
@@ -26,6 +25,8 @@ extension Endpoint {
           if !body.contentType.isEmpty {
             $0.addValue(body.contentType, forHTTPHeaderField: "Content-Type")
           }
+
+          config($0)
         })
         .mapError { $0 as! URLError }
     }

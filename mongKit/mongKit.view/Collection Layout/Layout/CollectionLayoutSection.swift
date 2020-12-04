@@ -13,10 +13,12 @@ public struct CollectionLayoutSection {
     direction             : CollectionLayout.SpanDirection,
     inset                 : UIEdgeInsets = .zero,
     scrollCharacteristic  : CollectionLayout.SpanScrollCharacteristic = .none,
+    supplements           : [CollectionLayoutSupplement] = [],
     group                 : [CollectionLayoutGroup]) {
 
     self.direction = direction
     self.scrollCharacteristic = scrollCharacteristic
+    self.supplements = supplements
     self.inset = inset
     self.group = group
   }
@@ -24,6 +26,8 @@ public struct CollectionLayoutSection {
   public let direction            : CollectionLayout.SpanDirection
   public let inset                : UIEdgeInsets
   public let scrollCharacteristic : CollectionLayout.SpanScrollCharacteristic
+
+  public let supplements          : [CollectionLayoutSupplement]
 
   public let group                : [CollectionLayoutGroup]
 }

@@ -1,20 +1,35 @@
 Pod::Spec.new do |spec|
     spec.name                   = 'mongKit'
-    spec.version                = '0.0.36'
-    spec.homepage               = 'https://www.whitecloak.com'
-    spec.source                 = { :git => "https://gitlab.whitecloak.io/michael.ong/mongkit.git", :tag => "0.0.36" }
-    spec.authors                = { 'Michael Ong' => 'michael.ong@whitecloak.com' }
+    spec.version                = '0.1.0'
+    spec.homepage               = 'https://www.noname.com'
+    spec.source                 = { :git => "https://github.com/mongindustries/mongkit.git", :tag => spec.version }
+    spec.authors                = { 'Michael Ong' => 'michaelong18@gmail.com' }
     spec.license                = { :type => 'MIT' }
     spec.summary                = 'Boilerplate code for iOS projects.'
-
-    spec.module_name            = "mongKit"
 
     spec.swift_version          = "5.2"
     spec.ios.deployment_target  = "12.0"
 
-    spec.source_files           = "mongKit/**/*.swift"
-
     spec.dependency 'ReactiveSwift', '~> 6.3.0'
     spec.dependency 'ReactiveCocoa', '~> 11.0.0'
 
+    spec.subspec 'Core' do |cspec|
+        cspec.source_files = "mongKit/mongKit.core/**/*.swift"
+    end
+
+    spec.subspec 'View' do |cspec|
+        cspec.source_files = "mongKit/mongKit.view/**/*.swift"
+        cspec.dependency 'mongKit/Core'
+        cspec.dependency 'mongKit/Structure'
+    end
+
+    spec.subspec 'Structure' do |cspec|
+        cspec.source_files = "mongKit/mongKit.structure/**/*.swift"
+        cspec.dependency 'mongKit/Core'
+    end
+
+    spec.subspec 'Networking' do |cspec|
+        cspec.source_files = "mongKit/mongKit.networking/**/*.swift"
+        cspec.dependency 'mongKit/Core'
+    end
 end

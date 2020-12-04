@@ -19,7 +19,7 @@ extension UICollectionView {
 
   public convenience init(
     _ collectionViewLayout: UICollectionViewLayout = UICollectionViewFlowLayout(),
-    @CollectionAdapterSectionBuilder _ sections: () -> AnySection) {
+    @CollectionAdapterSectionBuilder _ sections: () -> [AnySection]) {
     self.init(frame: .zero, collectionViewLayout: collectionViewLayout)
 
     adapter = CollectionAdapter(for: self, sections)
@@ -29,7 +29,7 @@ extension UICollectionView {
     _ collectionViewLayout: UICollectionViewLayout = UICollectionViewFlowLayout(),
     style: Style,
     layout: LayoutConfiguration,
-    @CollectionAdapterSectionBuilder _ sections: () -> AnySection) {
+    @CollectionAdapterSectionBuilder _ sections: () -> [AnySection]) {
 
     self.init(frame: .zero, collectionViewLayout: collectionViewLayout)
 

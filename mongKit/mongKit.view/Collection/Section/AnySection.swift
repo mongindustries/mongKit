@@ -6,7 +6,6 @@
 //  Copyright © 2020 mong Industries. All rights reserved.
 //
 import UIKit
-import mongKitCore
 
 import ReactiveSwift
 
@@ -20,6 +19,10 @@ public struct AnySection: Hashable, CollectionAdapterSection {
 
   public let list: ReactiveSwift.Property<Array<Item>>
 
+  public let base: Any
+
+  let desc: String
+
   let config: (UICollectionView) -> Void
   
   let sizeCl: (UICollectionView, IndexPath, CGSize, AnyHashable) -> CGSize
@@ -27,7 +30,10 @@ public struct AnySection: Hashable, CollectionAdapterSection {
   let dequeC: (UICollectionView, IndexPath, AnyHashable) -> UICollectionViewCell
 
   init<Section: CollectionAdapterSection>(_ section: Section) {
+    desc    = String(describing: Section.Item.self)
     list    = section.list.map { $0.map { AnyHashable($0) } }
+
+    base    = section
 
     config  = { cv in
       section.configure(cv) }
@@ -36,19 +42,6 @@ public struct AnySection: Hashable, CollectionAdapterSection {
 
     sizeCl = { cv, ip, rs, d in
       section.measureCell(cv, at: ip, referenceSize: rs, data: d.base as! Section.Item) }
-  }
-
-  init(_ sections     : [AnySection]) {
-    list    = .init(value: sections.map { AnyHashable($0) })
-
-    config  = { cv in
-      sections.forEach {
-        $0.configure(cv) } }
-    dequeC  = { cv, ip, d in
-      sections[ip.section].dequeueCell(cv, at: ip, data: d) }
-
-    sizeCl = { cv, ip, rs, d in
-      sections[ip.section].measureCell(cv, at: ip, referenceSize: rs, data: d) }
   }
 
   public func hash(
@@ -75,4 +68,8 @@ public struct AnySection: Hashable, CollectionAdapterSection {
     data              : AnyHashable) -> UICollectionViewCell {
     dequeC(collectionView, indexPath, data)
   }
+}
+
+extension CollectionAdapterSection {
+    public var any: AnySection { AnySection(self) }
 }

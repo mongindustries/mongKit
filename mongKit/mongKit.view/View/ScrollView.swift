@@ -8,9 +8,6 @@
 
 import UIKit
 
-import mongKitCore
-import mongKitStructure
-
 import ReactiveSwift
 
 private class KeyboardDismissHandler: UITapGestureRecognizer, UIGestureRecognizerDelegate {
@@ -65,20 +62,8 @@ open class ScrollView: UIScrollView, CodedView {
 
     addGestureRecognizer(tell(KeyboardDismissHandler()) {
       __scope += $0.reactive.stateChanged.observeValues { [unowned self] _ in
-        self.endEditing(true)
+        endEditing(true)
       }
     })
-  }
-
-  open override func layoutSubviews() {
-    super.layoutSubviews()
-
-    if let viewController = next as? BaseController {
-      
-      contentInset =
-        .init(top: 0, sides: 0, bottom: viewController.__mngkit_state.bottomOffset - safeAreaInsets.bottom)
-      scrollIndicatorInsets =
-        .init(top: 0, sides: 0, bottom: viewController.__mngkit_state.bottomOffset - safeAreaInsets.bottom)
-    }
   }
 }

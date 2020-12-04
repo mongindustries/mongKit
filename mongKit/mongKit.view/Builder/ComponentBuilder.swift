@@ -7,10 +7,17 @@
 //
 
 import UIKit
-import mongKitCore
 
 @_functionBuilder
 public struct ComponentBuilder {
+
+  public static func buildExpression
+    (_ item: Component) -> Component {
+      item }
+
+  public static func buildExpression<Item: Component>
+    (_ items: [Item]) -> Component {
+      Components.Group(items: items) }
 
   public static func buildBlock
     (_ items: Component...) -> Component {

@@ -104,19 +104,29 @@ internal func diffData(
       return DiffingResult(toRemove: [], toInsert: toInsert, toReload: [], toMove: relocate)
     }
 
-  default: // TODO: Incomplete!
+  default:
 
+    var toReload = Set<Int>()
     var relocate = [(f: Int, t: Int)]()
+
+    for item in toAdd {
+      toReload.insert(newItems.firstIndex(of: item)!)
+    }
+
+    for item in toDel {
+      toReload.insert(newItems.firstIndex(of: item)!)
+    }
 
     zip(toMov.map { oldItems.firstIndex(of: $0)! },
         toMov.map { newItems.firstIndex(of: $0)! })
       .forEach  { a, b in
         if a != b {
           relocate.append((f: a, t: b))
+          toReload.remove(b)
         }
       }
 
-    return DiffingResult(toRemove: [], toInsert: [], toReload: [], toMove: relocate)
+    return DiffingResult(toRemove: [], toInsert: [], toReload: toReload.asArray, toMove: relocate)
   }
 }
 

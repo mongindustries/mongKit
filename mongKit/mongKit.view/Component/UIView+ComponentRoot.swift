@@ -6,7 +6,6 @@
 //  Copyright © 2020 mong Industries / White Cloak Technologies, Inc. All rights reserved.
 //
 import UIKit
-import mongKitCore
 
 internal struct StyleWrapper {
 
@@ -38,7 +37,7 @@ extension UIView {
       objc_setAssociatedObject(self, &style______Key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
   }
 
-  func buildChildren  (_ component: Component) {
+  func buildChildren  (_ stack: [Component], _ component: Component) {
 
     switch component {
     case let sview as UIView:
@@ -59,17 +58,19 @@ extension UIView {
 
     case let block as Components.Group:
       block.items.forEach {
-        buildChildren($0)
+        buildChildren(stack + [component], $0)
       }
 
     case let block as Components.Redirect:
-      buildChildren(block.item())
+      buildChildren(stack + [component], block.item())
 
+    case let block as ComponentModifier:
+      block.apply(stack)
     case let block as ChoiceResolverComponent:
-      buildChildren(block.result)
+      buildChildren(stack + [component], block.result)
 
     default:
-      fatalError()
+      break
     }
   }
 
@@ -89,8 +90,8 @@ extension UIView {
 
     self.layout       = layout
     self.style        = StyleWrapper(style)
-    
-    buildChildren     (children())
+
+    buildChildren     ([self], children())
   }
   
   public convenience init<StyleConfig: StyleConfiguration>(

@@ -12,7 +12,7 @@ public struct InstanceInfo {
   let id              : String
   let resolutionMode  : ModelResolutionMode
 
-  let builder         : (Any?, Any?, Any?, Any?, Any?) -> Any
+  let builder         : (Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?) -> Any
 }
 
 public protocol Container: class {

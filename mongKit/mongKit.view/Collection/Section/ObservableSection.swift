@@ -8,20 +8,18 @@
 import UIKit
 import ReactiveSwift
 
-import mongKitCore
-
 public struct ObservableSection<Item: Hashable>: CollectionAdapterSection {
 
-  public var list : ReactiveSwift.Property<[Item]>
+  public let list : ReactiveSwift.Property<[Item]>
 
   let builder     : ObservableSectionBuilder
 
   init(
-    listening                           : MutableProperty<[Item]>,
+    listening                           : ReactiveSwift.Property<[Item]>,
     @ObservableSectionBuilder _ builder : () -> ObservableSectionBuilder) {
 
     self.builder  = builder()
-    list          = listening.map { $0 }
+    list          = listening
   }
 
   public func configure(
@@ -52,7 +50,7 @@ public struct ObservableSection<Item: Hashable>: CollectionAdapterSection {
 }
 
 public func observableSection<Item: Hashable>(
-  listening items: MutableProperty<[Item]>,
+  listening items: ReactiveSwift.Property<[Item]>,
   @ObservableSectionBuilder builder: () -> ObservableSectionBuilder) -> ObservableSection<Item> {
   .init(listening: items, builder)
 }

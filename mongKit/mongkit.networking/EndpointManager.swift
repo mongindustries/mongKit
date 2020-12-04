@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import mongKitCore
 
 public class EndpointManager {
   public static let instance = EndpointManager()

@@ -6,7 +6,6 @@
 //  Copyright © 2020 mong Industries / White Cloak Technologies, Inc. All rights reserved.
 //
 import UIKit
-import mongKitCore
 
 /**
  This extension provides support for view building for all UIKit view types.
@@ -14,12 +13,12 @@ import mongKitCore
 extension UIView: Component {
 
   public func addSubview(@ComponentBuilder _ builder: () -> Component) {
-    buildChildren(builder())
+    buildChildren([self], builder())
   }
 
   public func replaceViews(@ComponentBuilder with builder: () -> Component) {
     self.subviews.forEach { $0.removeFromSuperview() }
 
-    buildChildren(builder())
+    buildChildren([self], builder())
   }
 }

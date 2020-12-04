@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import mongKitCore
+ 
 import mongKitView
 
 @UIApplicationMain

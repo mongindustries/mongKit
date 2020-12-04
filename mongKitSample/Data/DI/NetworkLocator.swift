@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import mongKitCore
+ 
 import mongKitStructure
 
 func networkLocator() {

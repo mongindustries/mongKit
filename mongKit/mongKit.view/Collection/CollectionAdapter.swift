@@ -8,7 +8,6 @@
 import UIKit
 import Foundation
 
-import mongKitCore
 import ReactiveSwift
 
 ///
@@ -83,18 +82,20 @@ import ReactiveSwift
 /// To customize the default implementation, conform the `measure` static function
 /// on your `CollectionCell` implementation.
 ///
-public class CollectionAdapter: NSObject, UICollectionViewDataSource, CollectionLayoutDelegate, Scopeable {
+public class CollectionAdapter: NSObject, UICollectionViewDataSource, Scopeable {
 
-  var section: AnySection {
+  var section: [AnySection] {
     didSet {
       scope = .init(.init())
 
-      section.configure(collectionView!)
+      section.forEach { $0.configure(collectionView!) }
       performSectionDiffing(oldValue: oldValue)
     }
   }
 
   weak var collectionView: UICollectionView?
+    
+  public weak var supplementaryDelegate: CollectionAdapterSupplementaryDelegate?
 
   public var scope: ScopedDisposable<CompositeDisposable> = .init(.init())
 
@@ -104,7 +105,7 @@ public class CollectionAdapter: NSObject, UICollectionViewDataSource, Collection
   ///   - items: The initial collection view configuration.
   public init(
     for collectionView: UICollectionView,
-    @CollectionAdapterSectionBuilder _ items: () -> AnySection) {
+    @CollectionAdapterSectionBuilder _ items: () -> [AnySection]) {
 
     self.collectionView = collectionView
     section             = items()
@@ -113,33 +114,66 @@ public class CollectionAdapter: NSObject, UICollectionViewDataSource, Collection
 
     collectionView.dataSource = self
 
-    section.configure(collectionView)
+    section.forEach { $0.configure(collectionView) }
     listenForRowChanges()
   }
 
   public func section(at index: Int) -> AnySection? {
-    section.list.value[index].base as? AnySection
+    section[index]
   }
 
   public func item(
     for indexPath: IndexPath) -> AnyHashable? {
-    (section.list.value[indexPath.section].base as? AnySection)?.list.value[indexPath.row]
+    section[indexPath.section].list.value[indexPath.row]
   }
 
   public func item<Return: Hashable>(
     for indexPath: IndexPath,
     as: Return.Type) -> Return? {
-    (section.list.value[indexPath.section].base as? AnySection)?.list.value[indexPath.row].base as? Return
-  }
-
-  public func size(
-    for indexPath: IndexPath, referenceSize size: CGSize) -> CGSize {
-    section.measureCell(collectionView!, at: indexPath, referenceSize: size, data: item(for: indexPath)!)
+    section[indexPath.section].list.value[indexPath.row].base as? Return
   }
 
   public func update(
-    @CollectionAdapterSectionBuilder _ items: () -> AnySection) {
+    @CollectionAdapterSectionBuilder _ items: () -> [AnySection]) {
     section = items()
+  }
+
+  public func update(
+    with items: () -> [AnySection]) {
+    section = items()
+  }
+}
+
+extension CollectionAdapter: CollectionLayoutDelegate {
+  
+  public func sizeForItem(
+    at indexPath: IndexPath, with size: CGSize) -> CGSize {
+    section[indexPath.section].measureCell(collectionView!, at: indexPath, referenceSize: size, data: item(for: indexPath)!)
+  }
+
+  public func sizeForSupplementary(at indexPath: IndexPath, kind: String, with referenceSize: CGSize) -> CGSize {
+    guard let supplementary = supplementaryDelegate else {
+      return .zero
+    }
+    
+    let hpri: UILayoutPriority
+    let vpri: UILayoutPriority
+    
+    if referenceSize.width == UIView.layoutFittingCompressedSize.width {
+      hpri = .fittingSizeLevel
+    } else {
+      hpri = .required
+    }
+    
+    if referenceSize.height == UIView.layoutFittingCompressedSize.height {
+      vpri = .fittingSizeLevel
+    } else {
+      vpri = .required
+    }
+
+    return supplementary
+      .supplementaryCell        (for: collectionView!, at: indexPath, with: kind)
+      .systemLayoutSizeFitting  (referenceSize, withHorizontalFittingPriority: hpri, verticalFittingPriority: vpri)
   }
 }
 
@@ -149,13 +183,13 @@ extension CollectionAdapter {
   
   public func numberOfSections  (
     in collectionView                       : UICollectionView) -> Int {
-    section.list.value.count
+    section.count
   }
 
   public func collectionView    (
     _ collectionView                        : UICollectionView,
     numberOfItemsInSection index            : Int) -> Int {
-    (section.list.value[index].base as! AnySection).list.value.count
+    section[index].list.value.count
   }
 
   public func collectionView    (
@@ -163,7 +197,7 @@ extension CollectionAdapter {
     cellForItemAt indexPath                 : IndexPath) -> UICollectionViewCell {
     // TODO: for CollectionLayout, check if section is HLinear.
     // If so, dequeue a special horizontal collection view.
-    section.dequeueCell(
+    section[indexPath.section].dequeueCell(
       collectionView,
       at  : indexPath,
       data: item(for: indexPath)!)
@@ -173,7 +207,11 @@ extension CollectionAdapter {
     _ collectionView                        : UICollectionView,
     viewForSupplementaryElementOfKind kind  : String,
     at indexPath                            : IndexPath) -> UICollectionReusableView {
-    fatalError()
+    guard let delegate = supplementaryDelegate else {
+        fatalError()
+    }
+
+    return delegate.supplementaryCell(for: self.collectionView!, at: indexPath, with: kind)
   }
 }
 
@@ -181,33 +219,19 @@ extension CollectionAdapter {
 
 extension CollectionAdapter {
 
-  private func performSectionDiffing  (oldValue: AnySection) {
-
-    let res = diffData(newItems: section.list.value, oldItems: oldValue.list.value) {
-      $0.base as? AnySection }
+  private func performSectionDiffing  (oldValue: [AnySection]) {
 
     guard let cv = collectionView else {
       fatalError()
     }
 
-    cv.performBatchUpdates {
-      cv.deleteSections(IndexSet(res.toRemove))
-      cv.insertSections(IndexSet(res.toInsert))
-      cv.reloadSections(IndexSet(res.toReload))
-
-      for (from, to) in res.toMove {
-        cv.moveSection(from, toSection: to)
-      }
-    } completion: { [unowned self] _ in
-      listenForRowChanges()
-    }
+    // TODO: for now
+    cv.reloadData()
+    listenForRowChanges()
   }
 
   private func listenForRowChanges    () {
-
-    let sections = section.list.value.map { $0.base as! AnySection }
-
-    sections
+    section
       .enumerated ()
       .forEach    { index, section in
         scope += section.list
@@ -219,19 +243,8 @@ extension CollectionAdapter {
               fatalError()
             }
 
-            let res = diffData(newItems: newItems, oldItems: oldItems) {
-              $0.base as? AnySection.Item }
-
-            cv.performBatchUpdates {
-              cv.deleteItems(at: res.toRemove.map { IndexPath(row: $0, section: index) })
-              cv.insertItems(at: res.toInsert.map { IndexPath(row: $0, section: index) })
-              cv.reloadItems(at: res.toReload.map { IndexPath(row: $0, section: index) })
-
-              for (from, to) in res.toMove {
-                cv.moveItem(at: .init(row: from, section: index), to: .init(row: to, section: index))
-              }
-            } completion: { _ in
-            }
+            // TODO: for now
+            cv.performBatchUpdates { cv.reloadSections([ index ]) } completion: { _ in }
           }
       }
   }

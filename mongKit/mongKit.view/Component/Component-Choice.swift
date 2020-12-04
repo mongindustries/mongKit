@@ -6,8 +6,6 @@
 //  Copyright © 2020 mong Industries / White Cloak Technologies, Inc. All rights reserved.
 //
 
-import mongKitCore
-
 public protocol ChoiceResolverComponent {
 
   var result: Component { get }

@@ -27,6 +27,6 @@ let package = Package(
                             dependencies: [ "ReactiveSwift", "ReactiveCocoa", "mongKitCore" ],
                             path: "mongKit.structure"),
                     .target(name: "mongKitView",
-                            dependencies: [ "ReactiveSwift", "ReactiveCocoa", "mongKitCore" ],
+                            dependencies: [ "ReactiveSwift", "ReactiveCocoa", "mongKitCore", "mongKitStructure" ],
                             path: "mongKit.view")
     ])

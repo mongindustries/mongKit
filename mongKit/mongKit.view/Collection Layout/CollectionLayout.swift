@@ -6,13 +6,17 @@
 //  Copyright © 2020 mong Industries. All rights reserved.
 //
 import UIKit
-import mongKitCore
 
 public protocol CollectionLayoutDelegate {
-  func size(for indexPath: IndexPath, referenceSize: CGSize) -> CGSize
+  func sizeForItem(at indexPath: IndexPath, with referenceSize: CGSize) -> CGSize
+  func sizeForSupplementary(at indexPath: IndexPath, kind: String, with referenceSize: CGSize) -> CGSize
 }
 
 public class CollectionLayout: UICollectionViewLayout {
+
+  class __supplementary: UICollectionViewLayoutAttributes {
+    var item: CollectionLayoutSupplement!
+  }
 
   public struct Environment {
     public let horizontalSize   : UIUserInterfaceSizeClass
@@ -72,6 +76,8 @@ public class CollectionLayout: UICollectionViewLayout {
 
   var cellBounds      : [ IndexPath : UICollectionViewLayoutAttributes ] = [:]
   var prevCellBounds  : [ IndexPath : UICollectionViewLayoutAttributes ] = [:]
+  
+  var spleCellBounds  : [ IndexPath : UICollectionViewLayoutAttributes ] = [:]
 
   var sectionCache    = [CGSize]()
 
@@ -92,95 +98,136 @@ public class CollectionLayout: UICollectionViewLayout {
   public override func prepare() {
     super.prepare()
 
-    guard let collectionView = collectionView, collectionView.bounds.size != .zero, cellBounds.isEmpty else {
+    guard let collectionView = collectionView, collectionView.bounds.size != .zero else {
       return
     }
 
-    let environment = Environment(
-      horizontalSize  : collectionView.traitCollection.horizontalSizeClass,
-      verticalSize    : collectionView.traitCollection.verticalSizeClass,
-      collectionBounds: collectionView.bounds,
-      collectionInsets: collectionView.adjustedContentInset)
+    if cellBounds.isEmpty {
+    
+      let environment = Environment(
+        horizontalSize  : collectionView.traitCollection.horizontalSizeClass,
+        verticalSize    : collectionView.traitCollection.verticalSizeClass,
+        collectionBounds: collectionView.bounds,
+        collectionInsets: collectionView.adjustedContentInset)
 
-    var pointer         = CGPoint.zero
-    var newOverallSize  = CGSize.zero
+      var pointer         = CGPoint.zero
+      var newOverallSize  = CGSize.zero
 
-    for sectionIndex in 0..<collectionView.numberOfSections {
+      for sectionIndex in 0..<collectionView.numberOfSections {
 
-      var sectionSize   = CGSize.zero
-      var groupSizes    = [CGSize]()
+        var sectionSize   = CGSize.zero
+        var groupSizes    = [CGSize]()
 
-      var rows          = (0..<collectionView.numberOfItems(inSection: sectionIndex)).map { $0 }
-      let section       = callback(sectionIndex, environment)
+        var rows          = (0..<collectionView.numberOfItems(inSection: sectionIndex)).map { $0 }
+        let section       = callback(sectionIndex, environment)
 
-      switch section.direction {
-      case .horizontal:
-        pointer.x += section.inset.left
-      case .vertical:
-        pointer.y += section.inset.top
-      }
+        // bounds stores the current content offset
+        let psize         = CGRect(origin: .zero, size: collectionView.bounds.size)
+          .inset(by: collectionView.adjustedContentInset)
 
-      while !rows.isEmpty {
+        #if DEBUG
+        for supplement in section.supplements {
+          let nanEdges : [ KeyPath<UIEdgeInsets, CGFloat> ] = [ \UIEdgeInsets.left, \UIEdgeInsets.top, \UIEdgeInsets.right, \UIEdgeInsets.bottom ]
 
-        for group in section.group {
+          assert(nanEdges.map { path in supplement.frame[keyPath: path].isNaN }.filter { $0 }.count >= 1,
+                 "A section supplement should have at least one floating edge.")
+        }
+        #endif
 
-          let cursor: CGPoint
+        var supplementaryInsets = UIEdgeInsets.zero
+        section.supplements.enumerated().map { index, item in
+          // determine size
+          let indexPath = IndexPath(row: index, section: sectionIndex)
+          return (item, indexPath, buildSupplement(item: indexPath, item))
+        }.forEach { (item: CollectionLayoutSupplement, indexPath: IndexPath, size: CGSize) in
+          // determine position and add as offset to cursor
+          let cx: CGFloat
+          let cy: CGFloat
 
-          switch section.direction {
-          case .horizontal:
-            cursor = CGPoint(x: pointer.x, y: pointer.y + section.inset.top)
-          default:
-            cursor = CGPoint(x: pointer.x + section.inset.left, y: pointer.y)
+          if item.frame.left.isNaN && item.frame.right.isNaN {
+            cx = (psize.width - size.width) / 2
+          } else if item.frame.left.isNaN {
+            cx = psize.width - size.width - item.frame.right
+            supplementaryInsets.right = max(supplementaryInsets.right, size.width + item.frame.right)
+          } else {
+            cx = item.frame.left
+            supplementaryInsets.left = max(supplementaryInsets.left, size.width + item.frame.left)
           }
 
-          let psize = collectionView.bounds
-            .inset(by: collectionView.adjustedContentInset)
-            .inset(by: section.inset)
-            .size
-
-          let size = buildGroup(
-            section       : sectionIndex,
-            rows          : &rows,
-            cursor        : cursor,
-            group,
-            parentBounds  : psize)
-
-          switch section.direction {
-          case .horizontal:
-            pointer.x += size.width
-          case .vertical:
-            pointer.y += size.height
+          if item.frame.top.isNaN && item.frame.bottom.isNaN {
+            cy = (psize.height - size.height) / 2
+          } else if item.frame.top.isNaN {
+            cy = psize.height - size.height - item.frame.bottom
+            supplementaryInsets.bottom = max(supplementaryInsets.bottom, size.height + item.frame.bottom)
+          } else {
+            cy = item.frame.top
+            supplementaryInsets.top = max(supplementaryInsets.top, size.height + item.frame.top)
           }
 
-          groupSizes.append(size)
+          let origin = CGPoint(x: cx, y: cy) + pointer
+
+          spleCellBounds[indexPath] = tell(__supplementary(forSupplementaryViewOfKind: item.identifier, with: indexPath)) {
+            $0.item     = item
+            $0.frame    = CGRect(origin: origin, size: size).integral
+            $0.zIndex   = 10
+          }
+        }
+
+        var sectionCursor = CGPoint(x: 0, y: supplementaryInsets.top)
+
+        while !rows.isEmpty {
+          for group in section.group {
+
+            let ssize = psize
+              .inset(by: section.inset)
+              .inset(by: group  .inset)
+
+            let cursor: CGPoint = pointer + sectionCursor + ssize.origin
+
+            let size = buildGroup(
+              section       : sectionIndex,
+              rows          : &rows,
+              cursor        : cursor,
+              group,
+              parentBounds  : ssize.size)
+
+            switch section.direction {
+            case .horizontal:
+              sectionCursor.x += group.inset.left + size.width  + group.inset.right
+            case .vertical:
+              sectionCursor.y += group.inset.top  + size.height + group.inset.bottom
+            }
+
+            groupSizes.append(size)
+          }
+        }
+
+        let perp = groupSizes.reduce(0) { sum, item in max(sum, item.value(from: section.direction.perpendicular)) }
+
+        switch section.direction {
+        case .horizontal:
+          sectionSize  = CGSize(width: sectionCursor.x, height: perp)
+          pointer.x   += section.inset.left + sectionSize.width + section.inset.right
+        case .vertical:
+          sectionSize  = CGSize(width: perp, height: sectionCursor.y)
+          pointer.y   += section.inset.top + sectionSize.height + section.inset.bottom
+        }
+
+        switch rootDirection {
+        case .horizontal:
+          newOverallSize.width  += sectionSize.width
+          newOverallSize.height  = max(sectionSize.height, newOverallSize.height)
+
+        case .vertical:
+          newOverallSize.height += sectionSize.height
+          newOverallSize.width   = max(sectionSize.width, newOverallSize.width)
         }
       }
 
-      let main = groupSizes.reduce(0) { sum, item in item.value(from: section.direction) + sum }
-      let perp = groupSizes.reduce(0) { sum, item in max(sum, item.value(from: section.direction.perpendicular)) }
-
-      switch section.direction {
-      case .horizontal:
-        sectionSize = CGSize(width: main, height: perp)
-        pointer.x   += section.inset.right
-      case .vertical:
-        pointer.y   += section.inset.bottom
-        sectionSize = CGSize(width: perp, height: main)
-      }
-
-      switch rootDirection {
-      case .horizontal:
-        newOverallSize.width  += sectionSize.width
-        newOverallSize.height = max(sectionSize.height, newOverallSize.height)
-      case .vertical:
-        newOverallSize.height += sectionSize.height
-        newOverallSize.width  = max(sectionSize.width, newOverallSize.width)
-      }
+      overallSize = .init(width: max(newOverallSize.width, pointer.x), height: max(newOverallSize.height, pointer.y))
     }
-
-    overallSize = newOverallSize
   }
-  
+
   // MARK: Engine
 
   func buildItem  (
@@ -213,7 +260,7 @@ public class CollectionLayout: UICollectionViewLayout {
       let size: CGSize
 
       if let sizer = collectionView?.dataSource as? CollectionLayoutDelegate {
-        size = sizer.size(for: indexPath, referenceSize: .init(width: rwdh, height: rhgt))
+        size = sizer.sizeForItem(at: indexPath, with: .init(width: rwdh, height: rhgt))
       } else {
         
         let hfit: UILayoutPriority
@@ -260,15 +307,17 @@ public class CollectionLayout: UICollectionViewLayout {
     _ group: CollectionLayoutGroup,
     parentBounds: CGSize) -> CGSize {
 
-    var nominalWidth  = group.width .computeSize(for: parentBounds)
-    var nominalHeight = group.height.computeSize(for: parentBounds)
+    let pbounds       = CGRect(origin: .zero, size: parentBounds)
+
+    var nominalWidth  = group.width .computeSize(for: pbounds.size)
+    var nominalHeight = group.height.computeSize(for: pbounds.size)
 
     if nominalWidth.isNaN {
-      nominalWidth = parentBounds.width
+      nominalWidth = pbounds.width
     }
 
     if nominalHeight.isNaN {
-      nominalHeight = parentBounds.height
+      nominalHeight = pbounds.height
     }
 
     let groupBound    = CGSize(width: nominalWidth, height: nominalHeight)
@@ -276,7 +325,7 @@ public class CollectionLayout: UICollectionViewLayout {
 
     let prefinalSize  = group.items
       .reduce(CGFloat(0)) { sum, item in
-        item.value(from: group.direction, parentSize: parentBounds) + sum + group.spacing } - group.spacing
+        item.value(from: group.direction, parentSize: pbounds.size) + sum + group.spacing } - group.spacing
 
     if prefinalSize.isNaN {
 
@@ -297,9 +346,9 @@ public class CollectionLayout: UICollectionViewLayout {
 
         switch group.direction {
         case .horizontal:
-          localCursor.x = sum.width
+          localCursor.x = sum.width + group.spacing
         case .vertical:
-          localCursor.y = sum.height
+          localCursor.y = sum.height + group.spacing
         }
 
         let size : CGSize
@@ -364,9 +413,9 @@ public class CollectionLayout: UICollectionViewLayout {
 
         switch group.direction {
         case .horizontal:
-          localCursor.x += size.width
+          localCursor.x += size.width + group.spacing
         case .vertical:
-          localCursor.y += size.height
+          localCursor.y += size.height + group.spacing
         }
 
         return max(sum, size.value(from: group.direction.perpendicular))
@@ -381,18 +430,51 @@ public class CollectionLayout: UICollectionViewLayout {
     }
   }
 
+  func buildSupplement(
+    item: IndexPath,
+    _ supplement: CollectionLayoutSupplement) -> CGSize {
+    
+    guard let collectionView = collectionView else {
+      return .zero
+    }
+    
+    let bounds = collectionView.bounds
+      .inset(by: collectionView.adjustedContentInset)
+    
+    let rwidth: CGFloat
+    let rheight: CGFloat
+
+    if supplement.frame.left.isNaN || supplement.frame.right.isNaN {
+      rwidth = 0
+    } else {
+      rwidth = bounds.width - (supplement.frame.left + supplement.frame.right)
+    }
+
+    if supplement.frame.top.isNaN || supplement.frame.bottom.isNaN {
+      rheight = 0
+    } else {
+      rheight = bounds.height - (supplement.frame.top + supplement.frame.bottom)
+    }
+
+    if let delegate = collectionView.dataSource as? CollectionLayoutDelegate {
+      return delegate
+        .sizeForSupplementary(at: item, kind: supplement.identifier, with: .init(width: rwidth, height: rheight))
+    } else {
+      return .zero
+    }
+  }
 
   // MARK: Core
 
   public override func layoutAttributesForElements(
     in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-    cellBounds.values.filter { $0.frame.intersects(rect) }
+    cellBounds.values.filter { $0.frame.intersects(rect) } + spleCellBounds.values // TODO: section supplementaries are always visible
   }
 
   public override func layoutAttributesForSupplementaryView(
     ofKind elementKind: String,
     at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-    nil
+    spleCellBounds[indexPath]
   }
 
   public override func layoutAttributesForItem(
@@ -417,7 +499,7 @@ public class CollectionLayout: UICollectionViewLayout {
   public override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
     prevCellBounds[itemIndexPath]
   }
-  
+
   public override func invalidateLayout(
     with context: UICollectionViewLayoutInvalidationContext) {
     super.invalidateLayout(with: context)
@@ -425,11 +507,13 @@ public class CollectionLayout: UICollectionViewLayout {
     if context.invalidateEverything || context.invalidateDataSourceCounts {
       prevCellBounds = cellBounds
       cellBounds.removeAll()
+      spleCellBounds.removeAll()
     }
 
     if collectionView!.bounds.size.value(from: rootDirection) != curWidth {
       prevCellBounds = cellBounds
       cellBounds.removeAll()
+      spleCellBounds.removeAll()
     }
 
     curWidth = collectionView!.bounds.size.value(from: rootDirection)
@@ -440,13 +524,14 @@ public class CollectionLayout: UICollectionViewLayout {
     if curWidth != newBounds.size.value(from: rootDirection) {
       prevCellBounds = cellBounds
       cellBounds.removeAll()
+      spleCellBounds.removeAll()
     }
 
     curWidth = newBounds.size.value(from: rootDirection)
 
     return true
   }
-  
+
   public override func shouldInvalidateLayout(
     forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes,
     withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {

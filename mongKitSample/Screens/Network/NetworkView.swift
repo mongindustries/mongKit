@@ -6,7 +6,7 @@
 //  Copyright © 2020 mong Industries. All rights reserved.
 //
 import UIKit
-import mongKitCore
+ 
 import mongKitView
 
 import ReactiveSwift

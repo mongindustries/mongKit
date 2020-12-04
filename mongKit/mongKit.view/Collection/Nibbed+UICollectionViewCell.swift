@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import mongKitCore
 
 extension Nibbed where Self: UICollectionViewCell & CollectionCell {
 

@@ -6,12 +6,12 @@
 //  Copyright © 2020 mong Industries. All rights reserved.
 //
 import UIKit
-import mongKitCore
 
 import ReactiveSwift
 
 public struct DisplayStateSection<
-  Payload: Hashable, Failure: Error & Hashable>: CollectionAdapterSection {
+  Payload: Hashable,
+  Failure: Error & Hashable>: CollectionAdapterSection {
 
   public struct Load: Hashable {
     public let index: Int
@@ -37,7 +37,7 @@ public struct DisplayStateSection<
     ItemCell: UICollectionViewCell & CollectionCell,
     LoadCell: UICollectionViewCell & CollectionCell,
     FailCell: UICollectionViewCell & CollectionCell>(
-    for displayState: MutableProperty<DisplayState<[Payload], Failure>>,
+    for displayState: ReactiveSwift.Property<DisplayState<[Payload], Failure>>,
     loadInstances: Int = 1,
     item: ItemCell.Type,
     load: LoadCell.Type,
@@ -97,7 +97,7 @@ public struct DisplayStateSection<
     ItemCell: UICollectionViewCell & CollectionCell,
     LoadCell: UICollectionViewCell & CollectionCell,
     FailCell: UICollectionViewCell & CollectionCell>(
-    for displayState: MutableProperty<DisplayState<Payload, Failure>>,
+    for displayState: ReactiveSwift.Property<DisplayState<Payload, Failure>>,
     loadInstances: Int = 1,
     item: ItemCell.Type,
     load: LoadCell.Type,

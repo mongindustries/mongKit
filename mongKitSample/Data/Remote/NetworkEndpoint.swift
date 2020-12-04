@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import mongKitCore
+ 
 import mongKitNetworking
 
 enum NetworkEndpoint: mongKitNetworking.Endpoint {

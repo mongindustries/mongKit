@@ -6,7 +6,7 @@
 //  Copyright © 2020 mong Industries / White Cloak Technologies, Inc. All rights reserved.
 //
 import UIKit
-import mongKitCore
+ 
 
 func generateEqualConstraint
   (for view: UIView, _ prop: KeyPath<UIView, NSLayoutXAxisAnchor>, _ guideProp: KeyPath<UILayoutGuide, NSLayoutXAxisAnchor>, to horizontalTarget: HorizontalConstraint) -> NSLayoutConstraint {
