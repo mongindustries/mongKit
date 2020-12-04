@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                   = 'mongKit'
-    spec.version                = '0.1.0'
+    spec.version                = '0.1.1'
     spec.homepage               = 'https://www.noname.com'
     spec.source                 = { :git => "https://github.com/mongindustries/mongkit.git", :tag => spec.version }
     spec.authors                = { 'Michael Ong' => 'michaelong18@gmail.com' }
@@ -10,8 +10,8 @@ Pod::Spec.new do |spec|
     spec.swift_version          = "5.2"
     spec.ios.deployment_target  = "12.0"
 
-    spec.dependency 'ReactiveSwift', '~> 6.3.0'
-    spec.dependency 'ReactiveCocoa', '~> 11.0.0'
+    spec.dependency 'ReactiveSwift'
+    spec.dependency 'ReactiveCocoa'
 
     spec.subspec 'Core' do |cspec|
         cspec.source_files = "mongKit/mongKit.core/**/*.swift"
