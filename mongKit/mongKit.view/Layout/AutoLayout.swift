@@ -23,7 +23,7 @@ public struct AutoLayoutBuilder: Constraint {
   }
 }
 
-public struct AutoLayout: LayoutConfiguration {
+public class AutoLayout: LayoutConfiguration {
 
   let constraints: (Weak<UIView>) -> [NSLayoutConstraint]
 

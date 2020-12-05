@@ -7,7 +7,7 @@
 //
 import UIKit
 
-public struct FrameLayout: LayoutConfiguration {
+public class FrameLayout: LayoutConfiguration {
 
   let frame: CGRect
 

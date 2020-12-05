@@ -28,12 +28,14 @@ extension mongKit {
       return
     }
 
+    if view.superview != nil {
+      view.layout?.apply(view)
+      view.layout = nil
+    }
+
     for subview in view.subviews {
       scanLayouts(for: subview)
     }
-
-    view.layout?.apply(view)
-    view.layout = nil
   }
 
   @objc
