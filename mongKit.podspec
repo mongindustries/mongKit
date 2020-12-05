@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                   = 'mongKit'
-    spec.version                = '0.1.1'
+    spec.version                = '0.1.2'
     spec.homepage               = 'https://www.noname.com'
     spec.source                 = { :git => "https://github.com/mongindustries/mongkit.git", :tag => spec.version }
     spec.authors                = { 'Michael Ong' => 'michaelong18@gmail.com' }
