@@ -47,10 +47,8 @@ import Foundation
  - transform: The block to configure the instance.
  - Returns: The newly created instance.
  */
-public func apply<Target, Return>(_ target: Target, _ transform: (inout Target) -> Return) -> Return {
-
-  var back = target
-  return transform(&back)
+public func apply<Target, Return>(_ target: Target, _ transform: (Target) -> Return) -> Return {
+  return transform(target)
 }
 
 extension NSObject {

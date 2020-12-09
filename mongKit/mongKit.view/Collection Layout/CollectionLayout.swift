@@ -135,11 +135,12 @@ public class CollectionLayout: UICollectionViewLayout {
         #endif
 
         var supplementaryInsets = UIEdgeInsets.zero
-        section.supplements.enumerated().map { index, item in
+        for (index, item) in section.supplements.enumerated() {
           // determine size
+
           let indexPath = IndexPath(row: index, section: sectionIndex)
-          return (item, indexPath, buildSupplement(item: indexPath, item))
-        }.forEach { (item: CollectionLayoutSupplement, indexPath: IndexPath, size: CGSize) in
+          let size      = buildSupplement(item: indexPath, item)
+
           // determine position and add as offset to cursor
           let cx: CGFloat
           let cy: CGFloat
@@ -163,7 +164,7 @@ public class CollectionLayout: UICollectionViewLayout {
             cy = item.frame.top
             supplementaryInsets.top = max(supplementaryInsets.top, size.height + item.frame.top)
           }
-
+          
           let origin = CGPoint(x: cx, y: cy) + pointer
 
           spleCellBounds[indexPath] = tell(__supplementary(forSupplementaryViewOfKind: item.identifier, with: indexPath)) {
@@ -181,6 +182,11 @@ public class CollectionLayout: UICollectionViewLayout {
             let ssize = psize
               .inset(by: section.inset)
               .inset(by: group  .inset)
+
+            // configured like this because if supplmentary insets are in the .inset pipe calls,
+            // the overall size wont include the offset supplied by the supplementary view
+//            let fsize = CGSize(width: ssize.width   - (supplementaryInsets.left + supplementaryInsets.right),
+//                               height: ssize.height - (supplementaryInsets.top + supplementaryInsets.bottom))
 
             let cursor: CGPoint = pointer + sectionCursor + ssize.origin
 
@@ -500,6 +506,7 @@ public class CollectionLayout: UICollectionViewLayout {
     prevCellBounds[itemIndexPath]
   }
 
+
   public override func invalidateLayout(
     with context: UICollectionViewLayoutInvalidationContext) {
     super.invalidateLayout(with: context)
@@ -519,6 +526,10 @@ public class CollectionLayout: UICollectionViewLayout {
     curWidth = collectionView!.bounds.size.value(from: rootDirection)
   }
 
+  public override func invalidationContext(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutInvalidationContext {
+    super.invalidationContext(forPreferredLayoutAttributes: preferredAttributes, withOriginalAttributes: originalAttributes)
+  }
+  
   public override func shouldInvalidateLayout(
     forBoundsChange newBounds: CGRect) -> Bool {
     if curWidth != newBounds.size.value(from: rootDirection) {

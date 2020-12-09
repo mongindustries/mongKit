@@ -13,7 +13,9 @@ public struct CollectionLayoutSupplement {
   
   public static var floating: CGFloat = .nan
   
-  public init(identifier: String, frame: UIEdgeInsets = .init(top: 0, sides: 0, bottom: CollectionLayoutSupplement.floating), fixedToSectionBounds: Bool = true) {
+  public init(identifier: String,
+              frame: UIEdgeInsets = .init(top: 0, sides: 0, bottom: CollectionLayoutSupplement.floating),
+              fixedToSectionBounds: Bool = true) {
     self.identifier = identifier
     self.frame = frame
     self.fixedToSectionBounds = fixedToSectionBounds

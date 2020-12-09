@@ -14,11 +14,13 @@ public struct CollectionLayoutSection {
     inset                 : UIEdgeInsets = .zero,
     scrollCharacteristic  : CollectionLayout.SpanScrollCharacteristic = .none,
     supplements           : [CollectionLayoutSupplement] = [],
+    supplementInsetBias   : NSLayoutConstraint.Axis = .vertical,
     group                 : [CollectionLayoutGroup]) {
 
     self.direction = direction
     self.scrollCharacteristic = scrollCharacteristic
     self.supplements = supplements
+    self.supplementInsetBias = supplementInsetBias
     self.inset = inset
     self.group = group
   }
@@ -28,6 +30,7 @@ public struct CollectionLayoutSection {
   public let scrollCharacteristic : CollectionLayout.SpanScrollCharacteristic
 
   public let supplements          : [CollectionLayoutSupplement]
+  public let supplementInsetBias  : NSLayoutConstraint.Axis
 
   public let group                : [CollectionLayoutGroup]
 }

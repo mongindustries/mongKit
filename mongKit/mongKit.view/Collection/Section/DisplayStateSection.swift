@@ -34,14 +34,16 @@ public struct DisplayStateSection<
 
 
   public init<
+    Range: RangeExpression,
     ItemCell: UICollectionViewCell & CollectionCell,
     LoadCell: UICollectionViewCell & CollectionCell,
     FailCell: UICollectionViewCell & CollectionCell>(
     for displayState: ReactiveSwift.Property<DisplayState<[Payload], Failure>>,
-    loadInstances: Int = 1,
+    loadInstances   : Int = 1,
+    itemRange       : Range,
     item: ItemCell.Type,
     load: LoadCell.Type,
-    fail: FailCell.Type) where LoadCell.Item == Load, ItemCell.Item == Payload, FailCell.Item == Failure {
+    fail: FailCell.Type) where Range.Bound == Int, LoadCell.Item == Load, ItemCell.Item == Payload, FailCell.Item == Failure {
 
     config            = { cv in
       ItemCell.register(collectionView: cv)
@@ -86,9 +88,9 @@ public struct DisplayStateSection<
         case .failed    (let failure):
           return [ .failure(failure) ]
         case .loadMore  (let payload):
-          return payload.map { State.payload($0) } + [ State.loading(.init(index: 0, more: true)) ]
+          return .init((payload.map { State.payload($0) } + [ State.loading(.init(index: 0, more: true)) ])[itemRange])
         case .successful(let payload):
-          return payload.map { State.payload($0) }
+          return .init((payload.map { State.payload($0) })[itemRange])
         }
       }
   }

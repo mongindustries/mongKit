@@ -244,7 +244,7 @@ extension CollectionAdapter {
             }
 
             // TODO: for now
-            cv.performBatchUpdates { cv.reloadSections([ index ]) } completion: { _ in }
+            cv.reloadSections([ index ])
           }
       }
   }
