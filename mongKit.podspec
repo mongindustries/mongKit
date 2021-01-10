@@ -1,13 +1,13 @@
 Pod::Spec.new do |spec|
     spec.name                   = 'mongKit'
-    spec.version                = '0.1.3'
+    spec.version                = '0.1.4'
     spec.homepage               = 'https://www.noname.com'
     spec.source                 = { :git => "https://github.com/mongindustries/mongkit.git", :tag => spec.version }
     spec.authors                = { 'Michael Ong' => 'michaelong18@gmail.com' }
     spec.license                = { :type => 'MIT' }
     spec.summary                = 'Boilerplate code for iOS projects.'
 
-    spec.swift_version          = "5.2"
+    spec.swift_version          = "5.3"
     spec.ios.deployment_target  = "12.0"
 
     spec.dependency 'ReactiveSwift'
