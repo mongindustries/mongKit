@@ -15,7 +15,7 @@ public protocol Endpoint {
 extension Endpoint {
   public func performRequest
   (with session : URLSession = EndpointManager.instance.session,
-   _  config    : (URLRequest) -> Void = { _ in }) -> SignalProducer<(Data, URLResponse), URLError>  {
+   _  config    : (inout URLRequest) -> Void = { _ in }) -> SignalProducer<(Data, URLResponse), URLError>  {
       session
         .reactive
         .data     (with: tell(URLRequest(url: path)) {
@@ -26,7 +26,15 @@ extension Endpoint {
             $0.addValue(body.contentType, forHTTPHeaderField: "Content-Type")
           }
 
-          config($0)
+          config(&$0)
+
+            #if DEBUG
+            print("URL: [\($0.httpMethod!)] \($0.url!)")
+            print("Header:")
+            $0.allHTTPHeaderFields?.forEach { key, value in
+                print("\(key): \(value)")
+            }
+            #endif
         })
         .mapError { $0 as! URLError }
     }

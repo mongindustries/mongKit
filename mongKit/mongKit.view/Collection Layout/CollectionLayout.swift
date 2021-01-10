@@ -164,8 +164,8 @@ public class CollectionLayout: UICollectionViewLayout {
             cy = item.frame.top
             supplementaryInsets.top = max(supplementaryInsets.top, size.height + item.frame.top)
           }
-          
-          let origin = CGPoint(x: cx, y: cy) + pointer
+
+          let origin = CGPoint(x: cx, y: cy + collectionView.contentInset.top) + pointer
 
           spleCellBounds[indexPath] = tell(__supplementary(forSupplementaryViewOfKind: item.identifier, with: indexPath)) {
             $0.item     = item

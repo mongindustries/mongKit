@@ -12,3 +12,9 @@ public protocol CollectionAdapterSupplementaryDelegate: AnyObject {
                          at indexPath: IndexPath,
                          with identifier: String) -> UICollectionReusableView
 }
+
+public protocol CollectionAdapterIndexDelegate: AnyObject {
+  func indices(for collectionView: UICollectionView) -> [String]?
+  
+  func indexPath(_ collectionView: UICollectionView, for index: Int) -> IndexPath
+}

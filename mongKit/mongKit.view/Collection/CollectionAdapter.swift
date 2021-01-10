@@ -94,8 +94,10 @@ public class CollectionAdapter: NSObject, UICollectionViewDataSource, Scopeable 
   }
 
   weak var collectionView: UICollectionView?
-    
+
   public weak var supplementaryDelegate: CollectionAdapterSupplementaryDelegate?
+
+  public weak var indexDelegate: CollectionAdapterIndexDelegate?
 
   public var scope: ScopedDisposable<CompositeDisposable> = .init(.init())
 
@@ -213,6 +215,14 @@ extension CollectionAdapter {
 
     return delegate.supplementaryCell(for: self.collectionView!, at: indexPath, with: kind)
   }
+
+  public func indexTitles(for collectionView: UICollectionView) -> [String]? {
+    indexDelegate?.indices(for: collectionView)
+  }
+
+  public func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+    indexDelegate?.indexPath(collectionView, for: index) ?? .init()
+  }
 }
 
 // MARK: Engine
@@ -244,7 +254,10 @@ extension CollectionAdapter {
             }
 
             // TODO: for now
-            cv.reloadSections([ index ])
+            cv.performBatchUpdates { [weak cv] in
+                cv?.reloadSections([ index ])
+            } completion: { _ in
+            }
           }
       }
   }
